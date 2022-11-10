@@ -4,16 +4,18 @@
 		<h1 class="title">Welcome Back</h1>
 		<!-- 登录表单 -->
 		<view class="login-form">
-			<input type="text" class="input-content" placeholder="请输入QQ邮箱" placeholder-class="input-placeholder" />
-			<input type="password" class="input-content" placeholder="请输入密码" placeholder-class="input-placeholder">
+			<input type="text" class="input-content" placeholder="请输入QQ邮箱" placeholder-class="input-placeholder"
+				v-model="loginForm.userName" />
+			<input type="password" class="input-content" placeholder="请输入密码" placeholder-class="input-placeholder"
+				v-model="loginForm.password">
 			<view class="setting">
 				<!-- 记住密码 -->
 				<text class="remember-content">Remember me</text>
 				<!-- 忘记密码 -->
 				<text class="forgot-content">Forgot Password?</text>
 			</view>
-			<view class="btn-login">Login</view>
-			<view class="tip" @click="handleLogin">
+			<view class="btn-login" @tap="handleLogin">Login</view>
+			<view class="tip" @click="toRegist">
 				<text>New User?</text>
 				<text class="sign">Sign Up</text>
 			</view>
@@ -22,9 +24,28 @@
 </template>
 
 <script lang="ts" setup>
+	import {
+		reactive,
+	} from "vue";
+	import {tipMesg} from '../../../script/common.js'
 	const emit = defineEmits(['componentCheck'])
-	const handleLogin = () => {
+	const toRegist = () => {
 		emit('componentCheck', false)
+	}
+	const loginForm = reactive({
+		userName: '',
+		password: ''
+	})
+	const handleLogin = () => {
+		// 判断邮件是否为空
+		if (!loginForm.userName) {
+			tipMesg('请输入邮箱')
+			return
+		}
+		if (!loginForm.password) {
+			tipMesg('请输入密码')
+			return
+		}
 	}
 </script>
 

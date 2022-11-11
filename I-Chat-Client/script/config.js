@@ -1,4 +1,4 @@
-const APIURL = "http://localhost:9527";
+const APIURL = "/api";
 const SOCKETAPI = "ws://localhost:9527";
 
 // 邮箱检验

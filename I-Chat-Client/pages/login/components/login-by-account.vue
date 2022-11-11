@@ -28,11 +28,20 @@
 		reactive
 	} from "vue";
 	import {
-		tipMesg
-	} from '../../../script/common.js'
+		tipMesg,
+		initStateInfo
+	} from '@/script/common.js'
 	import {
-		emailValidate
-	} from '../../../script/config.js'
+		emailValidate,
+		APIURL
+	} from '@/script/config.js'
+	import store from '@/store/index.js'; //需要引入store
+	import {
+		post
+	} from '@/script/request.js'
+	
+	
+	
 	const emit = defineEmits(['componentCheck'])
 	const toRegist = () => {
 		emit('componentCheck', false)
@@ -56,6 +65,16 @@
 			tipMesg('请输入密码')
 			return
 		}
+		post(`${APIURL}/users/login`,{userName:loginForm.userName,password:loginForm.password}).then(res => {
+			console.log(res.data)
+			if(res?.code == 200) {
+				// 初始化vuex数据
+				initStateInfo(res?.data)
+				// 路由跳转
+			}else {
+				tipMesg(res?.message)
+			}
+		})
 	}
 </script>
 

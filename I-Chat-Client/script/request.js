@@ -31,7 +31,7 @@ export function post(url, data, header, isLoad) {
 			}
 		})
 	})
-},
+}
 /**
  * get请求
  * @param {Object} url [地址]

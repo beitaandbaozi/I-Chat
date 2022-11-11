@@ -1,4 +1,5 @@
 import App from './App'
+import store from './store'
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -16,6 +17,7 @@ import {
 } from 'vue'
 export function createApp() {
 	const app = createSSRApp(App)
+	app.use(store)
 	return {
 		app
 	}

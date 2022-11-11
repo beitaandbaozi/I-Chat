@@ -25,9 +25,14 @@
 
 <script lang="ts" setup>
 	import {
-		reactive,
+		reactive
 	} from "vue";
-	import {tipMesg} from '../../../script/common.js'
+	import {
+		tipMesg
+	} from '../../../script/common.js'
+	import {
+		emailValidate
+	} from '../../../script/config.js'
 	const emit = defineEmits(['componentCheck'])
 	const toRegist = () => {
 		emit('componentCheck', false)
@@ -40,6 +45,11 @@
 		// 判断邮件是否为空
 		if (!loginForm.userName) {
 			tipMesg('请输入邮箱')
+			return
+		}
+		if (!emailValidate.test(loginForm.userName)) {
+			tipMesg('请输入正确的邮箱')
+			loginForm.userName = ''
 			return
 		}
 		if (!loginForm.password) {

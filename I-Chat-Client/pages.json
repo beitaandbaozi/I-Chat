@@ -1,15 +1,82 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// 登录页
 		{
-			"path": "pages/login/login",
+			"path": "pages/index/index",
 			"style": {
 				// "navigationBarTitleText": "首页",
 				// 禁用原生导航栏
 				"navigationStyle": "custom",
 				"pageOrientation": "auto"
 			}
+		},
+		// 消息列表
+		{
+			"path": "pages/chat-session/chat-session",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+
+		},
+		// 好友列表
+		{
+			"path": "pages/chat-user/chat-user",
+			"style": {
+				"navigationBarTitleText": "好友"
+			}
+
+		},
+		// 朋友圈
+		{
+			"path": "pages/community/community",
+			"style": {
+				"navigationBarTitleText": "朋友圈",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		// 我的
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
+	"tabBar": {
+		"borderStyle": "black",
+		"backgroundColor": "#292D32",
+		"color": "#cdcdcd",
+		"selectedColor": "#718b5c",
+		"iconWidth": "24px",
+		"list": [{
+				"pagePath": "pages/chat-session/chat-session",
+				"iconPath": "static/img/message.png",
+				"selectedIconPath": "static/img/message-selected.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/chat-user/chat-user",
+				"iconPath": "static/img/friend.png",
+				"selectedIconPath": "static/img/friend-selected.png",
+				"text": "通讯录"
+			},
+			{
+				"pagePath": "pages/community/community",
+				"iconPath": "static/img/social.png",
+				"selectedIconPath": "static/img/social-selected.png",
+				"text": "发现"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/img/mine.png",
+				"selectedIconPath": "static/img/mine-selected.png",
+				"text": "我的"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "I-Chat",

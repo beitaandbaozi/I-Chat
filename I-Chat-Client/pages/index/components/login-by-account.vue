@@ -40,17 +40,14 @@
 	import {
 		post
 	} from '@/script/request.js'
-	
-	
-	
-	const emit = defineEmits(['componentCheck'])
-	const toRegist = () => {
-		emit('componentCheck', false)
-	}
+
+
+
 	const loginForm = reactive({
 		userName: '',
 		password: ''
 	})
+
 	const handleLogin = () => {
 		// 判断邮件是否为空
 		if (!loginForm.userName) {
@@ -66,16 +63,27 @@
 			tipMesg('请输入密码')
 			return
 		}
-		post(`${APIURL}/users/login`,{userName:loginForm.userName,password:loginForm.password}).then(res => {
-			if(res?.code == 200) {
+		post(`${APIURL}/users/login`, {
+			userName: loginForm.userName,
+			password: loginForm.password
+		}).then(res => {
+			if (res?.code == 200) {
 				// 初始化vuex数据
 				initStateInfo(res?.data)
 				// 路由跳转
 				reLaunch('/chat-user/chat-user')
-			}else {
+			} else {
 				tipMesg(res?.message)
 			}
 		})
+	}
+
+	const emit = defineEmits(['componentCheck'])
+	const toRegist = () => {
+		// 清空登录表单
+		loginForm.userName = '';
+		loginForm.password = '';
+		emit('componentCheck', false)
 	}
 </script>
 

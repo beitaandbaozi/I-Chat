@@ -37,3 +37,8 @@ export function reLaunch(url, params = {}) {
 		},
 	})
 }
+
+// 浏览器本地缓存判断当前用户是否已经登录过
+export function isLogin() {
+	return uni.getStorageSync('token') && uni.getStorageSync('sender') ? true : false
+}

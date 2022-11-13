@@ -29,7 +29,8 @@
 	} from "vue";
 	import {
 		tipMesg,
-		initStateInfo
+		initStateInfo,
+		reLaunch
 	} from '@/script/common.js'
 	import {
 		emailValidate,
@@ -66,11 +67,11 @@
 			return
 		}
 		post(`${APIURL}/users/login`,{userName:loginForm.userName,password:loginForm.password}).then(res => {
-			console.log(res.data)
 			if(res?.code == 200) {
 				// 初始化vuex数据
 				initStateInfo(res?.data)
 				// 路由跳转
+				reLaunch('/chat-user/chat-user')
 			}else {
 				tipMesg(res?.message)
 			}

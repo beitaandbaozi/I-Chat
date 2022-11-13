@@ -47,7 +47,7 @@
 	],
 	"tabBar": {
 		"borderStyle": "black",
-		"backgroundColor": "#292D32",
+		"backgroundColor": "#fff",
 		"color": "#cdcdcd",
 		"selectedColor": "#718b5c",
 		"iconWidth": "24px",

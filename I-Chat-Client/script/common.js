@@ -13,7 +13,7 @@ export function tipMesg(title, icon, time, mask) {
 	})
 }
 
-// 登录时初始化缓存信息
+// 初始化缓存信息
 export function initStateInfo(data) {
 	store.commit('setPropName', {
 		propName: 'sender',
@@ -21,4 +21,19 @@ export function initStateInfo(data) {
 	})
 	uni.setStorageSync('token', data?.token)
 	uni.setStorageSync('sender', JSON.stringify(data?.myInfo))
+}
+
+// 封装reLaunch，和navigateTo没啥区别
+export function reLaunch(url, params = {}) {
+	let part = '';
+	for (var item in params) {
+		part += '&' + item + '=' + params[item];
+	}
+	url = "/pages" + url + part.replace('&', '?');
+	uni.reLaunch({
+		url: url,
+		fail(err) {
+			console.log('reLaunch跳转出错', err)
+		},
+	})
 }

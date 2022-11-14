@@ -23,7 +23,8 @@
 						placeholder-class="input-placeholder" />
 				</view>
 				<view class="option">
-					<view class="btn">发送验证码</view>
+					<view class="btn" @click="sendValidateCode" v-if="!validateCodeState">发送验证码</view>
+					<view class="disabled-btn" v-else>已发送({{cutDownTime}})</view>
 					<view class="btn">下一步</view>
 				</view>
 			</view>
@@ -42,8 +43,12 @@
 		ref
 	} from 'vue'
 	import {
-		get
+		get,
+		post
 	} from '@/script/request.js'
+	import {
+		APIURL
+	} from '@/script/config.js'
 
 	const registEmail = ref < string > ('')
 
@@ -86,6 +91,44 @@
 			//TODO handle the exception
 			tipMesg(e)
 		}
+	}
+	// 验证码发送状态
+	const validateCodeState = ref < boolean > (false)
+	// 倒计时状态
+	const cutDownState = ref < boolean > (false)
+	// 倒计时时间
+	const cutDownTime = ref < number > (5)
+	// 定时器
+	let timer: any = null
+	// 发送验证码
+	const sendValidateCode = () => {
+		const query = {
+			email: registEmail.value,
+			timestamp: +new Date()
+		}
+		post(`${APIURL}/users/sendVerificationCode`, query).then(res => {
+			if (res?.code === 200) {
+				tipMesg(res?.message)
+				// 设置状态
+				validateCodeState.value = true
+				cutDownState.value = true
+				// 开始倒计时
+				timer = setInterval(() => {
+					if (cutDownTime.value < 1) {
+						if (timer !== null) {
+							clearInterval(timer);
+							timer = null;
+							validateCodeState.value = false
+						}
+						cutDownTime.value = 5;
+					} else {
+						cutDownTime.value--;
+					}
+				}, 1000);
+			} else {
+				tipMesg(res?.message);
+			}
+		})
 	}
 </script>
 

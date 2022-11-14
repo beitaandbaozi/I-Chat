@@ -36,7 +36,6 @@
 		emailValidate,
 		APIURL
 	} from '@/script/config.js'
-	import store from '@/store/index.js'; //需要引入store
 	import {
 		post
 	} from '@/script/request.js'

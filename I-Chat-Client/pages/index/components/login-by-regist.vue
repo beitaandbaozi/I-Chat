@@ -16,16 +16,16 @@
 		<view class="cover" v-show="showModel">
 			<!-- 第一步 -->
 			<view class="register-box" v-if="step === 1">
-				<view class="close-btn" @click="showModel=false">X</view>
+				<view class="close-btn" @click="handleClose">X</view>
 				<!-- 验证码 -->
 				<view class="input-validate">
 					<input class="input-content" type="text" :maxlength="6" placeholder="请输入您的验证码"
-						placeholder-class="input-placeholder" />
+						placeholder-class="input-placeholder"  v-model="validateCode"/>
 				</view>
 				<view class="option">
 					<view class="btn" @click="sendValidateCode" v-if="!validateCodeState">发送验证码</view>
 					<view class="disabled-btn" v-else>已发送({{cutDownTime}})</view>
-					<view class="btn">下一步</view>
+					<view :class="(validateCode.length === 6 && cutDownState) ? 'btn' : 'disabled-btn'">下一步</view>
 				</view>
 			</view>
 		</view>
@@ -92,12 +92,14 @@
 			tipMesg(e)
 		}
 	}
+	// 验证码
+	const validateCode = ref<string>('')
 	// 验证码发送状态
 	const validateCodeState = ref < boolean > (false)
 	// 倒计时状态
 	const cutDownState = ref < boolean > (false)
 	// 倒计时时间
-	const cutDownTime = ref < number > (5)
+	const cutDownTime = ref < number > (60)
 	// 定时器
 	let timer: any = null
 	// 发送验证码
@@ -118,9 +120,9 @@
 						if (timer !== null) {
 							clearInterval(timer);
 							timer = null;
-							validateCodeState.value = false
 						}
-						cutDownTime.value = 5;
+						validateCodeState.value = false
+						cutDownTime.value = 60;
 					} else {
 						cutDownTime.value--;
 					}
@@ -129,6 +131,10 @@
 				tipMesg(res?.message);
 			}
 		})
+	}
+	// 关闭验证时
+	const handleClose = () => {
+		showModel.value = false
 	}
 </script>
 

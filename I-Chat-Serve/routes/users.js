@@ -117,4 +117,21 @@ router.post("/sendVerificationCode", async (req, res) => {
   }
 });
 
+// 校验邮箱验证码
+router.post("/checkVerificationCode", (req, res) => {
+  try {
+    const { verificationCode, timestamp } = req.body;
+    // 与之前发送校验码时存储的相比较就可以了
+    if (sessionEmail[timestamp] === verificationCode) {
+      // 清空当前数组上的值
+      delete sessionEmail[timestamp];
+      res.send(msg.success(null, "验证码验证通过"));
+    } else {
+      res.send(msg.error("验证码验证失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
+
 module.exports = router;

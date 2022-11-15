@@ -5,7 +5,7 @@
 		<!-- 注册表单 -->
 		<view class="regist-form">
 			<input type="text" class="input-content" placeholder="请输入QQ邮箱" placeholder-class="input-placeholder"
-				v-model="registEmail" :disabled="showModel" />
+				v-model="registForm.email" :disabled="showModel" />
 			<view class="btn-login" @click="handleRegist">Sing Up</view>
 			<view class="tip" @click="toLogin">
 				<text>Already have an account ?</text>
@@ -35,17 +35,17 @@
 				<view class="close-btn" @click="handleClose">X</view>
 				<view class="input-validate">
 					<!-- 用户名 -->
-					<input class="input-content" type="text" placeholder="请输入用户名"
-						placeholder-class="input-placeholder" />
+					<input class="input-content" type="text" placeholder="请输入用户名" placeholder-class="input-placeholder"
+						v-model="registForm.nickName" />
 					<!-- 密码 -->
 					<input class="input-content" type="password" placeholder="请输入密码"
-						placeholder-class="input-placeholder" />
+						placeholder-class="input-placeholder" v-model="registForm.password" />
 					<!-- 确认密码 -->
 					<input class="input-content" type="password" placeholder="请再次输入密码"
-						placeholder-class="input-placeholder" />
+						placeholder-class="input-placeholder" v-model="registForm.surePassword" />
 				</view>
 				<view class="option">
-					<view class="btn">Sign Up</view>
+					<view class="btn" @click="toSignUp">Sign Up</view>
 				</view>
 			</view>
 		</view>
@@ -60,6 +60,7 @@
 		tipMesg,
 	} from '@/script/common.js'
 	import {
+		reactive,
 		ref
 	} from 'vue'
 	import {
@@ -67,14 +68,23 @@
 		post
 	} from '@/script/request.js'
 	import {
-		APIURL
+		APIURL,
+		userNanmeValidate
 	} from '@/script/config.js'
 
-	const registEmail = ref < string > ('')
+
+	// 注册表单
+	const registForm = reactive({
+		email: '',
+		nickName: '',
+		password: '',
+		surePassword: '',
+		avatar: '',
+	})
 
 	const emit = defineEmits(['componentCheck'])
 	const toLogin = () => {
-		registEmail.value = ''
+		registForm.email = ''
 		emit('componentCheck', true)
 	}
 
@@ -95,18 +105,19 @@
 			});
 		})
 	}
+
 	// 点击注册
 	const showModel = ref < boolean > (false)
 	const step = ref < number > (1)
 	const handleRegist = async () => {
 		try {
-			const option = registEmail.value.split('@')
-			if (!registEmail.value || registEmail.value.indexOf('@qq.com') === -1 || option.length !== 2)
+			const option = registForm.email.split('@')
+			if (!registForm.email || registForm.email.indexOf('@qq.com') === -1 || option.length !== 2)
 				return tipMesg('请输入QQ邮箱')
 			// 当前QQ邮箱进行校验
 			let res = await getUserInfoByQQ(option[0])
+			registForm.avatar = res.imgurl;
 			showModel.value = true
-			console.log('handleRegist', res)
 		} catch (e) {
 			//TODO handle the exception
 			tipMesg(e)
@@ -134,7 +145,7 @@
 	// 发送验证码
 	const sendValidateCode = () => {
 		const query = {
-			email: registEmail.value,
+			email: registForm.email,
 			timestamp: time
 		}
 		post(`${APIURL}/users/sendVerificationCode`, query).then(res => {
@@ -186,11 +197,32 @@
 			}
 		})
 	}
+
+	// 注册账号
+	const toSignUp = () => {
+		if (!registForm.nickName) return tipMesg('用户名不能为空')
+		if (!userNanmeValidate.test(registForm.nickName)) return tipMesg('用户名格式为4-16位')
+		if (!registForm.password) return tipMesg('密码不能为空')
+		if (registForm.password !== registForm.surePassword) return tipMesg("两次密码不一致")
+		// 注册账号
+		post(`${APIURL}/users/register`, registForm).then(res => {
+			if (res?.code == 200) {
+				tipMesg(res?.message);
+				handleClose()
+			} else {
+				tipMesg(res?.message);
+			}
+		})
+	}
+
 	// 关闭验证时
 	const handleClose = () => {
 		showModel.value = false
 		// 清空数据
 		validateCode.value = ""
+		registForm.nickName = ""
+		registForm.password = ""
+		registForm.surePassword = ""
 		step.value = 1
 	}
 </script>

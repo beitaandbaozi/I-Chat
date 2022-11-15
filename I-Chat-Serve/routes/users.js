@@ -2,7 +2,7 @@ var express = require("express");
 const app = require("../app");
 var router = express.Router();
 const db = require("../db/index");
-const { info, msg, emailConfig } = require("../config");
+const { info, msg, emailConfig, newUserConfig } = require("../config");
 // 邮箱发送模块
 const nodemailer = require("nodemailer");
 
@@ -46,6 +46,26 @@ const getCode = (num) => {
     result += all.charAt(index);
   }
   return result;
+};
+
+// 数据库插入数据（注册账号）
+const insertUser = (obj) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `insert into user (Name,NickName,Email,Password,Avatar) values("${obj.name}","${obj.nickName}","${obj.email}","${obj.password}","${obj.avatar}")`,
+        (err, res) => {
+          if (err) {
+            reject(info.error("新增用户失败"));
+          } else {
+            resolve(info.success(null, "新增用户成功"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("新增用户异常"));
+    }
+  });
 };
 
 // 登录
@@ -134,4 +154,37 @@ router.post("/checkVerificationCode", (req, res) => {
   }
 });
 
+// 注册账号
+router.post("/register", async (req, res) => {
+  try {
+    const { email, nickName, password, avatar } = req.body;
+    // 验证当前邮箱是否注册过
+    const result = await getUserInfoByEmail(email);
+    if (result.state) {
+      if (result.data.length > 0) {
+        res.send(msg.error("该邮箱已被注册"));
+        return;
+      }
+      // 新建用户
+      const userObj = {
+        name: nickName,
+        nickName,
+        email,
+        password,
+        avatar: avatar || newUserConfig.Avatar,
+      };
+
+      const result2 =  await insertUser(userObj);
+      if (result2.state) {
+        res.send(msg.success(null, "注册成功"));
+      } else {
+        res.send(msg.error("注册失败"));
+      }
+    } else {
+      res.send(msg.error("获取数据失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 module.exports = router;

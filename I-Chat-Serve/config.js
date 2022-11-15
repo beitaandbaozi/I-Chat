@@ -39,4 +39,8 @@ module.exports = {
       pass: "qypanpotyxdzdjac", // smtp 验证码
     },
   },
+  newUserConfig: {
+    Avatar:
+      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/04727b70-da9d-4923-9d38-20ec565f71c3.jpeg",
+  },
 };

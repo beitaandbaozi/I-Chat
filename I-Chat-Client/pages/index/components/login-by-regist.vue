@@ -20,12 +20,32 @@
 				<!-- 验证码 -->
 				<view class="input-validate">
 					<input class="input-content" type="text" :maxlength="6" placeholder="请输入您的验证码"
-						placeholder-class="input-placeholder"  v-model="validateCode"/>
+						placeholder-class="input-placeholder" v-model="validateCode" />
 				</view>
 				<view class="option">
-					<view class="btn" @click="sendValidateCode" v-if="!validateCodeState">发送验证码</view>
+					<view class="btn" @click="sendValidateCode" v-if="!cutDownState">发送验证码</view>
 					<view class="disabled-btn" v-else>已发送({{cutDownTime}})</view>
-					<view :class="(validateCode.length === 6 && cutDownState) ? 'btn' : 'disabled-btn'">下一步</view>
+					<view :class="(validateCode.length === 6 && validateCodeState) ? 'btn' : 'disabled-btn'"
+						@click="checkValidateCode">下一步
+					</view>
+				</view>
+			</view>
+			<!-- 第二步 -->
+			<view class="register-box" v-if="step === 2">
+				<view class="close-btn" @click="handleClose">X</view>
+				<view class="input-validate">
+					<!-- 用户名 -->
+					<input class="input-content" type="text" placeholder="请输入用户名"
+						placeholder-class="input-placeholder" />
+					<!-- 密码 -->
+					<input class="input-content" type="password" placeholder="请输入密码"
+						placeholder-class="input-placeholder" />
+					<!-- 确认密码 -->
+					<input class="input-content" type="password" placeholder="请再次输入密码"
+						placeholder-class="input-placeholder" />
+				</view>
+				<view class="option">
+					<view class="btn">Sign Up</view>
 				</view>
 			</view>
 		</view>
@@ -92,21 +112,30 @@
 			tipMesg(e)
 		}
 	}
+
 	// 验证码
-	const validateCode = ref<string>('')
+	const validateCode = ref < string > ('')
+
 	// 验证码发送状态
 	const validateCodeState = ref < boolean > (false)
+
 	// 倒计时状态
 	const cutDownState = ref < boolean > (false)
+
 	// 倒计时时间
 	const cutDownTime = ref < number > (60)
+
 	// 定时器
 	let timer: any = null
+
+	// 当前时间-作为标识唯一验证码的表示
+	const time = +new Date()
+
 	// 发送验证码
 	const sendValidateCode = () => {
 		const query = {
 			email: registEmail.value,
-			timestamp: +new Date()
+			timestamp: time
 		}
 		post(`${APIURL}/users/sendVerificationCode`, query).then(res => {
 			if (res?.code === 200) {
@@ -122,6 +151,7 @@
 							timer = null;
 						}
 						validateCodeState.value = false
+						cutDownState.value = false
 						cutDownTime.value = 60;
 					} else {
 						cutDownTime.value--;
@@ -132,9 +162,36 @@
 			}
 		})
 	}
+
+	// 校验验证码
+	const checkValidateCode = () => {
+		let query = {
+			verificationCode: validateCode.value,
+			timestamp: time
+		}
+		if (!(validateCode.value.length === 6 && validateCodeState.value)) return
+		post(`${APIURL}/users/checkVerificationCode`, query).then(res => {
+			if (res?.code === 200) {
+				if (timer !== null) {
+					clearInterval(timer);
+					timer = null;
+				}
+				// 校验正确之后跳转到步骤2
+				step.value = 2
+				// 重置倒计时秒数
+				cutDownTime.value = 60;
+				cutDownState.value = false
+			} else {
+				tipMesg(res?.message)
+			}
+		})
+	}
 	// 关闭验证时
 	const handleClose = () => {
 		showModel.value = false
+		// 清空数据
+		validateCode.value = ""
+		step.value = 1
 	}
 </script>
 

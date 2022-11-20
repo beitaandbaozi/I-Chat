@@ -48,7 +48,7 @@ const getCode = (num) => {
   return result;
 };
 
-// 数据库插入数据（注册账号）
+// 数据库插入数据（注册账号）  ------ Promise： 函数里面嵌套着另外一个函数(回调)
 const insertUser = (obj) => {
   return new Promise((resolve, reject) => {
     try {

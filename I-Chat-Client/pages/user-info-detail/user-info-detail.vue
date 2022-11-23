@@ -1,7 +1,7 @@
 <template>
 	<view class="user-info-detail">
 		<!-- 头像 -->
-		<view class="default">
+		<view class="default line">
 			<view class="option">
 				<text>头像</text>
 				<view class="right">
@@ -9,10 +9,9 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 名称 -->
-		<view class="default">
+		<view class="default line">
 			<view class="option-name option">
 				<text>名字</text>
 				<view class="right">
@@ -20,20 +19,18 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 拍一拍 -->
-		<view class="default">
+		<view class="default line">
 			<view class="option-name option">
 				<text>拍一拍</text>
 				<view class="right">
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 微信号 -->
-		<view class="default">
+		<view class="default line">
 			<view class="option-name option">
 				<text>微信号</text>
 				<view class="right">
@@ -41,10 +38,9 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 二维码 -->
-		<view class="default">
+		<view class="default line">
 			<view class="option-name option">
 				<text>我的二维码</text>
 				<view class="right">
@@ -52,7 +48,6 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 更多 -->
 		<view class="default">
@@ -111,7 +106,6 @@
 		.default {
 			background-color: rgb(255, 255, 255);
 
-			// 名称
 			.option-name {
 				padding: 23rpx 20rpx !important;
 			}
@@ -152,8 +146,14 @@
 
 			}
 
-			.line {
-				transform: translateX(15rpx);
+
+		}
+
+		.line {
+			&::after {
+				content: '';
+				display: block;
+				transform: translateX(20rpx);
 				width: 100%;
 				border-bottom: 1px solid #e5e5e5;
 			}

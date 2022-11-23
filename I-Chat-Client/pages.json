@@ -44,6 +44,15 @@
 				"enablePullDownRefresh": false
 			}
 
+		},
+		// 个人信息
+		{
+			"path": "pages/user-info-detail/user-info-detail",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"tabBar": {

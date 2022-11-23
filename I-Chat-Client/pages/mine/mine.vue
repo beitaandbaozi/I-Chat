@@ -1,7 +1,7 @@
 <template>
 	<view class="mine">
 		<!-- 头部 -->
-		<view class="header">
+		<view class="header" @click="toUserInfoDetail">
 			<!-- 头像 -->
 			<view>
 				<img :src="sender.Avatar" alt="头像" class="avatar">
@@ -77,7 +77,21 @@
 	import {
 		computed
 	} from "vue";
+
 	const sender = computed(() => store.state.sender)
+
+	// 跳转到个人信息
+	const toUserInfoDetail = () => {
+		uni.navigateTo({
+			url: '/pages/user-info-detail/user-info-detail',
+			success: (res) => {
+				console.log('success', res)
+			},
+			fail: (err) => {
+				console.log('err', err)
+			}
+		});
+	}
 </script>
 
 <style lang="scss">

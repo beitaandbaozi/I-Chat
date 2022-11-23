@@ -22,7 +22,8 @@
 		{
 			"path": "pages/chat-user/chat-user",
 			"style": {
-				"navigationBarTitleText": "好友"
+				"navigationBarTitleText": "通讯录",
+				"navigationBarBackgroundColor": "#EDEDED"
 			}
 
 		},

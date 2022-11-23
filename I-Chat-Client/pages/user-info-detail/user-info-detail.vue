@@ -62,7 +62,6 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 来电铃声 -->
 		<view class="default position">
@@ -73,7 +72,6 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 微信豆 -->
 		<view class="default position">
@@ -83,7 +81,6 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 		<!-- 我的地址 -->
 		<view class="default position">
@@ -93,7 +90,6 @@
 					<img src="../../static/img/more.png" class="img-more">
 				</view>
 			</view>
-			<view class="line"></view>
 		</view>
 	</view>
 </template>

@@ -68,6 +68,23 @@ const insertUser = (obj) => {
   });
 };
 
+// 获取好友列表
+const getUserList = (id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(`select * from user where Id !="${id}"`, (err, res) => {
+        if (err) {
+          reject(info.error("查找好友列表数据失败"));
+        } else {
+          resolve(info.success(res, "查找好友列表数据成功"));
+        }
+      });
+    } catch (error) {
+      reject(info.error("查找好友数据库异常"));
+    }
+  });
+};
+
 // 登录
 router.post("/login", async (req, res) => {
   try {
@@ -174,7 +191,7 @@ router.post("/register", async (req, res) => {
         avatar: avatar || newUserConfig.Avatar,
       };
 
-      const result2 =  await insertUser(userObj);
+      const result2 = await insertUser(userObj);
       if (result2.state) {
         res.send(msg.success(null, "注册成功"));
       } else {
@@ -185,6 +202,21 @@ router.post("/register", async (req, res) => {
     }
   } catch (error) {
     res.send(msg.error(error.message));
+  }
+});
+
+// 获取好友列表
+router.post("/userList", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await getUserList(id);
+    if (result.state) {
+      res.send(msg.success(result.data, "成功"));
+    } else {
+      res.send(msg.error("获取好友数据失败"));
+    }
+  } catch (error) {
+    res.send(msg.error("获取好友数据异常"));
   }
 });
 module.exports = router;

@@ -3,7 +3,9 @@ import {
 } from 'vuex'
 const store = createStore({
 	state: {
-		sender: null
+		sender: null,
+		// 好友列表
+		allSessionList: [],
 	},
 	mutations: {
 		// 更新state中的数据

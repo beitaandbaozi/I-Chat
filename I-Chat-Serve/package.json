@@ -13,6 +13,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.8.0"
+    "nodemailer": "^6.8.0",
+    "socket.io": "^4.5.4"
   }
 }

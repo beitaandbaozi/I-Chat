@@ -26,6 +26,7 @@
 		APIURL
 	} from '@/script/config.js'
 	import {
+		computed,
 		onMounted,
 		ref
 	} from "vue";
@@ -35,12 +36,12 @@
 	} from '@/script/common.js'
 
 	// 获取好友列表
-	const userList = ref < any[] > ([])
+	const userFromStore = computed(() => store.state.allSessionList)
+	const userList = ref < any > ([])
 	const getUserList = () => {
 		post(`${APIURL}/users/userList`, {
 			id: store.state.sender.Id,
 		}).then(res => {
-			console.log('res', res)
 			if (res?.code === 200) {
 				userList.value.push(...res.data)
 				// 存到vuex缓存中
@@ -54,9 +55,11 @@
 			}
 		})
 	}
-	onMounted(() => {
+	if (userFromStore.value.length > 0) {
+		userList.value = userFromStore
+	} else {
 		getUserList()
-	})
+	}
 </script>
 
 <style lang="scss">

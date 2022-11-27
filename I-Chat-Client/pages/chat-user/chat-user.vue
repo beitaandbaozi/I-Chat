@@ -15,6 +15,77 @@
 	import SearchByInput from './components/search-by-input.vue'
 	import OptionByUser from './components/option-by-user.vue'
 	import ListByUser from './components/list-by-user.vue'
+
+	import io from '@hyoga/uni-socket.io';
+	import {
+		SOCKETAPI
+	} from '@/script/config.js'
+	import store from '@/store/index.js'
+	import {
+		onMounted
+	} from "vue";
+	import {
+		logout,
+		tipMesg,
+		reLaunch
+	} from "@/script/common.js"
+	// 初始化socket
+	const initSocket = () => {
+		// 创建socket对象
+		const socket = io(SOCKETAPI, {
+			query: {},
+			transports: ['websocket', 'polling'],
+			timeout: 5000
+		})
+		// 放入vuex
+		store.commit('setPropName', {
+			propName: 'socket',
+			value: socket
+		})
+		// socket连接
+		store.state.socket.on("connect", () => {
+			console.log('前端socket连接')
+			// 连接服务器的socket
+			store.state.socket.emit("joinChat", {
+				SendId: store.state.sender.Id,
+				SendName: store.state.sender.Name,
+				ReviceId: -1,
+				ReviceName: "",
+				NoCode: store.state.noCode
+			})
+		})
+		// 多设备在线时，强制旧设备下线
+		store.state.socket.on('squeezeOut', (data) => {
+			if (data.noCode === store.state.noCode) {
+				// 退出登录
+				logout()
+				// 消息提醒
+				tipMesg("账户在其他地方登陆，会话已断开")
+				// 路由跳转
+				reLaunch('/index/index')
+			}
+		})
+		// 服务端更新完用户端状态，socket连接成功，加入会话成功
+		store.state.socket.on("joinSuccess", (data) => {
+			store.commit('setPropName', {
+				propName: 'conversitionList',
+				value: data.conversion
+			});
+			if (store.state.sessionList.length === 0) {
+				store.commit('setPropName', {
+					propName: 'sessionList',
+					value: data.historySessionList
+				});
+			}
+		})
+		// 断开连接
+		store.state.socket.on("disconnect", () => {
+			console.log('socket连接断开')
+		})
+	}
+	onMounted(() => {
+		initSocket()
+	})
 </script>
 
 <style lang="scss">

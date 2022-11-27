@@ -6,6 +6,12 @@ const store = createStore({
 		sender: null,
 		// 好友列表
 		allSessionList: [],
+		// socket
+		socket: null,
+		// 时间戳
+		noCode: +new Date(),
+		conversitionList: [],
+		sessionList: []
 	},
 	mutations: {
 		// 更新state中的数据

@@ -5,7 +5,6 @@ const db = require("../db/index");
 const { info, msg, emailConfig, newUserConfig } = require("../config");
 // 邮箱发送模块
 const nodemailer = require("nodemailer");
-
 // 存储发送时的校验码
 const sessionEmail = [];
 

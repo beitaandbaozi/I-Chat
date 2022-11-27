@@ -42,3 +42,11 @@ export function reLaunch(url, params = {}) {
 export function isLogin() {
 	return uni.getStorageSync('token') && uni.getStorageSync('sender') ? true : false
 }
+
+// 退出登录
+export function logout() {
+	uni.removeStorageSync("token");
+	uni.removeStorageSync("sender");
+	// 关闭socket通讯
+	store.state.socket.disconnect();
+}

@@ -158,3 +158,43 @@ exports.updateUserHistorySessionListById = (historySessionList, id) => {
     }
   });
 };
+
+// 获取用户未读的信息
+exports.getUnReadContent = (sendId, reciverId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `select * from content where SendId ="${sendId}" and ReciverId ="${reciverId}" and ReadFlag = false`,
+        (err, res) => {
+          if (err) {
+            reject(info.error("获取用户未读的信息失败"));
+          } else {
+            resolve(info.success(res, "获取用户未读的信息成功"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("获取用户未读的信息数据库异常"));
+    }
+  });
+};
+
+// 更新聊天内容阅读状态
+exports.updateContentReadFlagById = (id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `update content set ReadFlag = 1 where Id ="${id}"`,
+        (err, content) => {
+          if (err) {
+            reject(info.error("更新聊天内容阅读状态失败"));
+          } else {
+            resolve(info.success(content, "更新聊天内容阅读状态成功"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("更新聊天内容阅读状态数据库异常"));
+    }
+  });
+};

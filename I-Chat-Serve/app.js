@@ -19,6 +19,8 @@ const {
   getUserByOutTradeNo,
   insertContent,
   updateUserHistorySessionListById,
+  getUnReadContent,
+  updateContentReadFlagById,
 } = require("./query/socket");
 
 const { nowTime } = require("./config");
@@ -167,6 +169,23 @@ io.on("connection", function (socket) {
       }
     } catch (error) {
       console.log("发送消息报错", error.message);
+    }
+  });
+  // 修改信息阅读状态
+  socket.on("changeMsgRead", async (data) => {
+    try {
+      // ??? 获取用户未读的消息
+      const userUnReadMesg = await getUnReadContent(
+        data.SendId,
+        data.ReciverId
+      );
+      if (userUnReadMesg.state && userUnReadMesg.data.length > 0) {
+        userUnReadMesg.data.map((item) => {
+          updateContentReadFlagById(item.Id);
+        });
+      }
+    } catch (error) {
+      console.log("修改信息阅读状态异常", error.message);
     }
   });
 });

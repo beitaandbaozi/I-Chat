@@ -117,3 +117,44 @@ exports.getUserByOutTradeNo = (outTradeNo) => {
     }
   });
 };
+
+// 插入聊天记录
+exports.insertContent = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `insert into content (SendId,ReciverId,Content,Type,State,NoCode,CreateDateUtc,ReadFlag,Avatar,Description) 
+      values(${data.SendId},${data.ReciverId},'${data.Content}',${data.Type},${data.State},"${data.NoCode}","${data.CreateDateUtc}",${data.ReadFlag},"${data.Avatar}","${data.Description}")`,
+        (err, res) => {
+          if (err) {
+            reject(info.error("插入聊天内容失败"));
+          } else {
+            resolve(info.success(null, "插入聊天内容成功"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("插入聊天记录数据库异常"));
+    }
+  });
+};
+
+// 根据Id更新用户的历史会话列表
+exports.updateUserHistorySessionListById = (historySessionList, id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `update user set HistorySessionList = '${historySessionList}' where Id = ${id}`,
+        (err, res) => {
+          if (err) {
+            reject(info.error("根据Id更新用户的历史会话列表失败"));
+          } else {
+            resolve(null, "根据Id更新用户的历史会话列表成功");
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据Id更新用户的历史会话列表数据库异常"));
+    }
+  });
+};

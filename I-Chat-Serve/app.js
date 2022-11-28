@@ -188,6 +188,38 @@ io.on("connection", function (socket) {
       console.log("修改信息阅读状态异常", error.message);
     }
   });
+  // 新增历史会话
+  socket.on("insertHistorySession", async (data) => {
+    try {
+      let userInfo = await getUserInfoById(data.SendId);
+      if (userInfo.state && userInfo.data.length > 0) {
+        let historySessionList = [];
+        if (userInfo.data[0].HistorySessionList != null) {
+          historySessionList = JSON.parse(userInfo.data[0].HistorySessionList);
+          let len =
+            historySessionList.filter((item) => item.Id == data.Revicer.Id)
+              ?.length ?? 0;
+          if (len == 0) {
+            data.Revicer.HistorySessionList = "";
+            historySessionList.push(data.Revicer);
+            updateUserHistorySessionListById(
+              JSON.stringify(historySessionList),
+              data.SendId
+            );
+          }
+        } else {
+          data.Revicer.HistorySessionList = "";
+          historySessionList.push(data.Revicer);
+          updateUserHistorySessionListById(
+            JSON.stringify(historySessionList),
+            data.SendId
+          );
+        }
+      }
+    } catch (error) {
+      console.log("新增历史会话异常", error.message);
+    }
+  });
 });
 
 module.exports = app;

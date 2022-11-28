@@ -17,7 +17,11 @@ const {
   updateUserNoCodeById,
   getContentBySendId,
   getUserByOutTradeNo,
+  insertContent,
+  updateUserHistorySessionListById,
 } = require("./query/socket");
+
+const { nowTime } = require("./config");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -110,6 +114,59 @@ io.on("connection", function (socket) {
     // ??? 更新当前用户在线状态
     if (userInfoBySocketId.state && userInfoBySocketId.data.length > 0) {
       updateUserOnlineStateById(userInfoBySocketId.data[0].Id, false);
+    }
+  });
+  // 发送消息
+  socket.on("sendMsg", async (data) => {
+    try {
+      // ??? 获取接收者的角色信息
+      let receiverInfoResult = await getUserInfoById(
+        data.Conversition.ReciverId
+      );
+      if (!receiverInfoResult.state) {
+        console.log("接收数据失败");
+        return;
+      }
+      let receiverInfo = receiverInfoResult.data;
+      // ??? 设置消息的状态
+      data.Conversition.State = 1;
+      data.Conversition.CreateDateUtc = nowTime();
+      // ??? 在数据库插入聊天记录
+      await insertContent(data.Conversition);
+      // ??? 通知 socket 消息接收事件
+      if (receiverInfo.length > 0) {
+        socket
+          .to(receiverInfo[0].OutTradeNo)
+          .emit("reviceMsg", data.Conversition);
+      }
+      // ??? socket emit 消息状态改变事件
+      socket.emit("changMsgState", data.Conversition);
+      // ??? 将发送者的会话存储到接收者的历史会话中
+      if (receiverInfo[0].HistorySessionList != null) {
+        // ??? 说明有之前的记录
+        let historySessionList = JSON.parse(receiverInfo[0].HistorySessionList);
+        let len =
+          historySessionList.filter((x) => x.Id === data.Sender.Id)?.length ??
+          0;
+        if (len === 0) {
+          data.Sender.HistorySessionList = "";
+          historySessionList.push(data.Sender);
+          updateUserHistorySessionListById(
+            JSON.stringify(historySessionList),
+            receiverInfo[0].Id
+          );
+        }
+      } else {
+        let historySessionList = [];
+        data.Sender.HistorySessionList = "";
+        historySessionList.push(data.Sender);
+        updateUserHistorySessionListById(
+          JSON.stringify(historySessionList),
+          receiverInfo[0].Id
+        );
+      }
+    } catch (error) {
+      console.log("发送消息报错", error.message);
     }
   });
 });

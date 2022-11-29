@@ -54,6 +54,16 @@
 				"enablePullDownRefresh": false
 			}
 
+		},
+		// 用户信息
+		{
+			"path": "pages/friend-info-detail/friend-info-detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+
 		}
 	],
 	"tabBar": {

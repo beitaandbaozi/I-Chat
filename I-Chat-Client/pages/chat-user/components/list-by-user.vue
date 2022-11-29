@@ -1,7 +1,7 @@
 <template>
 	<view class="list-by-user">
 		<template v-for="(item) in userList" :key="item.Id">
-			<view class="user-list">
+			<view class="user-list" @click="selectSession(item)">
 				<view class="left">
 					<img :src="item.Avatar">
 				</view>
@@ -27,7 +27,6 @@
 	} from '@/script/config.js'
 	import {
 		computed,
-		onMounted,
 		ref
 	} from "vue";
 	import store from '@/store/index.js'
@@ -59,6 +58,23 @@
 		userList.value = userFromStore.value
 	} else {
 		getUserList()
+	}
+	// 点击好友
+	const selectSession = (data) => {
+		console.log('selectSession', data)
+		// 设置属性
+		store.commit('setPropName', {
+			propName: 'allSessionSelectId',
+			value: data.Id
+		})
+		store.commit('setPropName', {
+			propName: 'readyReciver',
+			value: data
+		})
+		// 跳转到具体的聊天页面
+		uni.navigateTo({
+			url: '/pages/friend-info-detail/friend-info-detail',
+		});
 	}
 </script>
 

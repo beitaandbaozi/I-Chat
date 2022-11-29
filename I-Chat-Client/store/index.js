@@ -13,7 +13,10 @@ const store = createStore({
 		// 本地消息
 		conversitionList: [],
 		sessionList: [],
-		sessionSelectId: 0
+		sessionSelectId: 0,
+		allSessionSelectId: 0,
+		// 接收人用户信息
+		readyReciver: null
 	},
 	mutations: {
 		// 更新state中的数据

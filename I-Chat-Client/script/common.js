@@ -50,3 +50,8 @@ export function logout() {
 	// 关闭socket通讯
 	store.state.socket.disconnect();
 }
+
+// 发送本地消息
+export function snedLocal(conversition) {
+	store.state.conversitionList.push(conversition)
+}

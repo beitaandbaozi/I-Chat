@@ -10,8 +10,10 @@ const store = createStore({
 		socket: null,
 		// 时间戳
 		noCode: +new Date(),
+		// 本地消息
 		conversitionList: [],
-		sessionList: []
+		sessionList: [],
+		sessionSelectId: 0
 	},
 	mutations: {
 		// 更新state中的数据

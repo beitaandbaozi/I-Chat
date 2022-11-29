@@ -56,7 +56,7 @@
 		})
 	}
 	if (userFromStore.value.length > 0) {
-		userList.value = userFromStore
+		userList.value = userFromStore.value
 	} else {
 		getUserList()
 	}

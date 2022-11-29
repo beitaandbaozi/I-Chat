@@ -27,7 +27,8 @@
 	import {
 		logout,
 		tipMesg,
-		reLaunch
+		reLaunch,
+		snedLocal
 	} from "@/script/common.js"
 	// 初始化socket
 	const initSocket = () => {
@@ -81,6 +82,35 @@
 		// 断开连接
 		store.state.socket.on("disconnect", () => {
 			console.log('socket连接断开')
+		})
+		// 接收信息
+		store.state.socket.on("reviceMsg", (data) => {
+			if (data.ReciverId == store.state.sender.Id) {
+				for (let item of store.state.sessionList) {
+					if (item.id == data.SendId && store.state.sessionSelectId == data.SendId) {
+						data.ReadFlag = true;
+						let query = {
+							SendId: data.SendId,
+							ReciverId: store.state.sender.Id
+						}
+						store.state.socket.emit("changeMsgRead", query)
+						break;
+					}
+				}
+			}
+			snedLocal(data)
+			let len = store.state.sessionList.filter((x) => x.Id == data.SendId)?.length ?? 0;
+			if (len === 0) {
+				let item = store.state.allSessionList.filter((x) => {
+					x.Id == data.SendId
+				})
+				let sessionList = store.state.sessionList
+				sessionList.push(...item)
+				store.commit('setPropName', {
+					propName: 'sessionList',
+					value: sessionList
+				})
+			}
 		})
 	}
 	onMounted(() => {

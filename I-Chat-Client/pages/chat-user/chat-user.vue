@@ -112,6 +112,19 @@
 				})
 			}
 		})
+		// 修改信息状态
+		store.state.socket.on("changeMsgState", (data) => {
+			let conversitionList = store.state.conversitionList
+			conversitionList.map((x) => {
+				if (x.NoCode != null && x.NoCode == data.NoCode) {
+					x.State = 1;
+				}
+			})
+			store.commit("setPropName", {
+				propName: "conversitionList",
+				value: conversitionList
+			})
+		})
 	}
 	onMounted(() => {
 		initSocket()

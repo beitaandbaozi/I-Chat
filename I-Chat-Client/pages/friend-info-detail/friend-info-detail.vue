@@ -2,7 +2,7 @@
 	<view class="friend-info-detail">
 		<view class="header">
 			<view class="left">
-				<img :src="readyReciverInfo.Avatar">
+				<img :src="readyReciverInfo.Avatar" mode="widthFix">
 			</view>
 			<view class="right">
 				<h3>{{readyReciverInfo.Name}}</h3>
@@ -33,7 +33,7 @@
 		</view>
 		<!-- 交互 -->
 		<view class="option">
-			<view class="sendMesg">
+			<view class="sendMesg" @click="sendMesg">
 				<img src="../../static/img/send-message.png" class="img-option">
 				<text>发消息</text>
 			</view>
@@ -52,6 +52,40 @@
 	} from "vue";
 
 	const readyReciverInfo = computed(() => store.state.readyReciver)
+
+	// 发送消息
+	const sendMesg = () => {
+		// 设置当前聊天对象的Id
+		store.commit("setPropName", {
+			propName: "sessionSelectId",
+			value: store.state.readyReciver.Id
+		})
+		// 设置聊天对象信息
+		store.commit("setPropName", {
+			propName: "reciver",
+			value: store.state.readyReciver
+		})
+		console.log('sessionList', store.state.sessionList)
+		let len = store.state.sessionList.filter((item) => item.Id === store.state.readyReciver.Id)?.length ?? 0;
+		if (len === 0) {
+			let sessionList = store.state.sessionList
+			sessionList.push(store.state.readyReciver)
+			store.commit("setPropName", {
+				propName: "sessionList",
+				value: sessionList
+			})
+			let query = {
+				SendId: store.state.sender.Id,
+				Revicer: store.state.readyReciver
+			}
+			store.state.socket.emit("insertHistorySession", query)
+		}
+		store.commit("changeReaded", store.state.readyReciver.Id)
+		// 跳转
+		uni.navigateTo({
+			url: '/pages/chat-content/chat-content',
+		});
+	}
 </script>
 
 <style lang="scss">
@@ -81,9 +115,11 @@
 				margin-left: 30rpx;
 				display: flex;
 				flex-direction: column;
+
 				h3 {
 					margin-bottom: 10rpx;
 				}
+
 				text {
 					font-size: 14px;
 					color: rgb(161, 161, 161)

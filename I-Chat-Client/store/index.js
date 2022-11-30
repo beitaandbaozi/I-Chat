@@ -16,7 +16,9 @@ const store = createStore({
 		sessionSelectId: 0,
 		allSessionSelectId: 0,
 		// 接收人用户信息
-		readyReciver: null
+		readyReciver: null,
+		// 发送的聊天对象信息
+		reciver: null
 	},
 	mutations: {
 		// 更新state中的数据

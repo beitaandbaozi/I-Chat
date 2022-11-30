@@ -64,8 +64,18 @@
 				"navigationBarBackgroundColor": "#fff"
 			}
 
-		}
-	],
+		},
+		// 聊天框
+		{
+            "path" : "pages/chat-content/chat-content",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"borderStyle": "black",
 		"backgroundColor": "#fff",

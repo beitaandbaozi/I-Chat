@@ -78,7 +78,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.list-by-user {
 		margin-top: 20rpx;
 

@@ -86,7 +86,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.title {
 		text-align: center;
 		font-size: 24px;

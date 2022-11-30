@@ -98,7 +98,7 @@
 	const sender = computed(() => store.state.sender)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.user-info-detail {
 		height: 100vh;
 		background-color: rgb(237, 237, 237);

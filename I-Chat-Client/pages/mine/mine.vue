@@ -94,7 +94,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.mine {
 		height: 100vh;
 		background: rgb(237, 237, 237);

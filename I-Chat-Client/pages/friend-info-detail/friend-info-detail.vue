@@ -88,7 +88,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.friend-info-detail {
 		height: 100vh;
 		background: rgb(237, 237, 237);

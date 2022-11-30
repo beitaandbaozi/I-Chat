@@ -227,7 +227,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.login-by-regist {
 		.title {
 			text-align: center;

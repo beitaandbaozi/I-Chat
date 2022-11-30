@@ -131,7 +131,7 @@
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.chat-user {
 		height: 100%;
 		background-color: rgb(237, 237, 237);

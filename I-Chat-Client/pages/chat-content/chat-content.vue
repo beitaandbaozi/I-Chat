@@ -90,7 +90,6 @@
 				.textarea-box {
 					width: 100%;
 					min-height: 70rpx;
-					margin-top: 15rpx;
 
 					.text-mode {
 						display: flex;
@@ -112,7 +111,7 @@
 						}
 
 						.em {
-							margin-top: 5rpx;
+							margin-top: 10rpx;
 							flex-shrink: 0;
 							width: 50rpx;
 							height: 50rpx;

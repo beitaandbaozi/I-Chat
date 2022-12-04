@@ -24,7 +24,25 @@ const store = createStore({
 		// 更新state中的数据
 		setPropName(state, res) {
 			state[res.propName] = res.value
-		}
+		},
+		changeReaded(state, res) {
+		    let userConversition = store.state.conversitionList.filter(
+		        (x) =>
+		        x.SendId == res &&
+		        x.ReciverId == store.state.sender.Id &&
+		        !x.ReadFlag
+		    );
+		    if (userConversition.length > 0) {
+		        userConversition.map((x) => {
+		            x.ReadFlag = true;
+		        });
+		    }
+		    let query = {
+		        SendId: res,
+		        ReciverId: store.state.sender.Id,
+		    };
+		    store.state.socket.emit("changeMsgRead", query);
+		},
 	}
 })
 

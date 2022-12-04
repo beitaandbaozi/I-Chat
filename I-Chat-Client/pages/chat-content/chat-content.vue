@@ -2,7 +2,37 @@
 	<view class="chat-content">
 		<!-- 内容 -->
 		<scroll-view scroll-y class="chat-content-scroll">
-			<view></view>
+			<view v-for="(item) in conversitionList" :key="item.Id">
+				<!-- 本人信息--右侧 -->
+				<view v-if="item.SendId === store.state.sender.Id">
+					<view class="my-self-infomation">
+						<!-- 文本内容 -->
+						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
+						</view>
+						<!-- 图片内容 -->
+						<!-- 视频内容 -->
+						<!-- 头像 -->
+						<view class="header">
+							<img :src="item.Avatar">
+						</view>
+					</view>
+				</view>
+
+				<!-- 好友信息--左侧 -->
+				<view v-else-if="item.SendId === reciver.Id">
+					<view class="friend-infomation">
+						<!-- 头像 -->
+						<view class="header">
+							<img :src="item.Avatar">
+						</view>
+						<!-- 文本内容 -->
+						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
+						</view>
+						<!-- 图片内容 -->
+						<!-- 视频内容 -->
+					</view>
+				</view>
+			</view>
 		</scroll-view>
 		<!-- 文本区域 -->
 		<view class="chat-botton">
@@ -40,12 +70,22 @@
 		onMounted
 	} from "vue";
 
+	// 动态设置标题
 	const reciver = computed(() => store.state.reciver)
 	onMounted(() => {
 		uni.setNavigationBarTitle({
 			title: reciver.value.Name
 		})
 	})
+
+	// 获取聊天内容
+	const conversitionList = computed(() => {
+		return store.state.conversitionList.filter((item: any) => {
+			return (item.SendId === store.state.sender.Id && item.ReciverId === reciver.value.Id) ||
+				(item.ReciverId === store.state.sender.Id && item.SendId === reciver.value.Id)
+		})
+	})
+	console.log(conversitionList.value)
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +98,95 @@
 			width: 100%;
 			height: calc(100vh - 100rpx);
 			overflow-y: auto;
+
+			// 用户消息
+			.my-self-infomation {
+				margin-top: 40rpx;
+				margin-right: 20rpx;
+				display: flex;
+				justify-content: flex-end;
+
+				// 文本框
+				.text-content {
+					margin-right: 40rpx;
+					position: relative;
+					max-width: 600rpx;
+					height: auto;
+					border-radius: 20rpx;
+					background-color: rgb(229, 243, 253);
+					color: #000;
+					padding: 10rpx 14rpx;
+					line-height: 60rpx;
+
+					&::after {
+						content: '';
+						display: block;
+						width: 0;
+						height: 0;
+						position: absolute;
+						right: -25rpx;
+						top: 30rpx;
+						border-top: 15px solid rgb(229, 243, 253);
+						border-right: 15px solid transparent;
+					}
+				}
+
+				.header {
+					width: 60rpx;
+					height: 60rpx;
+
+					img {
+						border-radius: 50%;
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+
+			// 好友消息
+			.friend-infomation {
+				margin-top: 40rpx;
+				margin-left: 20rpx;
+				display: flex;
+				justify-content: flex-start;
+
+				// 头像
+				.header {
+					width: 60rpx;
+					height: 60rpx;
+
+					img {
+						border-radius: 50%;
+						width: 100%;
+						height: 100%;
+					}
+				}
+
+				// 文本消息
+				.text-content {
+					margin-left: 40rpx;
+					position: relative;
+					max-width: 600rpx;
+					height: auto;
+					border-radius: 20rpx;
+					background-color: rgb(255, 255, 255);
+					color: #000;
+					padding: 10rpx 14rpx;
+					line-height: 60rpx;
+
+					&::before {
+						content: '';
+						display: block;
+						width: 0;
+						height: 0;
+						position: absolute;
+						left: -25rpx;
+						top: 30rpx;
+						border-top: 15px solid rgb(255, 255, 255);
+						border-left: 15px solid transparent;
+					}
+				}
+			}
 		}
 
 		// 输入框

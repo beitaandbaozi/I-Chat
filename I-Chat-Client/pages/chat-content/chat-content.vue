@@ -10,6 +10,7 @@
 						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
+						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
 						<!-- 头像 -->
 						<view class="header">
@@ -29,6 +30,7 @@
 						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
+						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
 					</view>
 				</view>
@@ -131,6 +133,15 @@
 					}
 				}
 
+				// 图片
+				.img-content {
+					width: 400rpx;
+					margin-right: 40rpx;
+					border-radius: 20rpx;
+					// 后端还未写存放图片的路径，所以先用颜色替代
+					background-color: #55aaff;
+				}
+
 				.header {
 					width: 60rpx;
 					height: 60rpx;
@@ -185,6 +196,15 @@
 						border-top: 15px solid rgb(255, 255, 255);
 						border-left: 15px solid transparent;
 					}
+				}
+
+				// 图片
+				.img-content {
+					width: 400rpx;
+					margin-left: 40rpx;
+					border-radius: 20rpx;
+					// 后端还未写存放图片的路径，所以先用颜色替代
+					background-color: #ffaa00;
 				}
 			}
 		}

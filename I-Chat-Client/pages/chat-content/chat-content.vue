@@ -1,7 +1,7 @@
 <template>
-	<view class="chat-content">
+	<view class="chat-content" id="body">
 		<!-- 内容 -->
-		<scroll-view scroll-y class="chat-content-scroll">
+		<scroll-view scroll-y class="chat-content-scroll" :style="{height:contentHeight + 'px'}">
 			<view v-for="(item) in conversitionList" :key="item.Id">
 				<!-- 本人信息--右侧 -->
 				<view v-if="item.SendId === store.state.sender.Id">
@@ -12,6 +12,7 @@
 						<!-- 图片内容 -->
 						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
+						<!-- 录音 -->
 						<!-- 头像 -->
 						<view class="header">
 							<img :src="item.Avatar">
@@ -32,14 +33,15 @@
 						<!-- 图片内容 -->
 						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
+						<!-- 录音 -->
 					</view>
 				</view>
 			</view>
 		</scroll-view>
 		<!-- 文本区域 -->
-		<view class="chat-botton">
+		<view class="chat-botton" :style="{height:bottomHeight + 'px'}">
 			<!-- 输入框 -->
-			<view class="input-box">
+			<view class="input-box" :class="popupLayerClass">
 				<view class="textarea-box">
 					<view class="text-mode">
 						<view class="box">
@@ -52,7 +54,7 @@
 					</view>
 				</view>
 				<!-- 功能选项 -->
-				<view class="more">
+				<view class="more" @click="handleShowMore">
 					<img src="../../static/img/option-add.png">
 				</view>
 				<!-- 发送按钮 -->
@@ -60,7 +62,10 @@
 					<view class="btn">发送</view>
 				</view>
 			</view>
+			<!-- 底部弹框 -->
+			<view class="popup-layer" :class="popupLayerClass">
 
+			</view>
 		</view>
 	</view>
 </template>
@@ -69,16 +74,10 @@
 	import store from '@/store/index.js'
 	import {
 		computed,
-		onMounted
+		onMounted,
+		ref,
+		watch
 	} from "vue";
-
-	// 动态设置标题
-	const reciver = computed(() => store.state.reciver)
-	onMounted(() => {
-		uni.setNavigationBarTitle({
-			title: reciver.value.Name
-		})
-	})
 
 	// 获取聊天内容
 	const conversitionList = computed(() => {
@@ -87,7 +86,67 @@
 				(item.ReciverId === store.state.sender.Id && item.SendId === reciver.value.Id)
 		})
 	})
-	console.log(conversitionList.value)
+
+	// 底部弹框
+	const windowHeight = ref < number > (0)
+	const contentHeight = ref < number > (0)
+	const bottomHeight = ref < number > (50)
+	const popupLayerClass = ref < string > ('')
+	watch(popupLayerClass, (newValue) => {
+		if (newValue === 'showLayer') {
+			bottomHeight.value = 238;
+		} else {
+			bottomHeight.value = 50;
+		}
+		contentHeight.value = windowHeight.value - bottomHeight.value;
+	})
+	// 打开弹框
+	const openDrew = () => {
+		popupLayerClass.value = 'showLayer'
+	}
+	// 关闭弹框
+	const closeDrew = () => {
+		popupLayerClass.value = ''
+	}
+
+	// 展示更多功能
+	const hideMore = ref < boolean > (true)
+	const handleShowMore = () => {
+		if (hideMore.value) {
+			hideMore.value = false;
+			openDrew()
+		} else {
+			hideMore.value = true;
+			closeDrew()
+		}
+	}
+
+	// 获取设备信息
+	const getTelephoneInfo = async () => {
+		uni.getSystemInfo({
+			success: (res) => {
+				// 设置滚动高度
+				const query = wx.createSelectorQuery();
+				query.select('#body').boundingClientRect();
+				query.exec(res => {
+					res.map((item) => {
+						windowHeight.value = item.height;
+					})
+				})
+				contentHeight.value = windowHeight.value - bottomHeight.value;
+			}
+		})
+	}
+
+	// 动态设置标题
+	const reciver = computed(() => store.state.reciver)
+	onMounted(() => {
+		uni.setNavigationBarTitle({
+			title: reciver.value.Name
+		})
+		// 获取设备信息
+		getTelephoneInfo()
+	})
 </script>
 
 <style lang="scss" scoped>
@@ -220,7 +279,7 @@
 			z-index: 20;
 			bottom: -2rpx;
 			border-top: solid 1rpx #ddd;
-			// transition: all .15s linear;
+			transition: all .15s linear;
 
 			.input-box {
 				display: flex;
@@ -233,7 +292,7 @@
 				position: fixed;
 				z-index: 20;
 				bottom: -2px;
-				// transition: all .15s linear;
+				transition: all .15s linear;
 				border-top: solid 0.5px #ddd;
 
 				.textarea-box {
@@ -303,6 +362,28 @@
 						font-size: 24rpx;
 					}
 				}
+
+				&.showLayer {
+					transform: translate3d(0, -50vw, 0);
+				}
+			}
+		}
+
+		// 底部弹框
+		.popup-layer {
+			transition: all .15s linear;
+			width: 100%;
+			height: 50vw;
+			padding-bottom: 15px;
+			background-color: #fff;
+			border-top: solid 0.5px #ddd;
+			position: fixed;
+			z-index: 20;
+			top: 100%;
+			padding-top: 40rpx;
+
+			&.showLayer {
+				transform: translate3d(0, -50vw, 0);
 			}
 		}
 	}

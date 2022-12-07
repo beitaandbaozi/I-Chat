@@ -2,7 +2,7 @@
 	<view class="chat-content" id="body">
 		<!-- 内容 -->
 		<scroll-view scroll-y class="chat-content-scroll" :style="{height:contentHeight + 'px'}">
-			<view v-for="(item) in conversitionList" :key="item.Id">
+			<template v-for="(item) in conversitionList" :key="item.Id">
 				<!-- 本人信息--右侧 -->
 				<view v-if="item.SendId === store.state.sender.Id">
 					<view class="my-self-infomation">
@@ -36,7 +36,7 @@
 						<!-- 录音 -->
 					</view>
 				</view>
-			</view>
+			</template>
 		</scroll-view>
 		<!-- 文本区域 -->
 		<view class="chat-botton" :style="{height:bottomHeight + 'px'}">
@@ -65,9 +65,13 @@
 			<!-- 底部弹框 -->
 			<view class="popup-layer" :class="popupLayerClass">
 				<!-- 表情包 -->
-				<view class="emjoi" :class="{ hidden : hideEmoji }">表情包</view>
+				<view class="emjois" :class="{ hidden : hideEmoji }">
+					<template v-for="(item, index) in expressions" :key="index">
+						<image :src="item.icon" :title="item.title" mode="widthFix"></image>
+					</template>
+				</view>
 				<!-- 功能 -->
-				<view class="option" :class="{ hidden : hideMore }">功能</view>
+				<view class="options" :class="{ hidden : hideMore }">功能</view>
 			</view>
 		</view>
 	</view>
@@ -81,6 +85,7 @@
 		ref,
 		watch
 	} from "vue";
+	import expressions from "@/static/json/expressions.json"
 
 	// 获取聊天内容
 	const conversitionList = computed(() => {
@@ -401,7 +406,7 @@
 			position: fixed;
 			z-index: 20;
 			top: 100%;
-			padding-top: 40rpx;
+			overflow-y: auto;
 
 			&.showLayer {
 				transform: translate3d(0, -50vw, 0);
@@ -409,6 +414,23 @@
 
 			.hidden {
 				display: none;
+			}
+
+			// 表情包
+			.emjois {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 20rpx;
+
+				image {
+					margin: 10rpx;
+					width: 60rpx;
+					height: 60rpx
+				}
+
+
 			}
 		}
 	}

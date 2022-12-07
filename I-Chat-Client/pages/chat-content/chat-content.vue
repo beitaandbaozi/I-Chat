@@ -48,7 +48,7 @@
 							<textarea auto-height></textarea>
 						</view>
 						<!-- 表情包 -->
-						<view class="em">
+						<view class="em" @click="handleShowEmjoi">
 							<img src="../../static/img/em.png">
 						</view>
 					</view>
@@ -64,7 +64,10 @@
 			</view>
 			<!-- 底部弹框 -->
 			<view class="popup-layer" :class="popupLayerClass">
-
+				<!-- 表情包 -->
+				<view class="emjoi" :class="{ hidden : hideEmoji }">表情包</view>
+				<!-- 功能 -->
+				<view class="option" :class="{ hidden : hideMore }">功能</view>
 			</view>
 		</view>
 	</view>
@@ -109,14 +112,28 @@
 		popupLayerClass.value = ''
 	}
 
-	// 展示更多功能
+	// 展示更多功能和展示表情包功能
+	const hideEmoji = ref < boolean > (true)
 	const hideMore = ref < boolean > (true)
+	// 展示更多
 	const handleShowMore = () => {
+		// 隐藏表情包
+		hideEmoji.value = true
 		if (hideMore.value) {
 			hideMore.value = false;
 			openDrew()
 		} else {
-			hideMore.value = true;
+			closeDrew()
+		}
+	}
+	// 展示表情包
+	const handleShowEmjoi = () => {
+		// 隐藏更多功能
+		hideMore.value = true
+		if (hideEmoji.value) {
+			hideEmoji.value = false;
+			openDrew()
+		} else {
 			closeDrew()
 		}
 	}
@@ -384,6 +401,10 @@
 
 			&.showLayer {
 				transform: translate3d(0, -50vw, 0);
+			}
+
+			.hidden {
+				display: none;
 			}
 		}
 	}

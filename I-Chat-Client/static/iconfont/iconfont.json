@@ -6,6 +6,20 @@
   "description": "聊天应用",
   "glyphs": [
     {
+      "icon_id": "1600990",
+      "name": "gentleman",
+      "font_class": "gentleman",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "5899152",
+      "name": "添加",
+      "font_class": "biaoqing1",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
       "icon_id": "4975218",
       "name": "语音识别优化",
       "font_class": "yuyinshibieyouhua",

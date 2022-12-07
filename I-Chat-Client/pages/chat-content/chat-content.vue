@@ -110,6 +110,10 @@
 	// 关闭弹框
 	const closeDrew = () => {
 		popupLayerClass.value = ''
+		setTimeout(() => {
+			hideMore.value = true;
+			hideEmoji.value = true;
+		}, 150);
 	}
 
 	// 展示更多功能和展示表情包功能

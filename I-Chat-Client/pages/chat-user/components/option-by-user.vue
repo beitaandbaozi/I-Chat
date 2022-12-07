@@ -1,37 +1,5 @@
 <template>
 	<view class="option-by-user">
-		<!-- <view class="default line">
-			<view class="option">
-				<svg class="icon img-option" aria-hidden="true">
-					<use xlink:href="#icon-Button-tianjiahaoyou"></use>
-				</svg>
-				<text class="option-content">新的朋友</text>
-			</view>
-		</view>
-		<view class="default line">
-			<view class="option">
-				<img src="@/static/img/lt.png" class="img-option">
-				<text class="option-content">仅聊天的朋友</text>
-			</view>
-		</view>
-		<view class="default line">
-			<view class="option">
-				<img src="@/static/img/ql.png" class="img-option">
-				<text class="option-content">群聊</text>
-			</view>
-		</view>
-		<view class="default line">
-			<view class="option">
-				<img src="@/static/img/bq.png" class="img-option">
-				<text class="option-content">标签</text>
-			</view>
-		</view>
-		<view class="default">
-			<view class="option">
-				<img src="@/static/img/gzh.png" class="img-option">
-				<text class="option-content">公众号</text>
-			</view>
-		</view> -->
 		<template v-for="(item,index) in friendOption" :key="index">
 			<view class="default line">
 				<view class="option">

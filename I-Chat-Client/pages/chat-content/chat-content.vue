@@ -413,7 +413,7 @@
 			}
 
 			.hidden {
-				display: none;
+				display: none !important;
 			}
 
 			// 表情包

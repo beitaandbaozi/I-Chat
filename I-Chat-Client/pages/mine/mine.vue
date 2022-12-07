@@ -21,54 +21,21 @@
 				<img src="../../static/img/more.png" class="img-more">
 			</view>
 		</view>
-		<!-- 服务 -->
-		<view class="container serve ">
-			<view class="option">
-				<img src="../../static/img/serve.png" class="img-option">
-				<text class="content-option no-border">服务</text>
-				<img src="../../static/img/more.png" class="img-more">
+		<!-- 选项 -->
+		<template v-for="item in mineOption" :key="item.id">
+			<view :class="['container',{'serve':item.id === 1},{'setting':item.id === 6}]">
+				<view class="option">
+					<svg class="icon img-option" aria-hidden="true">
+						<use :xlink:href="item.icon"></use>
+					</svg>
+					<text
+						:class="['content-option', {'no-border':item.id === 5 || item.id === 6}]">{{item.title}}</text>
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
+				</view>
 			</view>
-		</view>
-		<!-- 收藏 -->
-		<view class="container collection">
-			<view class="option">
-				<img src="../../static/img/collection.png" class="img-option">
-				<text class="content-option">收藏</text>
-				<img src="../../static/img/more.png" class="img-more">
-			</view>
-		</view>
-		<!-- 朋友圈 -->
-		<view class="container cirle-friend">
-			<view class="option">
-				<img src="../../static/img/cirle-friend.png" class="img-option">
-				<text class="content-option">朋友圈</text>
-				<img src="../../static/img/more.png" class="img-more">
-			</view>
-		</view>
-		<!-- 卡包 -->
-		<view class="container wallet">
-			<view class="option">
-				<img src="../../static/img/wallet.png" class="img-option">
-				<text class="content-option">卡包</text>
-				<img src="../../static/img/more.png" class="img-more">
-			</view>
-		</view>
-		<!-- 表情 -->
-		<view class="container expression">
-			<view class="option">
-				<img src="../../static/img/expression.png" class="img-option">
-				<text class="content-option no-border">表情</text>
-				<img src="../../static/img/more.png" class="img-more">
-			</view>
-		</view>
-		<!-- 设置 -->
-		<view class="container setting">
-			<view class="option">
-				<img src="../../static/img/setting.png" class="img-option">
-				<text class="content-option no-border">设置</text>
-				<img src="../../static/img/more.png" class="img-more">
-			</view>
-		</view>
+		</template>
 	</view>
 </template>
 
@@ -77,6 +44,9 @@
 	import {
 		computed
 	} from "vue";
+	import {
+		mineOption
+	} from '@/script/config.js'
 
 	const sender = computed(() => store.state.sender)
 

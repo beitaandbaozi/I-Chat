@@ -46,6 +46,38 @@ const friendOption = [{
 	}
 ]
 
+// 我的页面选项
+const mineOption = [{
+		id: 1,
+		title: "服务",
+		icon: "#icon-fuwu"
+	},
+	{
+		id: 2,
+		title: "收藏",
+		icon: "#icon-shoucang"
+	},
+	{
+		id: 3,
+		title: "朋友圈",
+		icon: "#icon-xingzhuang-tupian"
+	},
+	{
+		id: 4,
+		title: "卡包",
+		icon: "#icon-sekuaiqiabao"
+	},
+	{
+		id: 5,
+		title: "表情",
+		icon: "#icon-biaoqing"
+	},
+	{
+		id: 6,
+		title: "设置",
+		icon: "#icon-shezhi"
+	}
+]
 
 export {
 	APIURL,
@@ -53,5 +85,6 @@ export {
 	emailValidate,
 	userNanmeValidate,
 	moreIcon,
-	friendOption
+	friendOption,
+	mineOption
 }

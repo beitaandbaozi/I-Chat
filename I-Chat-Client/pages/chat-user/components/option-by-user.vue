@@ -1,8 +1,10 @@
 <template>
 	<view class="option-by-user">
-		<view class="default line">
+		<!-- <view class="default line">
 			<view class="option">
-				<img src="@/static/img/tj.png" class="img-option">
+				<svg class="icon img-option" aria-hidden="true">
+					<use xlink:href="#icon-Button-tianjiahaoyou"></use>
+				</svg>
 				<text class="option-content">新的朋友</text>
 			</view>
 		</view>
@@ -29,16 +31,30 @@
 				<img src="@/static/img/gzh.png" class="img-option">
 				<text class="option-content">公众号</text>
 			</view>
-		</view>
+		</view> -->
+		<template v-for="(item,index) in friendOption" :key="index">
+			<view class="default line">
+				<view class="option">
+					<svg class="icon img-option" aria-hidden="true">
+						<use :xlink:href="item.icon"></use>
+					</svg>
+					<text class="option-content">{{item.title}}</text>
+				</view>
+			</view>
+		</template>
 	</view>
 </template>
 
 <script lang="ts" setup>
+	import {
+		friendOption
+	} from '@/script/config.js'
 </script>
 
 <style lang="scss" scoped>
 	.option-by-user {
 		margin-top: 40rpx;
+
 		.default {
 			background: #fff;
 
@@ -48,6 +64,8 @@
 				padding: 8rpx;
 
 				.img-option {
+					width: 100rpx;
+					height: 100rpx;
 					margin-left: 20rpx;
 				}
 

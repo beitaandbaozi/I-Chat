@@ -23,11 +23,35 @@ const moreIcon = [{
 	},
 ]
 
+// 好友列表选项
+const friendOption = [{
+		title: "新的朋友",
+		icon: "#icon-Button-tianjiahaoyou"
+	},
+	{
+		title: "仅聊天的朋友",
+		icon: "#icon-xiaoxi"
+	},
+	{
+		title: "群聊",
+		icon: "#icon-haoyou"
+	},
+	{
+		title: "标签",
+		icon: "#icon-biaoqian"
+	},
+	{
+		title: "公众号",
+		icon: "#icon-gongzhonghao"
+	}
+]
+
 
 export {
 	APIURL,
 	SOCKETAPI,
 	emailValidate,
 	userNanmeValidate,
-	moreIcon
+	moreIcon,
+	friendOption
 }

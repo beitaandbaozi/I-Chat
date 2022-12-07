@@ -1,0 +1,135 @@
+{
+  "id": "3814036",
+  "name": "BEITA RECORDS",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "聊天应用",
+  "glyphs": [
+    {
+      "icon_id": "4975218",
+      "name": "语音识别优化",
+      "font_class": "yuyinshibieyouhua",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "11078228",
+      "name": "视频播放",
+      "font_class": "shipinbofang",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "21754095",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "26699",
+      "name": "二维码",
+      "font_class": "erweima",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "629333",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "1348186",
+      "name": "色块－卡包",
+      "font_class": "sekuaiqiabao",
+      "unicode": "e6cc",
+      "unicode_decimal": 59084
+    },
+    {
+      "icon_id": "4354253",
+      "name": "形状-图片",
+      "font_class": "xingzhuang-tupian",
+      "unicode": "eb98",
+      "unicode_decimal": 60312
+    },
+    {
+      "icon_id": "4482980",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "7025922",
+      "name": "服务",
+      "font_class": "fuwu",
+      "unicode": "e732",
+      "unicode_decimal": 59186
+    },
+    {
+      "icon_id": "8219237",
+      "name": "表情",
+      "font_class": "biaoqing",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "1727542",
+      "name": "309下一页、前进、查看更多",
+      "font_class": "xiayiyeqianjinchakangengduo",
+      "unicode": "e8f1",
+      "unicode_decimal": 59633
+    },
+    {
+      "icon_id": "774380",
+      "name": "消息",
+      "font_class": "xiaoxi1",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "5387891",
+      "name": "视频_o",
+      "font_class": "shipin_o",
+      "unicode": "eb81",
+      "unicode_decimal": 60289
+    },
+    {
+      "icon_id": "9917176",
+      "name": "公众号",
+      "font_class": "gongzhonghao",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "21841996",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "12188359",
+      "name": "好友",
+      "font_class": "haoyou",
+      "unicode": "e7fe",
+      "unicode_decimal": 59390
+    },
+    {
+      "icon_id": "4253523",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "21853057",
+      "name": "Button-添加好友",
+      "font_class": "Button-tianjiahaoyou",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    }
+  ]
+}

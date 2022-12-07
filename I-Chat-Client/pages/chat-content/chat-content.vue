@@ -71,7 +71,11 @@
 					</template>
 				</view>
 				<!-- 功能 -->
-				<view class="options" :class="{ hidden : hideMore }">功能</view>
+				<view class="options" :class="{ hidden : hideMore }">
+					<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-yuyinshibieyouhua"></use>
+					</svg>
+				</view>
 			</view>
 		</view>
 	</view>

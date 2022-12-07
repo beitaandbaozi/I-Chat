@@ -1,4 +1,5 @@
 <script>
+	import "@/static/iconfont/iconfont.js"
 	import {
 		isLogin,
 		reLaunch
@@ -33,6 +34,8 @@
 </script>
 
 <style>
+	@import url("@/static/iconfont/iconfont.css");
+
 	/*每个页面公共css */
 	uni-page-body,
 	page {

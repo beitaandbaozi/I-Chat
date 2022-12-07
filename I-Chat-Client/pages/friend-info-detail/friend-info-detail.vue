@@ -14,31 +14,44 @@
 		<!-- 标签 -->
 		<view class="tip">
 			<text class="title">标签</text>
-			<img src="../../static/img/more.png" class="img-more">
+			<svg class="icon img-more" aria-hidden="true">
+				<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+			</svg>
 		</view>
 		<!-- 朋友权限 -->
 		<view class="tip">
 			<text class="title">朋友权限</text>
-			<img src="../../static/img/more.png" class="img-more">
+			<svg class="icon img-more" aria-hidden="true">
+				<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+			</svg>
 		</view>
 		<!-- 朋友圈 -->
 		<view class="tip social">
 			<text class="title">朋友圈</text>
-			<img src="../../static/img/more.png" class="img-more">
+			<svg class="icon img-more" aria-hidden="true">
+				<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+			</svg>
 		</view>
 		<!-- 更多信息 -->
 		<view class="tip">
 			<text class="title">更多</text>
-			<img src="../../static/img/more.png" class="img-more">
+			<svg class="icon img-more" aria-hidden="true">
+				<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+			</svg>
 		</view>
 		<!-- 交互 -->
 		<view class="option">
 			<view class="sendMesg" @click="sendMesg">
-				<img src="../../static/img/send-message.png" class="img-option">
+				<!-- <img src="../../static/img/send-message.png" class="img-option"> -->
+				<svg class="icon img-option" aria-hidden="true">
+					<use xlink:href="#icon-xiaoxi1"></use>
+				</svg>
 				<text>发消息</text>
 			</view>
 			<view class="sendVoice">
-				<img src="../../static/img/video.png" class="img-option">
+				<svg class="icon img-option" aria-hidden="true">
+					<use xlink:href="#icon-shipin_o"></use>
+				</svg>
 				<text>音视频通话</text>
 			</view>
 		</view>

@@ -49,13 +49,17 @@
 						</view>
 						<!-- 表情包 -->
 						<view class="em" @click="handleShowEmjoi">
-							<img src="../../static/img/em.png">
+							<svg class="icon btn-em" aria-hidden="true">
+								<use xlink:href="#icon-gentleman"></use>
+							</svg>
 						</view>
 					</view>
 				</view>
 				<!-- 功能选项 -->
 				<view class="more" @click="handleShowMore">
-					<img src="../../static/img/option-add.png">
+					<svg class="icon btn-more" aria-hidden="true">
+						<use xlink:href="#icon-biaoqing1"></use>
+					</svg>
 				</view>
 				<!-- 发送按钮 -->
 				<view class="send">
@@ -356,25 +360,22 @@
 						.em {
 							margin-top: 10rpx;
 							flex-shrink: 0;
-							width: 50rpx;
-							height: 50rpx;
 
-							img {
-								width: 100%;
-								height: 100%
+							.btn-em {
+								width: 50rpx;
+								height: 50rpx;
 							}
+
 						}
 					}
 				}
 
 				.more {
 					flex-shrink: 0;
-					width: 50rpx;
-					height: 50rpx;
 
-					img {
-						width: 100%;
-						height: 100%
+					.btn-more {
+						width: 50rpx;
+						height: 50rpx;
 					}
 				}
 

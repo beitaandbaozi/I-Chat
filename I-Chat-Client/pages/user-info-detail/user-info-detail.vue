@@ -6,7 +6,9 @@
 				<text>头像</text>
 				<view class="right">
 					<img :src="sender.Avatar" class="img-avatar">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -16,7 +18,9 @@
 				<text>名字</text>
 				<view class="right">
 					<text class="content">{{sender.NickName}}</text>
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -25,7 +29,9 @@
 			<view class="option-name option">
 				<text>拍一拍</text>
 				<view class="right">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -35,7 +41,9 @@
 				<text>微信号</text>
 				<view class="right">
 					<text class="content">{{sender.Name}}</text>
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -44,8 +52,12 @@
 			<view class="option-name option">
 				<text>我的二维码</text>
 				<view class="right">
-					<img src="../../static/img/coder.png" class="img-coder">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-coder" aria-hidden="true">
+						<use xlink:href="#icon-erweima"></use>
+					</svg>
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -54,7 +66,9 @@
 			<view class="option-name option">
 				<text>更多</text>
 				<view class="right">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -64,7 +78,9 @@
 				<text>来电铃声</text>
 				<view class="right">
 					<text class="content">至夏</text>
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -73,7 +89,9 @@
 			<view class="option-name option">
 				<text>微信豆</text>
 				<view class="right">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>
@@ -82,7 +100,9 @@
 			<view class="option-name option">
 				<text>我的地址</text>
 				<view class="right">
-					<img src="../../static/img/more.png" class="img-more">
+					<svg class="icon img-more" aria-hidden="true">
+						<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+					</svg>
 				</view>
 			</view>
 		</view>

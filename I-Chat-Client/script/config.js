@@ -7,9 +7,27 @@ const emailValidate =
 
 // 用户名校验
 const userNanmeValidate = /^[\w-]{4,16}$/
+
+// 聊天内容更多功能icon
+const moreIcon = [{
+		name: "照片",
+		icon: "#icon-tupian"
+	},
+	{
+		name: "语音",
+		icon: "#icon-yuyinshibieyouhua"
+	},
+	{
+		name: "视频",
+		icon: "#icon-shipinbofang"
+	},
+]
+
+
 export {
 	APIURL,
 	SOCKETAPI,
 	emailValidate,
-	userNanmeValidate
+	userNanmeValidate,
+	moreIcon
 }

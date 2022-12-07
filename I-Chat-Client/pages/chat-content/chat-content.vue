@@ -72,9 +72,11 @@
 				</view>
 				<!-- 功能 -->
 				<view class="options" :class="{ hidden : hideMore }">
-					<svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-yuyinshibieyouhua"></use>
-					</svg>
+					<template v-for="(item,index) in moreIcon" :key="index">
+						<svg class="icon btn-option" aria-hidden="true">
+							<use :xlink:href="item.icon"></use>
+						</svg>
+					</template>
 				</view>
 			</view>
 		</view>
@@ -90,6 +92,9 @@
 		watch
 	} from "vue";
 	import expressions from "@/static/json/expressions.json"
+	import {
+		moreIcon
+	} from '@/script/config.js'
 
 	// 获取聊天内容
 	const conversitionList = computed(() => {
@@ -433,8 +438,19 @@
 					width: 60rpx;
 					height: 60rpx
 				}
+			}
 
+			// 功能
+			.options {
+				height: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
 
+				.btn-option {
+					width: 100rpx;
+					height: 100rpx;
+				}
 			}
 		}
 	}

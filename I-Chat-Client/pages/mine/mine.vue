@@ -17,8 +17,12 @@
 			</view>
 			<!-- 更多 -->
 			<view class="more">
-				<img src="../../static/img/coder.png" class="img-coder">
-				<img src="../../static/img/more.png" class="img-more">
+				<svg class="icon img-coder" aria-hidden="true">
+					<use xlink:href="#icon-erweima"></use>
+				</svg>
+				<svg class="icon img-more" aria-hidden="true">
+					<use xlink:href="#icon-xiayiyeqianjinchakangengduo"></use>
+				</svg>
 			</view>
 		</view>
 		<!-- 选项 -->

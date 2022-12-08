@@ -65,7 +65,7 @@
 					</svg>
 				</view>
 				<!-- 发送按钮 -->
-				<view class="send">
+				<view class="send" @click="sendMessage">
 					<view class="btn">发送</view>
 				</view>
 			</view>
@@ -103,6 +103,9 @@
 	import {
 		moreIcon
 	} from '@/script/config.js'
+	import {
+		tipMesg
+	} from '@/script/common.js'
 
 	// 获取聊天内容
 	const conversitionList = computed(() => {
@@ -220,6 +223,71 @@
 		// 获取设备信息
 		getTelephoneInfo()
 	})
+
+	// 信息到本地显示
+	const sendMessageToLocal = (data) => {
+		let conversitionList = store.state.conversitionList;
+		conversitionList.push(data)
+		store.commit('setPropName', {
+			propName: 'conversitionList',
+			value: conversitionList
+		})
+	}
+	// 真实发送消息
+	const sendMessageToSocket = (data) => {
+		let conversitionListData = {
+			conversition: data,
+			ReciverId: reciver.value.Id,
+			Sender: store.state.sender
+		}
+		store.state.socket.emit('sendMsg', conversitionListData)
+	}
+	// 发送消息
+	const sendMessage = () => {
+		let message = sendContent.value.trim()
+		// 判断是否是空信息
+		if (!message.length) {
+			tipMesg('不能发送空消息！')
+			return
+		}
+		// 处理表情包   利用正则匹配到是表情包的数据（[害怕]）  然后转换成图片的形式
+		const pattern = /\[.*?\]/g;
+		const matchResult = message.match(pattern);
+		matchResult.map((item) => {
+			// 去除 []
+			const imgName = item.substr(0, item.length - 1).substr(1)
+			// 拼接成图片
+			const url = `<img src="https://howcode.online/emo/${imgName}.png" class="emo-image">`
+			// 替代原来的内容
+			message = message.replace(item, url)
+		})
+		// 处理文本内容  转换成P标签
+		message = `<p>${message}</p>`
+		// 处理发送需要的参数
+		let noCode = +new Date() + ""
+		let conversition = {
+			SendId: store.state.sender.Id,
+			ReciverId: reciver.value.Id,
+			Content: message,
+			Type: 0,
+			State: 0,
+			NoCode: noCode,
+			CreateDateUtc: '',
+			Title: '',
+			Description: '',
+			Label: '',
+			Thumbnail: '',
+			ReadFlag: false,
+			Avatar: store.state.sender.Avatar,
+			SoundStatus: 0
+		}
+		if (store.state.socket == null) {
+			tipMesg('socket实例为空');
+			return;
+		}
+		sendMessageToLocal(conversition)
+		sendMessageToSocket(conversition)
+	}
 </script>
 
 <style lang="scss" scoped>

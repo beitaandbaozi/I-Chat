@@ -10,7 +10,8 @@
 						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
+						</image>
 						<!-- 视频内容 -->
 						<!-- 录音 -->
 						<!-- 头像 -->
@@ -31,7 +32,8 @@
 						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
+						</image>
 						<!-- 视频内容 -->
 						<!-- 录音 -->
 					</view>
@@ -45,7 +47,8 @@
 				<view class="textarea-box">
 					<view class="text-mode">
 						<view class="box">
-							<textarea auto-height></textarea>
+							<textarea auto-height @keydown="savePoint" @keyup="savePoint" @onmousedown="savePoint"
+								@onmouseup="savePoint"></textarea>
 						</view>
 						<!-- 表情包 -->
 						<view class="em" @click="handleShowEmjoi">
@@ -179,6 +182,19 @@
 
 	// 动态设置标题
 	const reciver = computed(() => store.state.reciver)
+
+	// 保存焦点位置
+	const start = ref < number > (0)
+	const end = ref < number > (0)
+	const savePoint = () => {
+		uni.getSelectedTextRange({
+			complete: (res) => {
+				start.value = res.start;
+				end.value = res.end;
+			}
+		})
+	}
+
 	onMounted(() => {
 		uni.setNavigationBarTitle({
 			title: reciver.value.Name

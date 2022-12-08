@@ -47,8 +47,8 @@
 				<view class="textarea-box">
 					<view class="text-mode">
 						<view class="box">
-							<textarea auto-height @keydown="savePoint" @keyup="savePoint" @onmousedown="savePoint"
-								@onmouseup="savePoint"></textarea>
+							<textarea auto-height="true" @keydown="savePoint" @keyup="savePoint"
+								@onmousedown="savePoint" @onmouseup="savePoint" v-model="sendContent"></textarea>
 						</view>
 						<!-- 表情包 -->
 						<view class="em" @click="handleShowEmjoi">
@@ -74,7 +74,8 @@
 				<!-- 表情包 -->
 				<view class="emjois" :class="{ hidden : hideEmoji }">
 					<template v-for="(item, index) in expressions" :key="index">
-						<image :src="item.icon" :title="item.title" mode="widthFix"></image>
+						<image :src="item.icon" :title="item.title" @click="insertEmjoi(item.title)" mode="widthFix">
+						</image>
 					</template>
 				</view>
 				<!-- 功能 -->
@@ -183,10 +184,15 @@
 	// 动态设置标题
 	const reciver = computed(() => store.state.reciver)
 
-	// 保存焦点位置
+	// 文本域内容
+	const sendContent = ref < string > ('')
+	// 焦点开始位置
 	const start = ref < number > (0)
+	// 焦点结束位置
 	const end = ref < number > (0)
+	// 保存焦点位置
 	const savePoint = () => {
+		console.log('savePoint')
 		uni.getSelectedTextRange({
 			complete: (res) => {
 				start.value = res.start;
@@ -195,6 +201,18 @@
 		})
 	}
 
+	// 插入表情包
+	const insertEmjoi = (emjoi: string) => {
+		if (start.value != undefined && end.value != undefined) {
+			const pre = sendContent.value.substr(0, start.value)
+			const last = sendContent.value.substr(end.value)
+			sendContent.value = pre + last + emjoi
+			start.value = emjoi.length
+			end.value = emjoi.length
+		} else {
+			sendContent.value += emjoi
+		}
+	}
 	onMounted(() => {
 		uni.setNavigationBarTitle({
 			title: reciver.value.Name

@@ -7,10 +7,10 @@
 				<view v-if="item.SendId === store.state.sender.Id">
 					<view class="my-self-infomation">
 						<!-- 文本内容 -->
-						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
+						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
 						<!-- 录音 -->
 						<!-- 头像 -->
@@ -28,10 +28,10 @@
 							<img :src="item.Avatar">
 						</view>
 						<!-- 文本内容 -->
-						<view v-if="item.Type === 0" class="text-content" v-html="item.Content">
+						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-if="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix"></image>
 						<!-- 视频内容 -->
 						<!-- 录音 -->
 					</view>

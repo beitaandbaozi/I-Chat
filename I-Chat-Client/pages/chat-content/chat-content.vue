@@ -236,7 +236,7 @@
 	// 真实发送消息
 	const sendMessageToSocket = (data) => {
 		let conversitionListData = {
-			conversition: data,
+			Conversition: data,
 			ReciverId: reciver.value.Id,
 			Sender: store.state.sender
 		}
@@ -253,14 +253,17 @@
 		// 处理表情包   利用正则匹配到是表情包的数据（[害怕]）  然后转换成图片的形式
 		const pattern = /\[.*?\]/g;
 		const matchResult = message.match(pattern);
-		matchResult.map((item) => {
-			// 去除 []
-			const imgName = item.substr(0, item.length - 1).substr(1)
-			// 拼接成图片
-			const url = `<img src="https://howcode.online/emo/${imgName}.png" class="emo-image">`
-			// 替代原来的内容
-			message = message.replace(item, url)
-		})
+		// matchResult为空的话，说明是不包含表情包，都是文本，以文本的情况处理
+		if (matchResult) {
+			matchResult.forEach((item) => {
+				// 去除 []
+				const imgName = item.substr(0, item.length - 1).substr(1)
+				// 拼接成图片
+				const url = `<img src="https://howcode.online/emo/${imgName}.png" class="emo-image">`
+				// 替代原来的内容
+				message = message.replace(item, url)
+			})
+		}
 		// 处理文本内容  转换成P标签
 		message = `<p>${message}</p>`
 		// 处理发送需要的参数

@@ -290,6 +290,8 @@
 		}
 		sendMessageToLocal(conversition)
 		sendMessageToSocket(conversition)
+		// 清空文本内容
+		sendContent.value = ''
 	}
 </script>
 

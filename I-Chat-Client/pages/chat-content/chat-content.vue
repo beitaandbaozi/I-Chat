@@ -222,6 +222,7 @@
 		})
 		// 获取设备信息
 		getTelephoneInfo()
+		console.log('聊天内容', conversitionList.value)
 	})
 
 	// 信息到本地显示
@@ -259,7 +260,8 @@
 				// 去除 []
 				const imgName = item.substr(0, item.length - 1).substr(1)
 				// 拼接成图片
-				const url = `<img src="https://howcode.online/emo/${imgName}.png" class="emo-image">`
+				const url =
+					`<image src="https://howcode.online/emo/${imgName}.png" style="width:20px;height:20px;vertical-align: middle;display:inline-block;">`
 				// 替代原来的内容
 				message = message.replace(item, url)
 			})
@@ -401,6 +403,7 @@
 						border-top: 15px solid rgb(255, 255, 255);
 						border-left: 15px solid transparent;
 					}
+
 				}
 
 				// 图片

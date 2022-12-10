@@ -120,6 +120,7 @@ io.on("connection", function (socket) {
   });
   // 发送消息
   socket.on("sendMsg", async (data) => {
+    console.log('sendMsg -发送消息')
     try {
       // ??? 获取接收者的角色信息
       let receiverInfoResult = await getUserInfoById(
@@ -135,7 +136,7 @@ io.on("connection", function (socket) {
       data.Conversition.CreateDateUtc = nowTime();
       // ??? 在数据库插入聊天记录
       await insertContent(data.Conversition);
-      // ??? 通知 socket 消息接收事件
+      // ??? 通知接收者消息 -----> socket 消息接收事件
       if (receiverInfo.length > 0) {
         socket
           .to(receiverInfo[0].OutTradeNo)

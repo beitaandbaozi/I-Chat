@@ -22,9 +22,6 @@
 	} from '@/script/config.js'
 	import store from '@/store/index.js'
 	import {
-		onMounted
-	} from "vue";
-	import {
 		logout,
 		tipMesg,
 		reLaunch,
@@ -85,6 +82,7 @@
 		})
 		// 接收信息
 		store.state.socket.on("reviceMsg", (data) => {
+			console.log('reviceMsg - 接收信息')
 			if (data.ReciverId == store.state.sender.Id) {
 				for (let item of store.state.sessionList) {
 					if (item.id == data.SendId && store.state.sessionSelectId == data.SendId) {
@@ -114,6 +112,7 @@
 		})
 		// 修改信息状态
 		store.state.socket.on("changeMsgState", (data) => {
+			console.log('changeMsgState - 修改信息状态')
 			let conversitionList = store.state.conversitionList
 			conversitionList.map((x) => {
 				if (x.NoCode != null && x.NoCode == data.NoCode) {
@@ -126,9 +125,7 @@
 			})
 		})
 	}
-	onMounted(() => {
-		initSocket()
-	})
+	initSocket()
 </script>
 
 <style lang="scss" scoped>

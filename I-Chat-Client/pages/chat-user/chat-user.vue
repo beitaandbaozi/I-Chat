@@ -65,6 +65,7 @@
 		})
 		// 服务端更新完用户端状态，socket连接成功，加入会话成功
 		store.state.socket.on("joinSuccess", (data) => {
+			console.log('socket----->joinSuccess', data)
 			store.commit('setPropName', {
 				propName: 'conversitionList',
 				value: data.conversion

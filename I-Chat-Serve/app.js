@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var uploadRouter = require("./routes/upload");
 var app = express();
 
 var socket = require("socket.io");
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/upload", uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -120,7 +122,7 @@ io.on("connection", function (socket) {
   });
   // 发送消息
   socket.on("sendMsg", async (data) => {
-    console.log('sendMsg -发送消息')
+    console.log("sendMsg -发送消息");
     try {
       // ??? 获取接收者的角色信息
       let receiverInfoResult = await getUserInfoById(

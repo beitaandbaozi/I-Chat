@@ -81,7 +81,7 @@
 				<!-- 功能 -->
 				<view class="options" :class="{ hidden : hideMore }">
 					<template v-for="(item,index) in moreIcon" :key="index">
-						<svg class="icon btn-option" aria-hidden="true">
+						<svg class="icon btn-option" aria-hidden="true" @click="handleOption(index)">
 							<use :xlink:href="item.icon"></use>
 						</svg>
 					</template>
@@ -89,6 +89,8 @@
 			</view>
 		</view>
 	</view>
+	<!-- 图片压缩 -->
+	<w-compress ref='wCompress' />
 </template>
 
 <script lang="ts" setup>
@@ -101,11 +103,14 @@
 	} from "vue";
 	import expressions from "@/static/json/expressions.json"
 	import {
-		moreIcon
+		moreIcon,
+		APIURL
 	} from '@/script/config.js'
 	import {
 		tipMesg
 	} from '@/script/common.js'
+
+	import WCompress from '@/components/common/w-compress.vue'
 
 	// 获取聊天内容
 	const conversitionList = computed(() => {
@@ -187,6 +192,10 @@
 	// 动态设置标题
 	const reciver = computed(() => store.state.reciver)
 
+	uni.setNavigationBarTitle({
+		title: reciver.value!.Name
+	})
+
 	// 文本域内容
 	const sendContent = ref < string > ('')
 	// 焦点开始位置
@@ -217,9 +226,9 @@
 		}
 	}
 	onMounted(() => {
-		uni.setNavigationBarTitle({
-			title: reciver.value.Name
-		})
+		// uni.setNavigationBarTitle({
+		// 	title: reciver.value!.Name
+		// })
 		// 获取设备信息
 		getTelephoneInfo()
 		console.log('聊天内容', conversitionList.value)
@@ -294,6 +303,134 @@
 		sendMessageToSocket(conversition)
 		// 清空文本内容
 		sendContent.value = ''
+	}
+
+	// 功能 ---图片、视频、语音
+	// 上传资源
+	const uploadData = (data: any) => {
+		return new Promise((resolve, reject) => {
+			uni.uploadFile({
+				url: `${APIURL}/upload/uploadFile`,
+				filePath: data,
+				name: 'file',
+				success: (uploadFile) => {
+					let result = {
+						code: 500,
+						content: ''
+					}
+					if (uploadFile.statusCode === 200) {
+						let data = JSON.parse(uploadFile.data)
+						result.code = 200;
+						result.content = `${APIURL}/upload/getFile?url=${data[0].originalname}`
+						resolve(result)
+					} else {
+						reject(result)
+					}
+				}
+			})
+		})
+	}
+	// 上传图片
+	// 压缩器对象
+	const wCompress = ref(null)
+	const uploadImage = () => {
+		console.log('上传图片')
+		uni.chooseImage({
+			// 默认是9张
+			count: 1,
+			sourceType: ['camera', 'album'],
+			success: (res) => {
+				// 压缩率
+				let rate = '0.8'
+				// 图片格式
+				let type = null
+				// 判断是否是图片
+				const imageRex = /^image\/\w+/;
+				if (!imageRex.test(res.tempFiles[0].type)) tipMesg('文件格式错误!')
+				type = res.tempFiles[0].type.split('/')[1]
+				// 根据图片大小确定压缩率
+				if (res.tempFiles[0].size < 1024000) {
+					rate = '0.9'
+				} else if (res.tempFiles[0].size > 1024000 && res.tempFiles[0].size <= 2048000) {
+					rate = '0.8'
+				} else if (res.tempFiles[0].size > 2048000 && res.tempFiles[0].size <= 5120000) {
+					rate = '0.5'
+				} else if (res.tempFiles[0].size > 5120000 && res.tempFiles[0].size <= 1024000) {
+					rate = '0.4'
+				} else if (res.tempFiles[0].size > 1024000) {
+					tipMesg('图片大小不得超过10M!')
+				}
+				// 开始上传
+				// 模拟loading
+				uni.showLoading({
+					title: '图片正在上传...',
+					mask: true
+				})
+				// 图片进行压缩
+				wCompress.value!.start(res.tempFilePaths[0], {
+					pixels: 4000000, //最大分辨率，默认二百万
+					quality: rate, // 压缩质量，默认0.8
+					type, //图片类型，默认JPG
+					base64: false, //是否返回base64, 默认false, 非H5有效
+				}).then(async res => {
+					// 关闭loading
+					uni.hideLoading()
+					// 连接后端
+					const result = await uploadData(res)
+					if (result.code === 200) {
+						// 处理发送需要的参数
+						let noCode = +new Date() + ""
+						let conversition = {
+							SendId: store.state.sender.Id,
+							ReciverId: reciver.value.Id,
+							Content: result.data,
+							Type: 1,
+							State: 0,
+							NoCode: noCode,
+							CreateDateUtc: '',
+							Title: '',
+							Description: '',
+							Label: '',
+							Thumbnail: '',
+							ReadFlag: false,
+							Avatar: store.state.sender.Avatar,
+							SoundStatus: 0
+						}
+						if (store.state.socket == null) {
+							tipMesg('socket实例为空');
+							return;
+						}
+						sendMessageToLocal(conversition)
+						sendMessageToSocket(conversition)
+					}
+				}).catch(e => {
+					// 关闭loading
+					uni.hideLoading()
+				})
+			}
+		})
+	}
+	// 上传视频
+	const uploadVideo = () => {
+		console.log('上传视频')
+	}
+	const handleOption = (index: number) => {
+		// 图片上传  ---- 0
+		// 语音上传  ---- 1
+		// 视频上传  ---- 2
+		switch (index) {
+			case 0:
+				uploadImage()
+				break;
+			case 1:
+				console.log('语音')
+				break;
+			case 2:
+				uploadVideo()
+				break;
+			default:
+				break;
+		}
 	}
 </script>
 
@@ -562,6 +699,7 @@
 					width: 100rpx;
 					height: 100rpx;
 				}
+
 			}
 		}
 	}

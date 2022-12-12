@@ -218,4 +218,5 @@ router.post("/userList", async (req, res) => {
     res.send(msg.error("获取好友数据异常"));
   }
 });
+
 module.exports = router;

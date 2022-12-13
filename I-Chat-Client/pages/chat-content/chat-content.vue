@@ -320,8 +320,10 @@
 					}
 					if (uploadFile.statusCode === 200) {
 						let data = JSON.parse(uploadFile.data)
+						console.log('data', data)
 						result.code = 200;
-						result.content = `${APIURL}/upload/getFile?url=${data[0].originalname}`
+						// url对应服务器内图片的存储地址
+						result.content = `${APIURL}/upload/getFile?url=${data[0].filename}${data[0].originalname}`
 						resolve(result)
 					} else {
 						reject(result)
@@ -377,13 +379,14 @@
 					uni.hideLoading()
 					// 连接后端
 					const result = await uploadData(res)
+					console.log('res', result)
 					if (result.code === 200) {
 						// 处理发送需要的参数
 						let noCode = +new Date() + ""
 						let conversition = {
 							SendId: store.state.sender.Id,
 							ReciverId: reciver.value.Id,
-							Content: result.data,
+							Content: result.content,
 							Type: 1,
 							State: 0,
 							NoCode: noCode,

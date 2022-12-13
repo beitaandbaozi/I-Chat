@@ -71,23 +71,17 @@
 	"vueVersion": "3",
 	"h5": {
 		"devServer": {
-			"port": 8080, //端口号
-			"disableHostCheck": true,
+			"port": 8080,
+			"https": false,
 			"proxy": {
 				"/api": {
-					"target": "http://localhost:9527/", //目标接口域名
-					"changeOrigin": true, //是否跨域
+					"target": "http://localhost:9527",
+					"changeOrigin": true,
+					"secure": false,
 					"pathRewrite": {
-						// 重新路由  localhost:8888/api/login  => www.baidu.com/api/login
-						"^/api": "" // 假设我们想把 localhost:8888/api/login 变成www.baidu.com/login 就需要这么做 
+						"^/api": ""
 					}
 				}
-			}
-
-		},
-		"optimization": {
-			"treeShaking": {
-				"enable": false
 			}
 		}
 	}

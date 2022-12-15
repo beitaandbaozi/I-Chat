@@ -323,7 +323,8 @@
 						console.log('data', data)
 						result.code = 200;
 						// url对应服务器内图片的存储地址
-						result.content = `${APIURL}/upload/getFile?url=${data[0].filename}${data[0].originalname}`
+						result.content =
+							`${APIURL}/upload/getFile?url=${data[0].filename}${data[0].originalname}`
 						resolve(result)
 					} else {
 						reject(result)
@@ -379,7 +380,7 @@
 					uni.hideLoading()
 					// 连接后端
 					const result = await uploadData(res)
-					console.log('res', result)
+					console.log('图片上传结果', result)
 					if (result.code === 200) {
 						// 处理发送需要的参数
 						let noCode = +new Date() + ""
@@ -416,6 +417,59 @@
 	// 上传视频
 	const uploadVideo = () => {
 		console.log('上传视频')
+		uni.chooseVideo({
+			sourceType: ['camera', 'album'],
+			success: async (res) => {
+				let reg = /^[^\u4e00-\u9fa5]+$/
+				// 模拟loading
+				uni.showLoading({
+					title: '视频正在上传...',
+					mask: true
+				})
+				// 限制中文名称的视频
+				if (!reg.test(res.name)) {
+					tipMesg('视频文件名称不能为中文!')
+					return;
+				}
+
+				// 上传到服务器
+				const result = await uploadData(res.tempFilePath)
+				if (result.code === 200) {
+					// 构造发送消息数据结构
+					let noCode = +new Date() + ""
+					let conversition = {
+						SendId: store.state.sender.Id,
+						ReciverId: reciver.value.Id,
+						Content: result.content,
+						Type: 2,
+						State: 0,
+						NoCode: noCode,
+						CreateDateUtc: '',
+						Title: '',
+						Description: '',
+						Label: '',
+						Thumbnail: '',
+						ReadFlag: false,
+						Avatar: store.state.sender.Avatar,
+						SoundStatus: 0
+					}
+					if (store.state.socket == null) {
+						tipMesg('socket实例为空');
+						return;
+					}
+					// 存储到本地
+					sendMessageToLocal(conversition)
+					// 存储到服务器
+					sendMessageToSocket(conversition)
+					// 关闭loading
+					uni.hideLoading()
+				}
+
+			},
+			fail: () => {
+				tipMesg("视频上传失败")
+			}
+		});
 	}
 	const handleOption = (index: number) => {
 		// 图片上传  ---- 0

@@ -16,7 +16,6 @@ router.post(
     const fileList = [];
     for (let i in files) {
       let file = files[i];
-      // 更改存储路径
       fs.renameSync(file.path, `upload/${file.filename}${file.originalname}`);
       file.path = `upload/${file.filename}${file.originalname}`;
       fileList.push(file);

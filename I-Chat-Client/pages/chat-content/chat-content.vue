@@ -448,42 +448,45 @@
 					return;
 				}
 
+				// 构造发送消息数据结构
+				let noCode = +new Date() + ""
+				let conversition = {
+					SendId: store.state.sender.Id,
+					ReciverId: reciver.value.Id,
+					Content: res.tempFilePath,
+					Type: 2,
+					State: 0,
+					NoCode: noCode,
+					CreateDateUtc: '',
+					Title: '',
+					Description: '',
+					Label: '',
+					Thumbnail: '',
+					ReadFlag: false,
+					Avatar: store.state.sender.Avatar,
+					SoundStatus: 0
+				}
+				if (store.state.socket == null) {
+					tipMesg('socket实例为空');
+					return;
+				}
+				// 存储到本地
+				sendMessageToLocal(conversition)
 				// 上传到服务器
 				const result = await uploadData(res.tempFilePath)
 				if (result.code === 200) {
-					// 构造发送消息数据结构
-					let noCode = +new Date() + ""
-					let conversition = {
-						SendId: store.state.sender.Id,
-						ReciverId: reciver.value.Id,
-						Content: result.content,
-						Type: 2,
-						State: 0,
-						NoCode: noCode,
-						CreateDateUtc: '',
-						Title: '',
-						Description: '',
-						Label: '',
-						Thumbnail: '',
-						ReadFlag: false,
-						Avatar: store.state.sender.Avatar,
-						SoundStatus: 0
-					}
-					if (store.state.socket == null) {
-						tipMesg('socket实例为空');
-						return;
-					}
-					// 存储到本地
-					sendMessageToLocal(conversition)
+					conversition.Content = result.content
 					// 存储到服务器
 					sendMessageToSocket(conversition)
-					// 关闭loading
-					uni.hideLoading()
 				}
 
 			},
 			fail: () => {
 				tipMesg("视频上传失败")
+			},
+			complete: () => {
+				// 关闭loading
+				uni.hideLoading()
 			}
 		});
 	}
@@ -512,6 +515,13 @@
 		if (!fullScreen) {
 			_this.videoContext.pause();
 		}
+	}
+	// 播放视频
+	const videoshow = (e) => {
+		_this.videoContext.requestFullScreen({
+			direction: 90
+		}); //direction: 90  控制全屏的时候视屏旋转多少度 
+		_this.videoContext.play();
 	}
 </script>
 

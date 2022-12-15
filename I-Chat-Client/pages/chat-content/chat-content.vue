@@ -340,7 +340,7 @@
 						result.code = 200;
 						// url对应服务器内图片的存储地址
 						result.content =
-							`${APIURL}/upload/getFile?url=${data[0].filename}${data[0].originalname}`
+							`http://localhost:9527${APIURL}/upload/getFile?url=${data[0].filename}${data[0].originalname}`
 						resolve(result)
 					} else {
 						reject(result)

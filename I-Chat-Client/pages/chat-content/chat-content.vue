@@ -14,7 +14,7 @@
 						</image>
 						<!-- 视频内容 -->
 						<video v-show="item.Type == 2" id="myvideo" class="video-content" :src="item.Content"
-							controls="false" />
+							controls="false" @fullscreenchange="handleScreenChange" />
 						<!-- 录音 -->
 						<!-- 头像 -->
 						<view class="header">
@@ -103,7 +103,9 @@
 		computed,
 		onMounted,
 		ref,
-		watch
+		watch,
+		getCurrentInstance,
+		ComponentInternalInstance
 	} from "vue";
 	import expressions from "@/static/json/expressions.json"
 	import {
@@ -229,6 +231,13 @@
 			sendContent.value += emjoi
 		}
 	}
+
+	// 获取组件实例
+	const {
+		proxy,
+		ctx
+	} = (getCurrentInstance() as ComponentInternalInstance)
+	const _this = proxy
 	onMounted(() => {
 		// uni.setNavigationBarTitle({
 		// 	title: reciver.value!.Name
@@ -236,6 +245,9 @@
 		// 获取设备信息
 		getTelephoneInfo()
 		console.log('聊天内容', conversitionList.value)
+		// 创建视频对象
+		_this.videoContext = uni.createVideoContext("myvideo", _this)
+		console.log('视频对象', _this.videoContext)
 	})
 
 	// 信息到本地显示
@@ -491,6 +503,14 @@
 				break;
 			default:
 				break;
+		}
+	}
+	// 视频全屏时
+	const handleScreenChange = (e) => {
+		console.log('视频全屏时', e.detail.fullScreen)
+		let fullScreen = e.detail.fullScreen; //值true为进入全屏，false为退出全屏
+		if (!fullScreen) {
+			_this.videoContext.pause();
 		}
 	}
 </script>

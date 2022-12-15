@@ -13,6 +13,8 @@
 						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
 						</image>
 						<!-- 视频内容 -->
+						<video v-show="item.Type == 2" id="myvideo" class="video-content" :src="item.Content"
+							controls="false" />
 						<!-- 录音 -->
 						<!-- 头像 -->
 						<view class="header">
@@ -35,6 +37,8 @@
 						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
 						</image>
 						<!-- 视频内容 -->
+						<video v-show="item.Type == 2" id="myvideo" class="video-content" :src="item.Content"
+							controls="false" />
 						<!-- 录音 -->
 					</view>
 				</view>
@@ -543,6 +547,16 @@
 					background-color: #55aaff;
 				}
 
+				// 视频
+				.video-content {
+					width: 400rpx;
+					height: 400rpx;
+					margin-right: 40rpx;
+					border-radius: 20rpx;
+					overflow: hidden;
+				}
+
+				// 头像
 				.header {
 					width: 60rpx;
 					height: 60rpx;
@@ -607,6 +621,15 @@
 					border-radius: 20rpx;
 					// 后端还未写存放图片的路径，所以先用颜色替代
 					background-color: #ffaa00;
+				}
+
+				// 视频
+				.video-content {
+					width: 400rpx;
+					height: 400rpx;
+					margin-right: 40rpx;
+					border-radius: 20rpx;
+					overflow: hidden;
 				}
 			}
 		}

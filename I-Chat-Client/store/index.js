@@ -10,7 +10,8 @@ const store = createStore({
 		socket: null,
 		// 时间戳
 		noCode: +new Date(),
-		// 本地消息
+		// 本地消息--聊天记录
+		// {Avatar: "https://q4.qlogo.cn/headimg_dl?dst_uin=1660797375&spec=100",Content: "<p>1</p>",CreateDateUtc: "2022-11-28- 20:07:01",...}
 		conversitionList: [],
 		// 发送信息的好友
 		sessionList: [],

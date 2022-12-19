@@ -9,8 +9,9 @@
 							<!-- 头像 -->
 							<image :src="item.Avatar"></image>
 							<!-- 未读消息 -->
-							<!-- 记得用v-if判断 -->
-							<view class="unread-count">1</view>
+							<template v-if="UnreadCount(item.Id) > 0">
+								<view class="unread-count">{{UnreadCount(item.Id)}}</view>
+							</template>
 						</view>
 						<!-- 右侧 -->
 						<view class="right">
@@ -40,6 +41,14 @@
 	import store from '@/store/index.js'
 	// 当前消息数据信息
 	const sessionList = computed(() => store.state.sessionList)
+	// 未读消息
+	const UnreadCount = computed(() => (id: number) => {
+		let currentContent = store.state.conversitionList.filter(
+			(item) =>
+			item.SendId == id && item.ReciverId == store.state.sender.Id && !item.ReadFlag
+		);
+		return currentContent.length > 99 ? "99+" : currentContent.length;
+	})
 </script>
 
 <style lang="scss" scoped>

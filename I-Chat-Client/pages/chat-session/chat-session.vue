@@ -20,9 +20,7 @@
 								{{item.Name}}
 							</view>
 							<!-- 信息 -->
-							<view class="content">
-
-							</view>
+							<view class="content" v-html="getMessageContent(item.Id)"></view>
 						</view>
 					</view>
 				</template>
@@ -41,13 +39,47 @@
 	import store from '@/store/index.js'
 	// 当前消息数据信息
 	const sessionList = computed(() => store.state.sessionList)
-	// 未读消息
+	// 未读消息数量
 	const UnreadCount = computed(() => (id: number) => {
 		let currentContent = store.state.conversitionList.filter(
 			(item) =>
 			item.SendId == id && item.ReciverId == store.state.sender.Id && !item.ReadFlag
 		);
 		return currentContent.length > 99 ? "99+" : currentContent.length;
+	})
+	// 最后一条消息的类型
+	const getMessageContent = computed(() => (id: number) => {
+		let result = '';
+		// 根据ID获取对应的聊天内容
+		let currentContent = store.state.conversitionList.filter(
+			(item) =>
+			(item.SendId == store.state.sender.Id && item.ReciverId == id) ||
+			(item.SendId == id && item.ReciverId == store.state.sender.Id)
+		)
+		// 根据最后一条内容的类型来判定消息以哪种形式呈现
+		// 文本：照常输出
+		// 图片: [图片]
+		// 视频: [视频]
+		if (currentContent.length > 0) {
+			let len = currentContent.length - 1;
+			switch (currentContent[len].Type) {
+				// 文字
+				case 0:
+					result = currentContent[len].Content;
+					break;
+					// 图片
+				case 1:
+					result = '[图片]'
+					break;
+					// 视频
+				case 2:
+					result = '[视频]'
+					break;
+				default:
+					break;
+			}
+		}
+		return result
 	})
 </script>
 

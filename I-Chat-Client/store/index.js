@@ -12,6 +12,7 @@ const store = createStore({
 		noCode: +new Date(),
 		// 本地消息
 		conversitionList: [],
+		// 发送信息的好友
 		sessionList: [],
 		sessionSelectId: 0,
 		allSessionSelectId: 0,
@@ -26,22 +27,22 @@ const store = createStore({
 			state[res.propName] = res.value
 		},
 		changeReaded(state, res) {
-		    let userConversition = store.state.conversitionList.filter(
-		        (x) =>
-		        x.SendId == res &&
-		        x.ReciverId == store.state.sender.Id &&
-		        !x.ReadFlag
-		    );
-		    if (userConversition.length > 0) {
-		        userConversition.map((x) => {
-		            x.ReadFlag = true;
-		        });
-		    }
-		    let query = {
-		        SendId: res,
-		        ReciverId: store.state.sender.Id,
-		    };
-		    store.state.socket.emit("changeMsgRead", query);
+			let userConversition = store.state.conversitionList.filter(
+				(x) =>
+				x.SendId == res &&
+				x.ReciverId == store.state.sender.Id &&
+				!x.ReadFlag
+			);
+			if (userConversition.length > 0) {
+				userConversition.map((x) => {
+					x.ReadFlag = true;
+				});
+			}
+			let query = {
+				SendId: res,
+				ReciverId: store.state.sender.Id,
+			};
+			store.state.socket.emit("changeMsgRead", query);
 		},
 	}
 })

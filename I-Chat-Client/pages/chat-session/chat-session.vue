@@ -7,7 +7,7 @@
 						@touchmove="handleDrawMove($event)" @touchend="handleDrawEnd($event)"
 						:style="{right: item.RightPadding + 'rpx'}">
 						<!-- 数据信息 -->
-						<view class="user-content">
+						<view class="user-content" @click="selectSession(item)">
 							<!-- 左侧 -->
 							<view class="left">
 								<!-- 头像 -->
@@ -52,6 +52,9 @@
 		ref,
 	} from "vue";
 	import store from '@/store/index.js'
+	import {
+		changeReaded
+	} from '@/script/common.js'
 	// 当前消息数据信息
 	const sessionList = computed(() => store.state.sessionList)
 	// 未读消息数量
@@ -141,6 +144,23 @@
 		} else {
 			sessionList[e.currentTarget.dataset.index].RightPadding = 0;
 		}
+	}
+	// 点击用户进入聊天页面
+	const selectSession = (data) => {
+		store.commit('setPropName', {
+			propName: 'sessionSelectId',
+			value: data.Id
+		})
+		store.commit('setPropName', {
+			propName: 'reciver',
+			value: data
+		})
+		// 更改消息状态
+		changeReaded(data.Id)
+		// 路由跳转
+		uni.navigateTo({
+			url: '/pages/chat-content/chat-content',
+		});
 	}
 </script>
 
@@ -247,6 +267,7 @@
 
 					text-align: center;
 					line-height: 150rpx;
+
 					// 标记未读
 					.btn-tag {
 						width: 200rpx;

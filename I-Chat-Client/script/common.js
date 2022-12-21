@@ -55,3 +55,23 @@ export function logout() {
 export function snedLocal(conversition) {
 	store.state.conversitionList.push(conversition)
 }
+
+// 修改信息为已读
+export function changeReaded(id) {
+	let userConversition = store.state.conversitionList.filter(
+		(item) =>
+		item.SendId == id &&
+		item.ReciverId == store.state.sender.Id &&
+		!item.ReadFlag
+	);
+	if (userConversition.length > 0) {
+		userConversition.forEach((item) => {
+			item.ReadFlag = true;
+		});
+	}
+	let query = {
+		SendId: id,
+		ReciverId: store.state.sender.Id,
+	};
+	store.state.socket.emit("changeMsgRead", query);
+}

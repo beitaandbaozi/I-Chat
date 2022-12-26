@@ -31,7 +31,8 @@
 		{
 			"path": "pages/community/community",
 			"style": {
-				"navigationBarTitleText": "朋友圈",
+				"navigationBarTitleText": "发现",
+				"navigationBarBackgroundColor": "#EDEDED",
 				"enablePullDownRefresh": false
 			}
 
@@ -67,15 +68,14 @@
 		},
 		// 聊天框
 		{
-            "path" : "pages/chat-content/chat-content",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+			"path": "pages/chat-content/chat-content",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"tabBar": {
 		"borderStyle": "black",
 		"backgroundColor": "#fff",

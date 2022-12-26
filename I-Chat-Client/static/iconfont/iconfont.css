@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3814036 */
-  src: url('iconfont.woff2?t=1670434886217') format('woff2'),
-       url('iconfont.woff?t=1670434886217') format('woff'),
-       url('iconfont.ttf?t=1670434886217') format('truetype');
+  src: url('iconfont.woff2?t=1672043260915') format('woff2'),
+       url('iconfont.woff?t=1672043260915') format('woff'),
+       url('iconfont.ttf?t=1672043260915') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xiaochengxu:before {
+  content: "\e619";
+}
+
+.icon-a-saoyisaosaoma-05-copy:before {
+  content: "\100ca";
+}
+
+.icon-souyisou-copy:before {
+  content: "\100cb";
+}
+
+.icon-gouwu-copy:before {
+  content: "\100cc";
+}
+
+.icon-weixinyaoyiyaoicon:before {
+  content: "\e621";
+}
+
+.icon-shipin:before {
+  content: "\e668";
+}
+
+.icon-pengyouquan:before {
+  content: "\e667";
+}
+
+.icon-zhibozhong-0:before {
+  content: "\e620";
+}
+
+.icon-kanyikan:before {
+  content: "\e60c";
+}
+
+.icon-biaoqiankuozhan_fujin-398:before {
+  content: "\ebff";
+}
+
+.icon-youxi:before {
+  content: "\100c9";
 }
 
 .icon-gentleman:before {

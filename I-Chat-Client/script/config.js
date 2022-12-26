@@ -79,6 +79,64 @@ const mineOption = [{
 	}
 ]
 
+// 发现页面
+const comunityOptions = [{
+		id: 0,
+		title: '朋友圈',
+		icon: '#icon-pengyouquan'
+	},
+	{
+		id: 1,
+		title: '视频号',
+		icon: '#icon-shipin'
+	},
+	{
+		id: 2,
+		title: '直播',
+		icon: '#icon-zhibozhong-0'
+	},
+	{
+		id: 3,
+		title: '扫一扫',
+		icon: '#icon-a-saoyisaosaoma-05-copy'
+	},
+	{
+		id: 4,
+		title: '摇一摇',
+		icon: '#icon-weixinyaoyiyaoicon'
+	},
+	{
+		id: 5,
+		title: '看一看',
+		icon: '#icon-kanyikan'
+	},
+	{
+		id: 6,
+		title: '搜一搜',
+		icon: '#icon-souyisou-copy'
+	},
+	{
+		id: 7,
+		title: '附近',
+		icon: '#icon-biaoqiankuozhan_fujin-398'
+	},
+	{
+		id: 8,
+		title: '购物',
+		icon: '#icon-gouwu-copy'
+	},
+	{
+		id: 9,
+		title: '游戏',
+		icon: '#icon-youxi'
+	},
+	{
+		id: 10,
+		title: '小程序',
+		icon: '#icon-xiaochengxu'
+	},
+]
+
 export {
 	APIURL,
 	SOCKETAPI,
@@ -86,5 +144,6 @@ export {
 	userNanmeValidate,
 	moreIcon,
 	friendOption,
-	mineOption
+	mineOption,
+	comunityOptions
 }

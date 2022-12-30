@@ -3,7 +3,8 @@
 		<scroll-view scroll-y class="options-list">
 			<template v-for="item in comunityOptions" :key="item.id">
 				<view
-					:class="['container', {'fix-top':item.id === 1 || item.id === 3 || item.id ===5 || item.id === 7 || item.id === 8 || item.id === 10}]">
+					:class="['container', {'fix-top':item.id === 1 || item.id === 3 || item.id ===5 || item.id === 7 || item.id === 8 || item.id === 10}]"
+					@click="handleClick(item.id)">
 					<view class="option">
 						<!-- 图标 -->
 						<svg class="icon img-icon" aria-hidden="true">
@@ -18,7 +19,6 @@
 						</svg>
 					</view>
 				</view>
-
 			</template>
 		</scroll-view>
 	</view>
@@ -28,6 +28,23 @@
 	import {
 		comunityOptions
 	} from '@/script/config.js'
+	// 跳转总体封装
+	const toggleUrl = (url: string) => {
+		uni.navigateTo({
+			url,
+		});
+	}
+	// 点击跳转
+	const handleClick = (value: number) => {
+		switch (value) {
+			// 跳转到朋友圈具体页面
+			case 0:
+				toggleUrl('/pages/social-circle/social-circle')
+				break;
+			default:
+				break;
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

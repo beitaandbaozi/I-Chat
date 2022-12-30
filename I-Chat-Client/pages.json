@@ -27,7 +27,7 @@
 			}
 
 		},
-		// 朋友圈
+		// 发现
 		{
 			"path": "pages/community/community",
 			"style": {
@@ -75,7 +75,19 @@
 			}
 
 		}
-	],
+	    ,
+		// 朋友圈
+		{
+            "path" : "pages/social-circle/social-circle",
+            "style" :                                                                                    
+            {
+                // "navigationBarTitleText": "朋友圈",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"borderStyle": "black",
 		"backgroundColor": "#fff",

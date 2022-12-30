@@ -137,6 +137,26 @@ const comunityOptions = [{
 	},
 ]
 
+// 朋友圈导航栏
+const socialCirle = [{
+		id: 0,
+		icon: '#icon-xiangzuo1'
+	},
+	{
+		id: 1,
+		icon: '#icon-shuaxin'
+	},
+	{
+		id: 2,
+		icon: '#icon-xiaoxi2'
+	},
+	{
+		id: 3,
+		icon: '#icon-fabu'
+	}
+]
+
+
 export {
 	APIURL,
 	SOCKETAPI,
@@ -145,5 +165,6 @@ export {
 	moreIcon,
 	friendOption,
 	mineOption,
-	comunityOptions
+	comunityOptions,
+	socialCirle
 }

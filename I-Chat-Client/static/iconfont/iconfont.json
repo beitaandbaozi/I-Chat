@@ -6,6 +6,41 @@
   "description": "聊天应用",
   "glyphs": [
     {
+      "icon_id": "1111442",
+      "name": "发布",
+      "font_class": "fabu",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "4686545",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "ec08",
+      "unicode_decimal": 60424
+    },
+    {
+      "icon_id": "7310413",
+      "name": "向左",
+      "font_class": "xiangzuo",
+      "unicode": "e74b",
+      "unicode_decimal": 59211
+    },
+    {
+      "icon_id": "7720075",
+      "name": "消息",
+      "font_class": "xiaoxi2",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "18028213",
+      "name": "向左",
+      "font_class": "xiangzuo1",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "3552293",
       "name": "小程序",
       "font_class": "xiaochengxu",

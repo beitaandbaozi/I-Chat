@@ -133,7 +133,7 @@
 
 						text {
 							color: #fff;
-							margin-right: 20rpx;
+							margin-right: 40rpx;
 						}
 
 						img {
@@ -141,7 +141,7 @@
 							height: 120rpx;
 							border-radius: 5%;
 
-							margin-right: 20rpx;
+							margin-right: 60rpx;
 						}
 					}
 				}

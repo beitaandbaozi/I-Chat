@@ -27,7 +27,8 @@
 		</view>
 		<!-- 选项 -->
 		<template v-for="item in mineOption" :key="item.id">
-			<view :class="['container',{'serve':item.id === 1},{'setting':item.id === 6}]">
+			<view :class="['container',{'serve':item.id === 1},{'setting':item.id === 6}]"
+				@click="handleClick(item.id)">
 				<view class="option">
 					<svg class="icon img-option" aria-hidden="true">
 						<use :xlink:href="item.icon"></use>
@@ -51,6 +52,9 @@
 	import {
 		mineOption
 	} from '@/script/config.js'
+	import {
+		logout
+	} from '@/script/common.js'
 
 	const sender = computed(() => store.state.sender)
 
@@ -65,6 +69,23 @@
 				console.log('err', err)
 			}
 		});
+	}
+	// 退出登录
+	const logoutUser = () => {
+		logout()
+		uni.navigateTo({
+			url: '/pages/index/index'
+		})
+	}
+	// 点击选项触发
+	const handleClick = (index: number) => {
+		switch (index) {
+			case 6:
+				logoutUser()
+				break;
+			default:
+				break;
+		}
 	}
 </script>
 

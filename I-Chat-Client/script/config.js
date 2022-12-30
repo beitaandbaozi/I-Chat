@@ -74,7 +74,7 @@ const mineOption = [{
 	},
 	{
 		id: 6,
-		title: "设置",
+		title: "设置(暂时设置为退出登录)",
 		icon: "#icon-shezhi"
 	}
 ]

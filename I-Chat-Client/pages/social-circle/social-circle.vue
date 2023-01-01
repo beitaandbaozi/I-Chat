@@ -35,7 +35,25 @@
 				</view>
 			</view>
 			<view class="content">
+				<view class="social-content">
+					<view class="left">
+						<!-- 头像 -->
 
+					</view>
+					<view class="right">
+						<!-- 昵称 -->
+						<text class="nick-name">昵称</text>
+						<!-- 内容 -->
+						<!-- 文本内容 -->
+						<!-- 图片内容 -->
+						<view class="text-content">
+						</view>
+						<view class="image-content">
+						</view>
+						<!-- 点赞和评论功能 -->
+						<!-- 点赞区和评论 -->
+					</view>
+				</view>
 			</view>
 		</scroll-view>
 	</view>
@@ -149,8 +167,58 @@
 
 			.content {
 				width: 100%;
-				height: 2099rpx;
-				background: beige;
+				height: auto;
+
+				// width: 100%;
+				// height: 2099rpx;
+				// background: beige;
+				.social-content {
+					margin: 60rpx 40rpx 40rpx 40rpx;
+					// height:200rpx;
+
+					display: flex;
+
+					.left {
+						width: 60rpx;
+						height: 60rpx;
+						background-color: beige;
+					}
+
+					.right {
+						margin-left: 20rpx;
+						
+						width: 100%;
+						border-bottom: 1px solid #F3F3F3;
+
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+
+						// 昵称
+						.nick-name {
+							color: rgb(87, 107, 149);
+							font-size: 15px;
+						}
+
+						// 文本内容
+						.text-content {
+							margin-top: 20rpx;
+
+							width: 100%;
+							height: 50rpx;
+							background-color: lightblue;
+						}
+
+						// 图片内容
+						.image-content {
+							margin-top: 10rpx;
+							width: 100%;
+							height: 100rpx;
+							background-color: lightcoral;
+							// flex 3张换一次
+						}
+					}
+				}
 			}
 		}
 	}

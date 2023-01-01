@@ -6,6 +6,34 @@
   "description": "聊天应用",
   "glyphs": [
     {
+      "icon_id": "21435111",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "33605646",
+      "name": "爱心 _实心-copy-copy",
+      "font_class": "weidianzan",
+      "unicode": "100ce",
+      "unicode_decimal": 65742
+    },
+    {
+      "icon_id": "33605647",
+      "name": "爱心 _实心-copy",
+      "font_class": "dianzan",
+      "unicode": "100cf",
+      "unicode_decimal": 65743
+    },
+    {
+      "icon_id": "33605648",
+      "name": "单色_功能集合-copy",
+      "font_class": "danse_gongnengjihe-copy",
+      "unicode": "100d0",
+      "unicode_decimal": 65744
+    },
+    {
       "icon_id": "1111442",
       "name": "发布",
       "font_class": "fabu",

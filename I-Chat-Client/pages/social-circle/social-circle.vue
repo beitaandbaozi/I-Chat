@@ -65,7 +65,6 @@
 								</svg>
 							</view>
 						</view>
-
 						<!-- 点赞区和评论 -->
 					</view>
 				</view>
@@ -215,7 +214,6 @@
 						flex-direction: column;
 						justify-content: center;
 
-
 						// 昵称
 						.nick-name {
 							color: rgb(87, 107, 149);
@@ -290,8 +288,6 @@
 							}
 
 						}
-
-
 					}
 				}
 			}

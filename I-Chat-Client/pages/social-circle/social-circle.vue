@@ -2,51 +2,9 @@
 	<view class="social-circle">
 		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll">
 			<!-- 顶部 -->
-			<HeaderBySocial v-model:navbarFlag="navbarFlag"/>
+			<HeaderBySocial v-model:navbarFlag="navbarFlag" />
 			<view class="content">
-				<view class="social-content">
-					<view class="left">
-						<!-- 头像 -->
-					</view>
-					<view class="right">
-						<!-- 昵称 -->
-						<text class="nick-name">昵称</text>
-						<!-- 内容 -->
-						<!-- 文本内容 -->
-						<!-- 图片内容 -->
-						<view class="text-content">
-						</view>
-						<view class="image-content">
-						</view>
-						<!-- 点赞和评论功能 -->
-						<view class="options-flex">
-							<!-- 区域 -->
-							<template v-if="optionsFlag">
-								<view class="options-content">
-									<view class="option">
-										<svg class="icon img-option" aria-hidden="true">
-											<use xlink:href="#icon-weidianzan"></use>
-										</svg>
-										<text>赞</text>
-									</view>
-									<view class="option">
-										<svg class="icon img-option" aria-hidden="true">
-											<use xlink:href="#icon-pinglun"></use>
-										</svg>
-										<text>评论</text>
-									</view>
-								</view>
-							</template>
-							<!-- 按钮 -->
-							<view class="options-btn" @click="handleOptions">
-								<svg class="icon img-options" aria-hidden="true">
-									<use xlink:href="#icon-danse_gongnengjihe-copy"></use>
-								</svg>
-							</view>
-						</view>
-						<!-- 点赞区和评论 -->
-					</view>
-				</view>
+				<ContentBySocial />
 			</view>
 		</scroll-view>
 	</view>
@@ -54,6 +12,7 @@
 
 <script lang="ts" setup>
 	import HeaderBySocial from './components/header-by-social.vue'
+	import ContentBySocial from './components/content-by-social.vue'
 	import {
 		ref
 	} from "vue";
@@ -66,13 +25,6 @@
 		} else {
 			navbarFlag.value = false;
 		}
-	}
-	
-
-	// 点赞和评论出现
-	const optionsFlag = ref < boolean > (false)
-	const handleOptions = () => {
-		optionsFlag.value = !optionsFlag.value
 	}
 </script>
 
@@ -93,134 +45,6 @@
 				// width: 100%;
 				// height: 2099rpx;
 				// background: beige;
-				.social-content {
-					margin: 60rpx 40rpx 40rpx 40rpx;
-					// height:200rpx;
-
-					display: flex;
-
-					.left {
-						width: 60rpx;
-						height: 60rpx;
-						background-color: beige;
-					}
-
-					.right {
-						margin-left: 20rpx;
-
-						width: 100%;
-						border-bottom: 1px solid #F3F3F3;
-
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-
-						// 昵称
-						.nick-name {
-							color: rgb(87, 107, 149);
-							font-size: 15px;
-						}
-
-						// 文本内容
-						.text-content {
-							margin-top: 20rpx;
-
-							width: 100%;
-							height: 50rpx;
-							background-color: lightblue;
-						}
-
-						// 图片内容
-						.image-content {
-							margin-top: 10rpx;
-							width: 100%;
-							height: 100rpx;
-							background-color: lightcoral;
-							// flex 3张换一次
-						}
-
-						// 点赞和评论功能
-						.options-flex {
-							margin: 15rpx 0 20rpx 0;
-
-							height: 60rpx;
-
-							display: flex;
-							justify-content: flex-end;
-							align-items: center;
-
-							// 区域
-							.options-content {
-								margin-right: 20rpx;
-
-								width: 300rpx;
-								height: 80rpx;
-								background-color: rgb(76, 76, 76);
-								border-radius: 10rpx;
-
-								animation: wakeup .2s ease;
-
-								display: flex;
-								justify-content: space-around;
-								align-items: center;
-
-								.option {
-									width: 50%;
-									height: 100%;
-
-									display: flex;
-									justify-content: center;
-									align-items: center;
-
-									.img-option {
-										width: 40rpx;
-										height: 40rpx;
-
-										margin-right: 10rpx;
-									}
-
-									text {
-										font-size: 20rpx;
-										color: #fff;
-									}
-									&:active {
-										border-radius: 10rpx;
-										background-color: rgb(68, 68, 68);
-									}
-								}
-							}
-
-							@keyframes wakeup {
-								0% {
-									width: 200rpx;
-								}
-
-								100% {
-									width: 300rpx;
-								}
-							}
-
-							// 按钮
-							.options-btn {
-
-								width: 60rpx;
-								height: 40rpx;
-
-								background: rgb(247, 247, 247);
-
-								display: flex;
-								justify-content: center;
-								align-items: center;
-
-								.img-options {
-									width: 60rpx;
-									height: 45rpx;
-								}
-							}
-
-						}
-					}
-				}
 			}
 		}
 	}

@@ -2,43 +2,11 @@
 	<view class="social-circle">
 		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll">
 			<!-- 顶部 -->
-			<view class="header">
-				<!-- v-show做判断 -->
-				<!-- 有背景 -->
-				<view class="header-bg">
-					<!-- 导航 -->
-					<view class="nav" :class="navbarFlag ? 'nav-fixed': ''">
-						<template v-for="item in socialCirle" :key="item.id">
-							<view class="nav-bars" v-show="item.id === 0 || item.id === 1  || item.id === 2 ">
-								<svg class="icon img-icon" aria-hidden="true">
-									<use :xlink:href="item.icon"></use>
-								</svg>
-							</view>
-						</template>
-						<text class="title" v-show="navbarFlag">朋友圈</text>
-						<template v-for="item in socialCirle" :key="item.id">
-							<view class="nav-bars" v-show="item.id === 3">
-								<svg class="icon img-icon" aria-hidden="true">
-									<use :xlink:href="item.icon"></use>
-								</svg>
-							</view>
-						</template>
-					</view>
-					<view class="bg-image">
-						<!-- 后续补充上去吧 -->
-					</view>
-					<!-- 头像 -->
-					<view class="user-info">
-						<text>{{userInfo.NickName}}</text>
-						<img :src="userInfo.Avatar">
-					</view>
-				</view>
-			</view>
+			<HeaderBySocial v-model:navbarFlag="navbarFlag"/>
 			<view class="content">
 				<view class="social-content">
 					<view class="left">
 						<!-- 头像 -->
-
 					</view>
 					<view class="right">
 						<!-- 昵称 -->
@@ -55,7 +23,18 @@
 							<!-- 区域 -->
 							<template v-if="optionsFlag">
 								<view class="options-content">
-
+									<view class="option">
+										<svg class="icon img-option" aria-hidden="true">
+											<use xlink:href="#icon-weidianzan"></use>
+										</svg>
+										<text>赞</text>
+									</view>
+									<view class="option">
+										<svg class="icon img-option" aria-hidden="true">
+											<use xlink:href="#icon-pinglun"></use>
+										</svg>
+										<text>评论</text>
+									</view>
 								</view>
 							</template>
 							<!-- 按钮 -->
@@ -74,14 +53,10 @@
 </template>
 
 <script lang="ts" setup>
+	import HeaderBySocial from './components/header-by-social.vue'
 	import {
-		socialCirle
-	} from '@/script/config.js'
-	import {
-		computed,
 		ref
 	} from "vue";
-	import store from '@/store/index.js'
 	// 导航flag
 	const navbarFlag = ref < boolean > (false)
 	// 滚动触发
@@ -92,8 +67,7 @@
 			navbarFlag.value = false;
 		}
 	}
-	// 个人信息
-	const userInfo = computed(() => store.state.sender)
+	
 
 	// 点赞和评论出现
 	const optionsFlag = ref < boolean > (false)
@@ -111,79 +85,6 @@
 			height: 100%;
 			width: 100%;
 			overflow: auto;
-
-			.header {
-				.header-bg {
-					width: 100%;
-					height: 660rpx;
-					background: lightblue;
-
-					position: relative;
-
-					.nav {
-						background: transparent;
-
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-
-						width: 100%;
-						height: 70rpx;
-
-						.nav-bars {
-							width: 40rpx;
-							height: 40rpx;
-							margin: 5rpx;
-
-							.img-icon {
-								width: 100%;
-								height: 100%;
-							}
-						}
-
-						.nav-right {
-							text-align: right;
-						}
-
-						.title {
-							flex: 1;
-							text-align: center;
-						}
-					}
-
-					.nav-fixed {
-						transition: all .35s linear;
-
-						position: fixed;
-						top: 0;
-
-						background-color: #eee;
-
-					}
-
-					.user-info {
-						position: absolute;
-						right: 0;
-						bottom: -30rpx;
-
-						display: flex;
-						align-items: center;
-
-						text {
-							color: #fff;
-							margin-right: 40rpx;
-						}
-
-						img {
-							width: 120rpx;
-							height: 120rpx;
-							border-radius: 5%;
-
-							margin-right: 60rpx;
-						}
-					}
-				}
-			}
 
 			.content {
 				width: 100%;
@@ -252,20 +153,50 @@
 							.options-content {
 								margin-right: 20rpx;
 
-								width: 250rpx;
-								height: 60rpx;
+								width: 300rpx;
+								height: 80rpx;
 								background-color: rgb(76, 76, 76);
 								border-radius: 10rpx;
-								
+
 								animation: wakeup .2s ease;
+
+								display: flex;
+								justify-content: space-around;
+								align-items: center;
+
+								.option {
+									width: 50%;
+									height: 100%;
+
+									display: flex;
+									justify-content: center;
+									align-items: center;
+
+									.img-option {
+										width: 40rpx;
+										height: 40rpx;
+
+										margin-right: 10rpx;
+									}
+
+									text {
+										font-size: 20rpx;
+										color: #fff;
+									}
+									&:active {
+										border-radius: 10rpx;
+										background-color: rgb(68, 68, 68);
+									}
+								}
 							}
 
 							@keyframes wakeup {
 								0% {
-									width: 50rpx;
+									width: 200rpx;
 								}
+
 								100% {
-									width: 250rpx;
+									width: 300rpx;
 								}
 							}
 

@@ -1,5 +1,5 @@
 var express = require("express");
-const { msg } = require("../config");
+const { msg, info } = require("../config");
 var router = express.Router();
 const db = require("../db/index");
 
@@ -12,7 +12,7 @@ const getCommunityList = ({ pageIndex, pageSize }) => {
           (pageIndex - 1) * pageSize
         },${pageSize}`,
         (error, res) => {
-          if (err) {
+          if (error) {
             reject(info.error("获取朋友圈内容数据库查询失败", error));
           } else {
             resolve(info.success(res, "从数据库获取朋友圈内容成功！"));
@@ -75,9 +75,9 @@ const getCommunityCommentList = ({ communityId }) => {
         `select * from community_comment where CommunityId = ${communityId}`,
         (error, res) => {
           if (error) {
-            res.send(info.error("从数据库获取朋友圈评论数据库查询失败", error));
+            reject(info.error("从数据库获取朋友圈评论数据库查询失败", error));
           } else {
-            res.send(
+            resolve(
               info.success(res, "从数据库获取朋友圈评论数据库查询成功！")
             );
           }

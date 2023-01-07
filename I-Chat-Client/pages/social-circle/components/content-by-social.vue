@@ -1,15 +1,19 @@
 <template>
 	<view class="social-content">
 		<view class="left">
+			<img :src="content.AvatarUrl" alt="avatr">
 		</view>
 		<view class="right">
 			<!-- 昵称 -->
-			<text class="nick-name">昵称</text>
+			<text class="nick-name">{{content.PublishName}}</text>
 			<!-- 内容 -->
 			<!-- 文本内容 -->
+			<template v-if="content.Content">
+				<view class="text-content">
+					<TextMore :model="content"/>
+				</view>
+			</template>
 			<!-- 图片内容 -->
-			<view class="text-content">
-			</view>
 			<view class="image-content">
 			</view>
 			<!-- 点赞和评论功能 -->
@@ -44,9 +48,15 @@
 </template>
 
 <script lang="ts" setup>
+	import TextMore from './text-more.vue'
 	import {
 		ref
 	} from 'vue'
+	const props = defineProps({
+		content: Object
+	})
+	// 朋友圈内容
+	const content = props.content
 	// 点赞和评论出现
 	const optionsFlag = ref < boolean > (false)
 	const handleOptions = () => {
@@ -62,9 +72,11 @@
 		display: flex;
 
 		.left {
-			width: 60rpx;
-			height: 60rpx;
-			background-color: beige;
+			img {
+				width: 80rpx;
+				height: 80rpx;
+				border-radius: 5%;
+			}
 		}
 
 		.right {
@@ -86,10 +98,7 @@
 			// 文本内容
 			.text-content {
 				margin-top: 20rpx;
-
 				width: 100%;
-				height: 50rpx;
-				background-color: lightblue;
 			}
 
 			// 图片内容

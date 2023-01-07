@@ -1,81 +1,62 @@
 <template>
 	<view class="image-content">
-		<!-- <template v-for="(item,index) in imageList" :key="index">
-			<view>
-				<image :src="item" mode="widthFix" class="img-info"></image>
-			</view>
-		</template> -->
-		<!-- 一张图片 -->
-		<!-- <view class="image-one">
-		</view> -->
-		<!-- 两张 -->
-		<!-- <view class="img-secend">
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-		</view> -->
-		<!-- 三张 -->
-		<!-- <view class="img-tree">
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-		</view> -->
-		<!-- 四张 -->
-		<!-- <view class="img-four">
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-			<view class="img-info">
-			</view>
-		</view> -->
-		<!-- 五张、六张 -->
-		<!-- <view class="img-five-six">
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-		</view> -->
-		<!-- 七张、八张、九张 -->
-		<!-- <view class="img-seven-eight-nine">
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-			<view class="img-info"></view>
-		</view> -->
+		<view :class="[
+			{'img-one':imageList.length === 1},
+			{'img-secend':imageList.length === 2},
+			{'img-tree':imageList.length === 3},
+			{'img-four':imageList.length === 4},
+			{'img-five-six':imageList.length === 5 || imageList.length === 6},
+			{'img-seven-eight-nine':imageList.length === 7 || imageList.length === 8 ||  imageList.length === 9},
+			]">
+			<template v-for="(item,index) in imageList" :key="index">
+				<template v-if="!defaultImageFlag">
+					<image :src="item" class="img-info" @error="handleImageError"></image>
+				</template>
+				<template v-else>
+					<view class="img-info">
+						<image :src="defaultImage"></image>
+					</view>
+				</template>
+			</template>
+		</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
+	import {
+		ref
+	} from 'vue'
 	const props = defineProps({
 		imageList: {
 			type: Array,
 			default: []
 		}
 	})
+	// 图片加载出错时，添加默认图片
+	const defaultImage = 'http://pets-images.dev-apis.com/pets/none.jpg'
+	const defaultImageFlag = ref < boolean > (false)
+	const handleImageError = (e) => {
+		console.log('image发生error事件，携带值为' + e.detail.errMsg)
+		defaultImageFlag.value = true
+	}
 </script>
 
 <style lang="scss" scoped>
 	.image-content {
+		image {
+			width: 100%;
+			height: 100%
+		}
 
 		// 图片一张时候的样式
-		.image-one {
+		.img-one {
 			width: 65%;
 			height: 400rpx;
-			background-color: brown;
+
+			.img-info {
+				width: 100%;
+				height: 100%
+			}
 		}
 
 		// 图片两张时候的样式
@@ -91,7 +72,6 @@
 
 				width: 50%;
 				height: 100%;
-				background-color: beige;
 			}
 		}
 
@@ -107,7 +87,6 @@
 
 				width: 33.3%;
 				height: 100%;
-				background-color: rosybrown;
 			}
 		}
 
@@ -126,7 +105,6 @@
 				margin-bottom: 10rpx;
 				width: 47%;
 				height: 47%;
-				background-color: lightpink;
 			}
 		}
 
@@ -145,7 +123,6 @@
 				margin-bottom: 10rpx;
 				width: 31.3%;
 				height: 48%;
-				background-color: lightpink;
 			}
 		}
 
@@ -162,7 +139,6 @@
 				margin-bottom: 10rpx;
 				width: 31.3%;
 				height: 30%;
-				background-color: lightpink;
 			}
 		}
 	}

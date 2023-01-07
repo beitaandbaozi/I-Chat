@@ -10,12 +10,15 @@
 			<!-- 文本内容 -->
 			<template v-if="content.Content">
 				<view class="text-content">
-					<TextMore :model="content"/>
+					<TextMore :model="content" />
 				</view>
 			</template>
 			<!-- 图片内容 -->
-			<view class="image-content">
-			</view>
+			<template v-if="content.ImgList">
+				<view class="image-list">
+					<ImageContent :imageList="content.ImgList" />
+				</view>
+			</template>
 			<!-- 点赞和评论功能 -->
 			<view class="options-flex">
 				<!-- 区域 -->
@@ -48,7 +51,10 @@
 </template>
 
 <script lang="ts" setup>
+	// 文本内容组件
 	import TextMore from './text-more.vue'
+	// 图片内容组件
+	import ImageContent from './image-content.vue'
 	import {
 		ref
 	} from 'vue'
@@ -102,12 +108,9 @@
 			}
 
 			// 图片内容
-			.image-content {
+			.image-list {
 				margin-top: 10rpx;
 				width: 100%;
-				height: 100rpx;
-				background-color: lightcoral;
-				// flex 3张换一次
 			}
 
 			// 点赞和评论功能

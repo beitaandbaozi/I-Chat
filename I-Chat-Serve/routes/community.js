@@ -8,7 +8,7 @@ const getCommunityList = ({ pageIndex, pageSize }) => {
   return new Promise((resolve, reject) => {
     try {
       db.query(
-        `select * from community order by Id desc limit ${
+        `select * from community order by CreateDateUtc desc limit ${
           (pageIndex - 1) * pageSize
         },${pageSize}`,
         (error, res) => {

@@ -29,10 +29,18 @@
 					<template v-if="optionsFlag">
 						<view class="options-content">
 							<view class="option">
-								<svg class="icon img-option" aria-hidden="true">
-									<use xlink:href="#icon-weidianzan"></use>
-								</svg>
-								<text>赞</text>
+								<template v-if="!content.IsLike">
+									<svg class="icon img-option" aria-hidden="true">
+										<use xlink:href="#icon-weidianzan"></use>
+									</svg>
+									<text>赞</text>
+								</template>
+								<template v-else>
+									<svg class="icon img-option" aria-hidden="true">
+										<use xlink:href="#icon-dianzan"></use>
+									</svg>
+									<text>取消</text>
+								</template>
 							</view>
 							<view class="option">
 								<svg class="icon img-option" aria-hidden="true">
@@ -68,7 +76,6 @@
 					</view>
 				</view>
 			</template>
-
 		</view>
 	</view>
 </template>
@@ -282,9 +289,9 @@
 
 					.like-users {
 						flex: 1;
-						
+
 						margin-left: 10rpx;
-						
+
 						// 点赞用户过多时换行处理
 						display: flex;
 						flex-wrap: wrap;

@@ -45,12 +45,13 @@ const getCommunityLikeRecord = ({ userId, communityId }) => {
   });
 };
 
-//!!! 从数据库获取具体的朋友圈喜爱数量
+//!!! 从数据库获取具体的朋友圈喜爱的用户数据
 const getCommunityLikeCount = ({ communityId }) => {
+  // 点赞的用户数据列表
   return new Promise((resolve, reject) => {
     try {
       db.query(
-        `select * from community_like_record where CommunityId = ${communityId}`,
+        `select user.Name from community_like_record join user on community_like_record.UserId = user.Id where community_like_record.CommunityId = ${communityId}`,
         (error, res) => {
           if (error) {
             reject(info.error("获取具体的朋友圈喜爱数量数据库查询失败", error));
@@ -109,6 +110,7 @@ router.post("/getCommunityList", async (req, res) => {
           communityId: queryData[i].Id,
         });
         if (communityLikedRecord.state) {
+          // ??? 是否点赞
           queryData[i].IsLike =
             communityLikedRecord.data?.length > 0 ? true : false;
         }
@@ -116,7 +118,8 @@ router.post("/getCommunityList", async (req, res) => {
         let communityLikeCount = await getCommunityLikeCount({
           communityId: queryData[i].Id,
         });
-        queryData[i].LikeNum = communityLikeCount.data.length;
+        queryData[i].LikeNum = communityLikeCount.data;
+        // ***获取朋友圈评论
         let communityCommentList = await getCommunityCommentList({
           communityId: queryData[i].Id,
         });

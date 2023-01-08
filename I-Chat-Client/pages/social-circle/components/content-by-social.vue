@@ -52,6 +52,23 @@
 				<!-- 点赞区和评论 -->
 
 			</view>
+			<!-- 点赞区和评论区 -->
+			<template v-if="content.LikeNum.length">
+				<view class="like-comment-area">
+					<view class="like-area">
+						<svg class="icon img-like" aria-hidden="true">
+							<use xlink:href="#icon-aixin-copy"></use>
+						</svg>
+						<!-- 点赞的用户数据 -->
+						<view class="like-users">
+							<template v-for="(item,index) in content.LikeNum" :key="index">
+								<text>{{item.Name}}</text>
+							</template>
+						</view>
+					</view>
+				</view>
+			</template>
+
 		</view>
 	</view>
 </template>
@@ -107,7 +124,6 @@
 <style lang="scss">
 	.social-content {
 		margin: 60rpx 40rpx 40rpx 40rpx;
-		// height:200rpx;
 
 		display: flex;
 
@@ -236,6 +252,49 @@
 						.img-options {
 							width: 60rpx;
 							height: 45rpx;
+						}
+					}
+				}
+			}
+
+			// 点赞和评论区
+			.like-comment-area {
+				margin-bottom: 40rpx;
+
+				width: 100%;
+				background: rgb(247, 247, 247);
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				// 点赞区
+				.like-area {
+					padding: 10rpx 0;
+					display: flex;
+					align-items: flex-start;
+
+					.img-like {
+						margin-left: 20rpx;
+						width: 40rpx;
+						height: 40rpx;
+					}
+
+					.like-users {
+						flex: 1;
+						
+						margin-left: 10rpx;
+						
+						// 点赞用户过多时换行处理
+						display: flex;
+						flex-wrap: wrap;
+
+						text {
+							margin-right: 10rpx;
+							font-size: 20rpx;
+							height: 40rpx;
+							line-height: 40rpx;
+							color: rgb(87, 107, 149);
 						}
 					}
 				}

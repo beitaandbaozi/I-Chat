@@ -6,6 +6,13 @@
   "description": "聊天应用",
   "glyphs": [
     {
+      "icon_id": "33692442",
+      "name": "爱心-copy",
+      "font_class": "aixin-copy",
+      "unicode": "100d1",
+      "unicode_decimal": 65745
+    },
+    {
       "icon_id": "21435111",
       "name": "评论",
       "font_class": "pinglun",

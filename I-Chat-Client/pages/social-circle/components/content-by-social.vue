@@ -60,8 +60,9 @@
 				<!-- 点赞区和评论 -->
 			</view>
 			<!-- 点赞区和评论区 -->
-			<template v-if="content.LikeNum.length">
-				<view class="like-comment-area">
+			<view class="like-comment-area">
+				<template v-if="content.LikeNum.length">
+					<!-- 点赞 -->
 					<view class="like-area">
 						<svg class="icon img-like" aria-hidden="true">
 							<use xlink:href="#icon-aixin-copy"></use>
@@ -73,8 +74,14 @@
 							</template>
 						</view>
 					</view>
-				</view>
-			</template>
+				</template>
+				<!-- 评论 -->
+				<template v-if="content.CommentList.length > 0">
+					<view class="comment-area">
+					
+					</view>
+				</template>
+			</view>
 		</view>
 	</view>
 	<!-- 评论组件 -->
@@ -322,6 +329,11 @@
 							color: rgb(87, 107, 149);
 						}
 					}
+				}
+
+				// 评论区
+				.comment-area {
+					height: 60rpx;
 				}
 			}
 		}

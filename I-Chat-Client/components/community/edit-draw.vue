@@ -1,7 +1,8 @@
 <template>
 	<view class="edit-draw">
 		<!-- 遮罩层 -->
-		<view v-if="mask" class="tui-drawer-mask" :class="{'tui-drawer-mask_show':editDrawFlag}"></view>
+		<view v-if="mask" class="tui-drawer-mask" :class="{'tui-drawer-mask_show':editDrawFlag}"
+			@click="handleCloseMask"></view>
 		<!-- 编辑插槽 -->
 		<view class="tui-drawer-container" :class="['tui-drawer-container_' + mode,editDrawFlag? mode + '_show':'']"
 			:style="{ width: drawerWidth, height: drawerHeight }">
@@ -40,6 +41,10 @@
 	watch(() => props.editDrawVisible, (newValue) => {
 		editDrawFlag.value = newValue
 	})
+	// 关闭遮罩层
+	const handleCloseMask = () => {
+		editDrawFlag.value = false
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -122,9 +127,10 @@
 			top: 0;
 			transform: translate3d(100%, 0, 0);
 		}
+
 		.right_show {
 			opacity: 1;
-			transform: translate3d(0,0,0);
+			transform: translate3d(0, 0, 0);
 		}
 	}
 </style>

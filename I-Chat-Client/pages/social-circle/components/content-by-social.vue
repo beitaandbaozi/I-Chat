@@ -42,7 +42,7 @@
 									<text>取消</text>
 								</template>
 							</view>
-							<view class="option">
+							<view class="option" @click="handleComment">
 								<svg class="icon img-option" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
 								</svg>
@@ -58,7 +58,6 @@
 					</view>
 				</view>
 				<!-- 点赞区和评论 -->
-
 			</view>
 			<!-- 点赞区和评论区 -->
 			<template v-if="content.LikeNum.length">
@@ -78,6 +77,9 @@
 			</template>
 		</view>
 	</view>
+	<!-- 评论组件 -->
+	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="50%">
+	</edit-draw>
 </template>
 
 <script lang="ts" setup>
@@ -85,6 +87,8 @@
 	import TextMore from './text-more.vue'
 	// 图片内容组件
 	import ImageContent from './image-content.vue'
+	// 评论组件
+	import EditDraw from '../../../components/community/edit-draw.vue'
 	import {
 		ref
 	} from 'vue'
@@ -125,6 +129,14 @@
 	const optionsFlag = ref < boolean > (false)
 	const handleOptions = () => {
 		optionsFlag.value = !optionsFlag.value
+	}
+	// 编辑抽屉组件flag
+	const editDrawVisible = ref < boolean > (false)
+	const handleComment = () => {
+		// 开启组件
+		editDrawVisible.value = true
+		// 关闭点赞和评论的模块
+		optionsFlag.value = false
 	}
 </script>
 

@@ -83,6 +83,9 @@
 			z-index: 99999;
 			opacity: 0;
 			background-color: #fff;
+			
+			// 高度比插槽容器的高度小时，应该提供滚动服务
+			overflow-y: scroll;
 		}
 
 		// 底部框架  从底部升上来

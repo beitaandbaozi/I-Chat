@@ -78,7 +78,8 @@
 		</view>
 	</view>
 	<!-- 评论组件 -->
-	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="50%">
+	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="40%"
+		@updateVisible="handleCloseDraw">
 	</edit-draw>
 </template>
 
@@ -132,11 +133,16 @@
 	}
 	// 编辑抽屉组件flag
 	const editDrawVisible = ref < boolean > (false)
+	// 点击评论按钮 -> 展开评论器组件
 	const handleComment = () => {
 		// 开启组件
 		editDrawVisible.value = true
 		// 关闭点赞和评论的模块
 		optionsFlag.value = false
+	}
+	// 关闭评论器组件
+	const handleCloseDraw = (value: boolean) => {
+		editDrawVisible.value = value
 	}
 </script>
 

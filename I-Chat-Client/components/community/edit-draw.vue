@@ -42,8 +42,10 @@
 		editDrawFlag.value = newValue
 	})
 	// 关闭遮罩层
+	const emit = defineEmits(['updateVisible'])
 	const handleCloseMask = () => {
 		editDrawFlag.value = false
+		emit('updateVisible', editDrawFlag.value)
 	}
 </script>
 

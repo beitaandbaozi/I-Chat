@@ -60,28 +60,49 @@
 				<!-- 点赞区和评论 -->
 			</view>
 			<!-- 点赞区和评论区 -->
-			<view class="like-comment-area">
-				<template v-if="content.LikeNum.length">
-					<!-- 点赞 -->
-					<view class="like-area">
-						<svg class="icon img-like" aria-hidden="true">
-							<use xlink:href="#icon-aixin-copy"></use>
-						</svg>
-						<!-- 点赞的用户数据 -->
-						<view class="like-users">
-							<template v-for="(item,index) in content.LikeNum" :key="index">
-								<text>{{item.Name}}</text>
+			<template v-if="content.LikeNum.length || content.CommentList.length">
+				<view class="like-comment-area">
+					<template v-if="content.LikeNum.length">
+						<!-- 点赞 -->
+						<view class="like-area">
+							<svg class="icon img-like" aria-hidden="true">
+								<use xlink:href="#icon-aixin-copy"></use>
+							</svg>
+							<!-- 点赞的用户数据 -->
+							<view class="like-users">
+								<template v-for="(item,index) in content.LikeNum" :key="index">
+									<text>{{item.Name}}</text>
+								</template>
+							</view>
+						</view>
+					</template>
+					<!-- 评论 -->
+					<template v-if="content.CommentList.length > 0">
+						<view class="comment-area">
+							<template v-for="item in content.CommentList" :key="item.Id">
+								<!-- 普通评论信息 -->
+								<template v-if="item.Type === 0">
+									<view class="comment-user">
+										<text class="send-user">{{item.SendName}}</text>
+										<text class="point">:</text>
+										<text class="content">{{item.Content}}</text>
+									</view>
+								</template>
+								<!-- 回复的评论 -->
+								<template v-else-if="item.Type === 1">
+									<view class="comment-user">
+										<text class="send-user">{{item.SendName}}</text>
+										<text class="point">回复</text>
+										<text class="send-user">{{item.ReceiverName}}</text>
+										<text class="point">:</text>
+										<text>{{item.Content}}</text>
+									</view>
+								</template>
 							</template>
 						</view>
-					</view>
-				</template>
-				<!-- 评论 -->
-				<template v-if="content.CommentList.length > 0">
-					<view class="comment-area">
-					
-					</view>
-				</template>
-			</view>
+					</template>
+				</view>
+			</template>
 		</view>
 	</view>
 	<!-- 评论组件 -->
@@ -299,6 +320,8 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
+				
+				border-radius: 5rpx;
 
 				// 点赞区
 				.like-area {
@@ -323,7 +346,7 @@
 
 						text {
 							margin-right: 10rpx;
-							font-size: 20rpx;
+							font-size: 25rpx;
 							height: 40rpx;
 							line-height: 40rpx;
 							color: rgb(87, 107, 149);
@@ -333,7 +356,19 @@
 
 				// 评论区
 				.comment-area {
-					height: 60rpx;
+					.comment-user {
+						padding: 15rpx;
+						font-size: 25rpx;
+
+						.send-user {
+							color: rgb(87, 107, 149);
+						}
+
+						.point {
+							margin: 0 10rpx;
+						}
+
+					}
 				}
 			}
 		}

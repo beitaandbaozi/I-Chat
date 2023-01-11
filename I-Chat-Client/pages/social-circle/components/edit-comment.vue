@@ -2,7 +2,7 @@
 	<view class="edit-comment">
 		<view class="container">
 			<!-- 文本域 -->
-			<textarea focus="true" maxlength="500" class="comment-textarea"></textarea>
+			<textarea focus="true" maxlength="500" class="comment-textarea" :placeholder="defaultPlaceHolder"></textarea>
 			<!-- 操作按钮 -->
 			<view class="btn-group">
 				<view class="btn btn-cancel">取消</view>
@@ -14,6 +14,13 @@
 </template>
 
 <script lang="ts" setup>
+	const props = defineProps({
+		// 回复XXXX、评论
+		defaultPlaceHolder: {
+			type: String,
+			default: '评论'
+		}
+	})
 </script>
 
 <style lang="scss" scoped>
@@ -62,7 +69,7 @@
 					text-align: center;
 					line-height: 50rpx;
 					color: rgba(255, 255, 255);
-					
+
 					font-size: 25rpx;
 					border-radius: 10%;
 				}

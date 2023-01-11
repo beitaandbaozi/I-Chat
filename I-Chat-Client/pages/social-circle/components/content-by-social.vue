@@ -42,7 +42,7 @@
 									<text>取消</text>
 								</template>
 							</view>
-							<view class="option" @click="handleComment">
+							<view class="option" @click="handleComment(content)">
 								<svg class="icon img-option" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
 								</svg>
@@ -107,7 +107,8 @@
 	</view>
 	<!-- 评论组件 -->
 	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="40%">
-		<edit-comment />
+		<edit-comment
+			:defaultPlaceHolder="commitCommentType.receiverName?('回复'+commitCommentType.receiverName+'：'):'评论：'" />
 	</edit-draw>
 </template>
 
@@ -121,6 +122,7 @@
 	// 评论组件
 	import EditComment from './edit-comment.vue'
 	import {
+		reactive,
 		ref
 	} from 'vue'
 	const props = defineProps({
@@ -164,12 +166,35 @@
 	// 编辑抽屉组件flag
 	const editDrawVisible = ref < boolean > (false)
 	// 点击评论按钮 -> 展开评论器组件
-	const handleComment = () => {
+	const handleComment = (content: any) => {
+		console.log('----', content)
 		// 开启组件
 		editDrawVisible.value = true
 		// 关闭点赞和评论的模块
 		optionsFlag.value = false
+		// 初始化数据结构
+		commitCommentType.type = 0 //个人评论
+		commitCommentType.receiverName = '' //接收人昵称,这里给空是因为数据结构认定type=0的评论receiverName都为空字符串
+		commitCommentType.receiverId = content.PublishId //接收用户Id  
+		commitCommentType.communityContent = content.Content //被评论内容
+		commitCommentType.communityId = content.Id //朋友圈的编码
+		commitCommentType.communityImg = content.ImgList.length > 0 ? content.ImgList[0] : "" //评论的图片
 	}
+	// 提交评论数据结构  ---还未完善的数据结构
+	const commitCommentType = reactive({
+		// 评论的类型  0代表是个人评论、1代表是回复的评论
+		type: 0,
+		// 接收用户昵称
+		receiverName: '',
+		// 接收用户Id
+		receiverId: 0,
+		// 被评论的内容
+		communityContent: '',
+		// 朋友圈的编码
+		communityId: 0,
+		// 评论的图片
+		communityImg: ""
+	})
 </script>
 
 <style lang="scss">

@@ -59,7 +59,7 @@ module.exports = {
       (month + 1) +
       "-" +
       date +
-      "- " +
+      "-" +
       hour +
       ":" +
       miu +

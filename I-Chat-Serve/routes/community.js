@@ -1,5 +1,5 @@
 var express = require("express");
-const { msg, info } = require("../config");
+const { msg, info, nowTime } = require("../config");
 var router = express.Router();
 const db = require("../db/index");
 
@@ -131,6 +131,54 @@ router.post("/getCommunityList", async (req, res) => {
     }
   } catch (error) {
     res.send(msg.error("获取朋友圈数据异常", error.message));
+  }
+});
+
+//!!! 从数据库新增朋友圈评价
+const insertCommunityComment = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `insert into community_comment (CommunityId,SendId,Type,SendName,ReceiverId,ReceiverName,AvatarUrl,Content,
+        CreateDateUtc,CommunityImg,CommunityContent) values (${model.communityId},${model.sendId},${model.type},"${model.sendName}",
+        ${model.receiverId},"${model.receiverName}","${model.avatarUrl}","${model.content}","${model.createDateUtc}",
+        "${model.communityImg}","${model.communityContent}")`,
+        (error, res) => {
+          if (error) {
+            res.send(info.error("新增朋友圈评价数据库异常", error));
+          } else {
+            resolve(info.success(null, "新增朋友圈评价数据库成功！"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("新增朋友圈评论异常！"));
+    }
+  });
+};
+// 新增评论
+router.post("/insertCommunityComment", (req, res) => {
+  try {
+    let model = req.body;
+    if (!(model.sendId > 0)) {
+      res.send(msg.error("请登录再发布"));
+      return;
+    }
+    if (!(model.communityId > 0)) {
+      res.send(msg.error("社区Id不得为空"));
+      return;
+    }
+    //!!! 设置时间
+    model.createDateUtc = nowTime();
+    // *** 插入评论
+    const result = insertCommunityComment(model);
+    if (result.state) {
+      res.send(msg.success(null, "评论成功"));
+    } else {
+      res.send(msg.error("评论失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
   }
 });
 

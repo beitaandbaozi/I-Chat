@@ -108,7 +108,7 @@
 	<!-- 评论组件 -->
 	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="40%">
 		<edit-comment
-			:defaultPlaceHolder="commitCommentType.receiverName?('回复'+commitCommentType.receiverName+'：'):'评论：'" />
+			:defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'" />
 	</edit-draw>
 </template>
 

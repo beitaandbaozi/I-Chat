@@ -108,6 +108,7 @@
 	<!-- 评论组件 -->
 	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="40%"
 		@updateVisible="handleCloseDraw">
+		<edit-comment />
 	</edit-draw>
 </template>
 
@@ -116,8 +117,10 @@
 	import TextMore from './text-more.vue'
 	// 图片内容组件
 	import ImageContent from './image-content.vue'
-	// 评论组件
+	// 抽屉组件
 	import EditDraw from '../../../components/community/edit-draw.vue'
+	// 评论组件
+	import EditComment from './edit-comment.vue'
 	import {
 		ref
 	} from 'vue'
@@ -320,7 +323,7 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				
+
 				border-radius: 5rpx;
 
 				// 点赞区

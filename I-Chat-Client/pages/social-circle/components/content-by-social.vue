@@ -82,7 +82,7 @@
 							<template v-for="item in content.CommentList" :key="item.Id">
 								<!-- 普通评论信息 -->
 								<template v-if="item.Type === 0">
-									<view class="comment-user">
+									<view class="comment-user" @click="replyComment(item)">
 										<text class="send-user">{{item.SendName}}</text>
 										<text class="point">:</text>
 										<text class="content">{{item.Content}}</text>
@@ -90,7 +90,7 @@
 								</template>
 								<!-- 回复的评论 -->
 								<template v-else-if="item.Type === 1">
-									<view class="comment-user">
+									<view class="comment-user" @click="replyComment(item)">
 										<text class="send-user">{{item.SendName}}</text>
 										<text class="point">回复</text>
 										<text class="send-user">{{item.ReceiverName}}</text>
@@ -125,6 +125,7 @@
 		reactive,
 		ref
 	} from 'vue'
+	import store from '@/store/index.js'
 	const props = defineProps({
 		content: Object
 	})
@@ -165,21 +166,6 @@
 	}
 	// 编辑抽屉组件flag
 	const editDrawVisible = ref < boolean > (false)
-	// 点击评论按钮 -> 展开评论器组件
-	const handleComment = (content: any) => {
-		console.log('----', content)
-		// 开启组件
-		editDrawVisible.value = true
-		// 关闭点赞和评论的模块
-		optionsFlag.value = false
-		// 初始化数据结构
-		commitCommentType.type = 0 //个人评论
-		commitCommentType.receiverName = '' //接收人昵称,这里给空是因为数据结构认定type=0的评论receiverName都为空字符串
-		commitCommentType.receiverId = content.PublishId //接收用户Id  
-		commitCommentType.communityContent = content.Content //被评论内容
-		commitCommentType.communityId = content.Id //朋友圈的编码
-		commitCommentType.communityImg = content.ImgList.length > 0 ? content.ImgList[0] : "" //评论的图片
-	}
 	// 提交评论数据结构  ---还未完善的数据结构
 	const commitCommentType = reactive({
 		// 评论的类型  0代表是个人评论、1代表是回复的评论
@@ -195,6 +181,40 @@
 		// 评论的图片
 		communityImg: ""
 	})
+	// 点击评论按钮 -> 展开评论器组件
+	const handleComment = (content: any) => {
+		// 开启组件
+		editDrawVisible.value = true
+		// 关闭点赞和评论的模块
+		optionsFlag.value = false
+		// 初始化数据结构
+		commitCommentType.type = 0 //个人评论
+		commitCommentType.receiverName = '' //接收人昵称,这里给空是因为数据结构认定type=0的评论receiverName都为空字符串
+		commitCommentType.receiverId = content.PublishId //接收用户Id  
+		commitCommentType.communityContent = content.Content //被评论内容
+		commitCommentType.communityId = content.Id //朋友圈的编码
+		commitCommentType.communityImg = content.ImgList.length > 0 ? content.ImgList[0] : "" //评论的图片
+	}
+	// 点击评论数据进行评论
+	const replyComment = (content: any) => {
+		console.log('====', content)
+		// 如果是自己的评论---->展示删除评论组件
+		if (content.SendId === store.state.sender.Id) {
+			console.log('展示删除组件')
+		} else {
+			// 开启组件
+			editDrawVisible.value = true
+			// 初始化数据结构
+			commitCommentType.type = 1 //回复评论
+			// 接收人昵称, 以第三个人的视角 '我'看到了'卡雷特'回复'韩子奇'的评论，'卡雷特'点击肯定是显示删除组件，'我'点击肯定是回复'卡雷特'
+			commitCommentType.receiverName = content.SendName
+			commitCommentType.receiverId = content.SendId //接收用户Id
+			//被评论内容, 这里也是以第三人称的视角来看
+			commitCommentType.communityContent = content.Content 
+			commitCommentType.communityId = content.CommunityId //朋友圈的编码
+			commitCommentType.communityImg = content.CommunityImg //评论的图片
+		}
+	}
 </script>
 
 <style lang="scss">

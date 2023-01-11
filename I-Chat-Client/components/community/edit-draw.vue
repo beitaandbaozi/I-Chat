@@ -40,12 +40,14 @@
 	const editDrawFlag = ref < boolean > (false)
 	watch(() => props.editDrawVisible, (newValue) => {
 		editDrawFlag.value = newValue
+	}, {
+		immediate: true
 	})
-	// 关闭遮罩层
-	const emit = defineEmits(['updateVisible'])
+	// 关闭遮罩层---双向绑定原理
+	const emit = defineEmits(['update:editDrawVisible'])
 	const handleCloseMask = () => {
 		editDrawFlag.value = false
-		emit('updateVisible', editDrawFlag.value)
+		emit('update:editDrawVisible', false)
 	}
 </script>
 
@@ -83,7 +85,7 @@
 			z-index: 99999;
 			opacity: 0;
 			background-color: #fff;
-			
+
 			// 高度比插槽容器的高度小时，应该提供滚动服务
 			overflow-y: scroll;
 		}

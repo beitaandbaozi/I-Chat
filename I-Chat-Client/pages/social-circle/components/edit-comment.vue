@@ -18,6 +18,9 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		tipMesg
+	} from '@/script/common.js'
 	const props = defineProps({
 		// 回复XXXX、评论
 		defaultPlaceHolder: {
@@ -44,6 +47,11 @@
 	const handleConfirm = () => {
 		// 清除文本的空格
 		textareaContent.value = textareaContent.value.trim()
+		// 空消息做处理
+		if (textareaContent.value.length === 0) {
+			tipMesg('不能发布空评论！')
+			return;
+		}
 		// emit出去
 		emit('handlecommitComment', textareaContent.value)
 		handleCancel()

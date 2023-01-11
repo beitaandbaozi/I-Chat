@@ -106,9 +106,13 @@
 		</view>
 	</view>
 	<!-- 评论组件 -->
-	<edit-draw v-model:editDrawVisible="editDrawVisible" mode="bottom" drawerWidth="100%" drawerHeight="40%">
+	<edit-draw v-model:drawVisible="commitCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="40%">
 		<edit-comment
 			:defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'" />
+	</edit-draw>
+	<!-- 删除组件 -->
+	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
+		<delete-comment />
 	</edit-draw>
 </template>
 
@@ -121,6 +125,8 @@
 	import EditDraw from '../../../components/community/edit-draw.vue'
 	// 评论组件
 	import EditComment from './edit-comment.vue'
+	// 删除组件
+	import DeleteComment from './delete-comment.vue'
 	import {
 		reactive,
 		ref
@@ -164,8 +170,10 @@
 	const handleOptions = () => {
 		optionsFlag.value = !optionsFlag.value
 	}
-	// 编辑抽屉组件flag
-	const editDrawVisible = ref < boolean > (false)
+	// 发表评论组件flag
+	const commitCommentFlag = ref < boolean > (false)
+	// 删除评论组件flag
+	const deleteCommentFlag = ref < boolean > (false)
 	// 提交评论数据结构  ---还未完善的数据结构
 	const commitCommentType = reactive({
 		// 评论的类型  0代表是个人评论、1代表是回复的评论
@@ -184,7 +192,7 @@
 	// 点击评论按钮 -> 展开评论器组件
 	const handleComment = (content: any) => {
 		// 开启组件
-		editDrawVisible.value = true
+		commitCommentFlag.value = true
 		// 关闭点赞和评论的模块
 		optionsFlag.value = false
 		// 初始化数据结构
@@ -200,17 +208,17 @@
 		console.log('====', content)
 		// 如果是自己的评论---->展示删除评论组件
 		if (content.SendId === store.state.sender.Id) {
-			console.log('展示删除组件')
+			deleteCommentFlag.value = true
 		} else {
 			// 开启组件
-			editDrawVisible.value = true
+			commitCommentFlag.value = true
 			// 初始化数据结构
 			commitCommentType.type = 1 //回复评论
 			// 接收人昵称, 以第三个人的视角 '我'看到了'卡雷特'回复'韩子奇'的评论，'卡雷特'点击肯定是显示删除组件，'我'点击肯定是回复'卡雷特'
 			commitCommentType.receiverName = content.SendName
 			commitCommentType.receiverId = content.SendId //接收用户Id
 			//被评论内容, 这里也是以第三人称的视角来看
-			commitCommentType.communityContent = content.Content 
+			commitCommentType.communityContent = content.Content
 			commitCommentType.communityId = content.CommunityId //朋友圈的编码
 			commitCommentType.communityImg = content.CommunityImg //评论的图片
 		}

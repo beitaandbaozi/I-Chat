@@ -21,7 +21,7 @@
 			type: Boolean,
 			default: true
 		},
-		editDrawVisible: {
+		drawVisible: {
 			type: Boolean,
 		},
 		mode: {
@@ -38,16 +38,16 @@
 		},
 	})
 	const editDrawFlag = ref < boolean > (false)
-	watch(() => props.editDrawVisible, (newValue) => {
+	watch(() => props.drawVisible, (newValue) => {
 		editDrawFlag.value = newValue
 	}, {
 		immediate: true
 	})
 	// 关闭遮罩层---双向绑定原理
-	const emit = defineEmits(['update:editDrawVisible'])
+	const emit = defineEmits(['update:drawVisible'])
 	const handleCloseMask = () => {
 		editDrawFlag.value = false
-		emit('update:editDrawVisible', false)
+		emit('update:drawVisible', false)
 	}
 </script>
 

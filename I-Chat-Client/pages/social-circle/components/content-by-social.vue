@@ -108,11 +108,12 @@
 	<!-- 评论组件 -->
 	<edit-draw v-model:drawVisible="commitCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="40%">
 		<edit-comment
-			:defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'" />
+			:defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'" 
+			@close="commitCommentFlag = false"/>
 	</edit-draw>
 	<!-- 删除组件 -->
 	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment />
+		<delete-comment/>
 	</edit-draw>
 </template>
 

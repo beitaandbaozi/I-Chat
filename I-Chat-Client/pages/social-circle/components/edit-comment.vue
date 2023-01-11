@@ -2,11 +2,12 @@
 	<view class="edit-comment">
 		<view class="container">
 			<!-- 文本域 -->
-			<textarea focus="true" maxlength="500" class="comment-textarea" :placeholder="defaultPlaceHolder"></textarea>
+			<textarea focus="true" maxlength="500" class="comment-textarea" :placeholder="defaultPlaceHolder"
+				v-model="textareaContent"></textarea>
 			<!-- 操作按钮 -->
 			<view class="btn-group">
-				<view class="btn btn-cancel">取消</view>
-				<view class="btn btn-reset">重置</view>
+				<view class="btn btn-cancel" @click="handleCancel">取消</view>
+				<view class="btn btn-reset" @click="handleReset">重置</view>
 				<view class="btn btn-confirm">确定</view>
 			</view>
 		</view>
@@ -14,6 +15,9 @@
 </template>
 
 <script lang="ts" setup>
+	import {
+		ref
+	} from 'vue'
 	const props = defineProps({
 		// 回复XXXX、评论
 		defaultPlaceHolder: {
@@ -21,6 +25,21 @@
 			default: '评论'
 		}
 	})
+	const emit = defineEmits(['close'])
+	// 文本域内容
+	const textareaContent = ref < string > ('')
+	// 取消
+	const handleCancel = () => {
+		// 文本内容清空
+		textareaContent.value = ''
+		// 关闭
+		emit('close')
+	}
+	// 重置
+	const handleReset = () => {
+		// 文本内容清空
+		textareaContent.value = ''
+	}
 </script>
 
 <style lang="scss" scoped>

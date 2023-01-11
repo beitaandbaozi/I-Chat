@@ -107,13 +107,12 @@
 	</view>
 	<!-- 评论组件 -->
 	<edit-draw v-model:drawVisible="commitCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="40%">
-		<edit-comment
-			:defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'" 
-			@close="commitCommentFlag = false"/>
+		<edit-comment :defaultPlaceHolder="commitCommentType.type === 1?('回复'+commitCommentType.receiverName+'：'):'评论：'"
+			@close="commitCommentFlag = false" @handlecommitComment="handlecommitComment" />
 	</edit-draw>
 	<!-- 删除组件 -->
 	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment/>
+		<delete-comment />
 	</edit-draw>
 </template>
 
@@ -224,11 +223,15 @@
 			commitCommentType.communityImg = content.CommunityImg //评论的图片
 		}
 	}
+	// 提交评论
+	const handlecommitComment = (content: string) => {
+		console.log('提交评论', content)
+	}
 	// 点击一条朋友圈
 	const jumpSocialDetail = () => {
 		console.log('jumpSocialDetail')
 		// 如果展开了点赞和评论页面，应该立即关闭
-		if(optionsFlag.value) {
+		if (optionsFlag.value) {
 			optionsFlag.value = !optionsFlag.value
 		}
 		// 跳转到朋友圈详情页面 ----埋坑

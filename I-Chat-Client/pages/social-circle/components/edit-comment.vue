@@ -8,7 +8,7 @@
 			<view class="btn-group">
 				<view class="btn btn-cancel" @click="handleCancel">取消</view>
 				<view class="btn btn-reset" @click="handleReset">重置</view>
-				<view class="btn btn-confirm">确定</view>
+				<view class="btn btn-confirm" @click="handleConfirm">确定</view>
 			</view>
 		</view>
 	</view>
@@ -25,7 +25,7 @@
 			default: '评论'
 		}
 	})
-	const emit = defineEmits(['close'])
+	const emit = defineEmits(['close', 'handlecommitComment'])
 	// 文本域内容
 	const textareaContent = ref < string > ('')
 	// 取消
@@ -39,6 +39,14 @@
 	const handleReset = () => {
 		// 文本内容清空
 		textareaContent.value = ''
+	}
+	// 确定
+	const handleConfirm = () => {
+		// 清除文本的空格
+		textareaContent.value = textareaContent.value.trim()
+		// emit出去
+		emit('handlecommitComment', textareaContent.value)
+		handleCancel()
 	}
 </script>
 

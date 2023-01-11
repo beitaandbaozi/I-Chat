@@ -9,7 +9,7 @@
 			<!-- 内容 -->
 			<!-- 文本内容 -->
 			<template v-if="content.Content">
-				<view class="text-content">
+				<view class="text-content" @click="jumpSocialDetail">
 					<TextMore :model="content" />
 				</view>
 			</template>
@@ -51,7 +51,7 @@
 						</view>
 					</template>
 					<!-- 按钮 -->
-					<view class="options-btn" @click="handleOptions">
+					<view class="options-btn" @click.stop="handleOptions">
 						<svg class="icon img-options" aria-hidden="true">
 							<use xlink:href="#icon-danse_gongnengjihe-copy"></use>
 						</svg>
@@ -222,6 +222,15 @@
 			commitCommentType.communityId = content.CommunityId //朋友圈的编码
 			commitCommentType.communityImg = content.CommunityImg //评论的图片
 		}
+	}
+	// 点击一条朋友圈
+	const jumpSocialDetail = () => {
+		console.log('jumpSocialDetail')
+		// 如果展开了点赞和评论页面，应该立即关闭
+		if(optionsFlag.value) {
+			optionsFlag.value = !optionsFlag.value
+		}
+		// 跳转到朋友圈详情页面 ----埋坑
 	}
 </script>
 

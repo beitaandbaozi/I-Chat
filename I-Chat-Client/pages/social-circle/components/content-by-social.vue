@@ -28,7 +28,7 @@
 					<!-- 区域 -->
 					<template v-if="optionsFlag">
 						<view class="options-content">
-							<view class="option">
+							<view class="option" @click="handleGiveALike(contentDetails)">
 								<template v-if="!contentDetails.IsLike">
 									<svg class="icon img-option" aria-hidden="true">
 										<use xlink:href="#icon-weidianzan"></use>
@@ -42,7 +42,7 @@
 									<text>取消</text>
 								</template>
 							</view>
-							<view class="option" @click="handleComment(content)">
+							<view class="option" @click="handleComment(contentDetails)">
 								<svg class="icon img-option" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
 								</svg>
@@ -57,7 +57,6 @@
 						</svg>
 					</view>
 				</view>
-				<!-- 点赞区和评论 -->
 			</view>
 			<!-- 点赞区和评论区 -->
 			<template v-if="contentDetails.LikeNum.length || contentDetails.CommentList.length">
@@ -111,9 +110,9 @@
 			@close="commitCommentFlag = false" @handlecommitComment="handlecommitComment" />
 	</edit-draw>
 	<!-- 删除组件 -->
-	<edit-draw class="delete-box" v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment  @close="deleteCommentFlag = false"
-			@handleDeleteComment="handleDeleteComment" />
+	<edit-draw class="delete-box" v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%"
+		drawerHeight="20%">
+		<delete-comment @close="deleteCommentFlag = false" @handleDeleteComment="handleDeleteComment" />
 	</edit-draw>
 </template>
 
@@ -299,6 +298,31 @@
 				tipMesg(res?.message)
 			}
 		})
+	}
+	// 进行点赞操作
+	const handleGiveALike = (content: any) => {
+		// 关闭评论区
+		optionsFlag.value = false
+		// 接口参数
+		let model = {
+			userId: store.state.sender.Id,
+			communityId: content.Id
+		}
+		// 根据IsLike来判断是点赞还是取消点赞
+		if (!content.IsLike) {
+			// 点赞
+			post(`${APIURL}/community/giveALike`, model).then(res => {
+				if (res?.code === 200) {
+					// icon图标flag
+					contentDetails.value!.IsLike = true
+					// 点赞区补充用户
+					contentDetails.value!.LikeNum = res?.data
+				}
+			})
+		} else {
+			// 取消点赞
+			console.log('取消点赞')
+		}
 	}
 	// 点击一条朋友圈
 	const jumpSocialDetail = () => {

@@ -266,5 +266,71 @@ router.post("/deleteCommentContentById", async (req, res) => {
     res.send(msg.error(error.message));
   }
 });
+//!!! 根据用户Id和朋友圈Id对朋友圈进行点赞
+const giveALike = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `insert into community_like_record (UserId,CommunityId) values(${model.userId},"${model.communityId}");`,
+        (error, res) => {
+          if (error) {
+            reject(
+              info.error(
+                "根据用户Id和朋友圈Id对朋友圈进行点赞数据库异常",
+                error
+              )
+            );
+          } else {
+            resolve(
+              info.success(
+                null,
+                "根据用户Id和朋友圈Id对朋友圈进行点赞数据库成功"
+              )
+            );
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据用户Id和朋友圈Id对朋友圈进行点赞异常"));
+    }
+  });
+};
+// 根据用户id和朋友圈id对某一条朋友圈进行点赞操作
+router.post("/giveALike", async (req, res) => {
+  try {
+    let model = req.body;
+    if (!(model.userId > 0 && model.communityId > 0)) {
+      res.send(msg.error("缺乏必要参数"));
+      return;
+    }
+    // *** 查看一下是否有点赞过
+    let isGiveLike = await getCommunityLikeRecord(model);
+    if (isGiveLike.state) {
+      if (isGiveLike.data.length === 0) {
+        // *** 进行点赞操作
+        let result = await giveALike(model);
+        // *** 获取对应的点赞用户
+        if (result.state) {
+          let communityLikeCount = await getCommunityLikeCount({
+            communityId: model.communityId,
+          });
+          if (communityLikeCount.state) {
+            res.send(msg.success(communityLikeCount.data, "点赞成功"));
+          } else {
+            res.send(msg.error("点赞异常"));
+          }
+        } else {
+          res.send(msg.error("点赞异常"));
+        }
+      } else {
+        res.send(msg.success(null, "点赞成功"));
+      }
+    } else {
+      res.send(msg.error("点赞失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 
 module.exports = router;

@@ -79,10 +79,10 @@
 					<!-- 评论 -->
 					<template v-if="contentDetails.CommentList.length > 0">
 						<view class="comment-area">
-							<template v-for="item in contentDetails.CommentList" :key="item.Id">
+							<template v-for="(item,index) in contentDetails.CommentList" :key="item.Id">
 								<!-- 普通评论信息 -->
 								<template v-if="item.Type === 0">
-									<view class="comment-user" @click="replyComment(item)">
+									<view class="comment-user" @click="replyComment(item,index)">
 										<text class="send-user">{{item.SendName}}</text>
 										<text class="point">:</text>
 										<text class="content">{{item.Content}}</text>
@@ -90,7 +90,7 @@
 								</template>
 								<!-- 回复的评论 -->
 								<template v-else-if="item.Type === 1">
-									<view class="comment-user" @click="replyComment(item)">
+									<view class="comment-user" @click="replyComment(item,index)">
 										<text class="send-user">{{item.SendName}}</text>
 										<text class="point">回复</text>
 										<text class="send-user">{{item.ReceiverName}}</text>
@@ -112,7 +112,7 @@
 	</edit-draw>
 	<!-- 删除组件 -->
 	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment @close="deleteCommentFlag = false"/>
+		<delete-comment @close="deleteCommentFlag = false" @handleDeleteComment="handleDeleteComment" />
 	</edit-draw>
 </template>
 
@@ -148,6 +148,7 @@
 	// 朋友圈内容
 	const contentDetails = ref(props.content)
 	watch(() => props.content, (value) => {
+		console.log('watch props.content', value)
 		contentDetails.value = value
 	})
 	// 发布时间处理
@@ -187,8 +188,6 @@
 	}
 	// 发表评论组件flag
 	const commitCommentFlag = ref < boolean > (false)
-	// 删除评论组件flag
-	const deleteCommentFlag = ref < boolean > (false)
 	// 提交评论数据结构  ---还未完善的数据结构
 	const commitCommentType = reactive({
 		// 评论的类型  0代表是个人评论、1代表是回复的评论
@@ -219,11 +218,13 @@
 		commitCommentType.communityImg = content.ImgList.length > 0 ? content.ImgList[0] : "" //评论的图片
 	}
 	// 点击评论数据进行评论
-	const replyComment = (content: any) => {
+	const replyComment = (content: any, index: number) => {
 		console.log('====', content)
 		// 如果是自己的评论---->展示删除评论组件
 		if (content.SendId === store.state.sender.Id) {
 			deleteCommentFlag.value = true
+			deletCommunityId.value = content.Id
+			deletCommunityIndex.value = index
 		} else {
 			// 开启组件
 			commitCommentFlag.value = true
@@ -256,6 +257,7 @@
 			if (res?.code === 200) {
 				// 更新最新的评论内容
 				let id = commitCommentType.communityId;
+				// 这里执行的是增加操作，所以需要重新更新一下对应communityId的评论数据，删除有足够的条件可以在页面渲染，添加不行
 				getCommentContentById(id)
 			} else {
 				tipMesg(res?.message)
@@ -272,6 +274,26 @@
 			if (res?.code === 200) {
 				// 更新
 				contentDetails.value!.CommentList = res?.data
+			} else {
+				tipMesg(res?.message)
+			}
+		})
+	}
+	// 删除评论
+	const deleteCommentFlag = ref < boolean > (false)
+	const deletCommunityId = ref < number > (0)
+	const deletCommunityIndex = ref < number > (-1)
+	const handleDeleteComment = () => {
+		let model = {
+			id: deletCommunityId.value
+		}
+		post(`${APIURL}/community/deleteCommentContentById`, model).then(res => {
+			if (res?.code === 200) {
+				// 删除操作 -----> 
+				// 这里的时候其实已经在数据库删除数据了，只是目前在页面删除，因为重新加载的时候会重新获取数据，所以这里肯定不用调用更新的函数
+				contentDetails.value!.CommentList.splice(deletCommunityIndex.value, 1)
+				// 关闭抽屉
+				deleteCommentFlag.value = false
 			} else {
 				tipMesg(res?.message)
 			}

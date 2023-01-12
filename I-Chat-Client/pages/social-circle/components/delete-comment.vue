@@ -1,16 +1,21 @@
 <template>
 	<view class="delete-comment">
 		<!-- 删除 -->
-		<view class="btn btn-remove">删除</view>
+		<view class="btn btn-remove" @click="handleDelete">删除</view>
 		<!-- 取消 -->
 		<view class="btn btn-cancel" @click="handleCancel">取消</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
-	const emit = defineEmits(['close'])
+	const emit = defineEmits(['close', 'handleDeleteComment'])
+	// 取消---->关闭抽屉
 	const handleCancel = () => {
 		emit('close')
+	}
+	// 删除---->删除功能
+	const handleDelete = () => {
+		emit('handleDeleteComment')
 	}
 </script>
 

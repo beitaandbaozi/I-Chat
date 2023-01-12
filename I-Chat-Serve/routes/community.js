@@ -226,4 +226,45 @@ router.post("/getCommentContentById", async (req, res) => {
   }
 });
 
+//!!! 根据Id删除数据库对应的评论
+const deleteCommentContentById = ({ id }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `delete from community_comment where Id = ${id};`,
+        (error, res) => {
+          if (error) {
+            reject(info.error("根据Id删除数据库对应的评论数据库异常"));
+          } else {
+            resolve(
+              info.success(null, "根据Id删除数据库对应的评论数据库成功！")
+            );
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据Id删除数据库对应的评论异常"));
+    }
+  });
+};
+// 根据id删除对应的评论
+router.post("/deleteCommentContentById", async (req, res) => {
+  try {
+    let model = req.body;
+    if (!(model.id > 0)) {
+      res.send(msg.error("缺乏必要参数"));
+      return;
+    }
+    // *** 根据Id删除数据库对应的评论
+    const result = await deleteCommentContentById(model);
+    if (result.state) {
+      res.send(msg.success(null, "删除成功"));
+    } else {
+      res.send(msg.error("删除失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
+
 module.exports = router;

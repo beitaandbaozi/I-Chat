@@ -1,35 +1,35 @@
 <template>
 	<view class="social-content">
 		<view class="left">
-			<img :src="content.AvatarUrl" alt="avatr">
+			<img :src="contentDetails.AvatarUrl" alt="avatr">
 		</view>
 		<view class="right">
 			<!-- 昵称 -->
-			<text class="nick-name">{{content.PublishName}}</text>
+			<text class="nick-name">{{contentDetails.PublishName}}</text>
 			<!-- 内容 -->
 			<!-- 文本内容 -->
-			<template v-if="content.Content">
+			<template v-if="contentDetails.Content">
 				<view class="text-content" @click="jumpSocialDetail">
 					<TextMore :model="content" />
 				</view>
 			</template>
 			<!-- 图片内容 -->
-			<template v-if="content.ImgList">
+			<template v-if="contentDetails.ImgList">
 				<view class="image-list">
-					<ImageContent :imageList="content.ImgList" />
+					<ImageContent :imageList="contentDetails.ImgList" />
 				</view>
 			</template>
 			<!-- 发布时间、点赞和评论功能 -->
 			<view class="publish-options-flex">
 				<view class="publish-time">
-					{{computedTime(content.CreateDateUtc)}}
+					{{computedTime(contentDetails.CreateDateUtc)}}
 				</view>
 				<view class="options-flex">
 					<!-- 区域 -->
 					<template v-if="optionsFlag">
 						<view class="options-content">
 							<view class="option">
-								<template v-if="!content.IsLike">
+								<template v-if="!contentDetails.IsLike">
 									<svg class="icon img-option" aria-hidden="true">
 										<use xlink:href="#icon-weidianzan"></use>
 									</svg>
@@ -60,9 +60,9 @@
 				<!-- 点赞区和评论 -->
 			</view>
 			<!-- 点赞区和评论区 -->
-			<template v-if="content.LikeNum.length || content.CommentList.length">
+			<template v-if="contentDetails.LikeNum.length || contentDetails.CommentList.length">
 				<view class="like-comment-area">
-					<template v-if="content.LikeNum.length">
+					<template v-if="contentDetails.LikeNum.length">
 						<!-- 点赞 -->
 						<view class="like-area">
 							<svg class="icon img-like" aria-hidden="true">
@@ -70,16 +70,16 @@
 							</svg>
 							<!-- 点赞的用户数据 -->
 							<view class="like-users">
-								<template v-for="(item,index) in content.LikeNum" :key="index">
+								<template v-for="(item,index) in contentDetails.LikeNum" :key="index">
 									<text>{{item.Name}}</text>
 								</template>
 							</view>
 						</view>
 					</template>
 					<!-- 评论 -->
-					<template v-if="content.CommentList.length > 0">
+					<template v-if="contentDetails.CommentList.length > 0">
 						<view class="comment-area">
-							<template v-for="item in content.CommentList" :key="item.Id">
+							<template v-for="item in contentDetails.CommentList" :key="item.Id">
 								<!-- 普通评论信息 -->
 								<template v-if="item.Type === 0">
 									<view class="comment-user" @click="replyComment(item)">
@@ -129,11 +129,26 @@
 	import DeleteComment from './delete-comment.vue'
 	import {
 		reactive,
-		ref
+		ref,
+		watch
 	} from 'vue'
 	import store from '@/store/index.js'
+	import {
+		post
+	} from '@/script/request.js'
+	import {
+		APIURL
+	} from '@/script/config.js'
+	import {
+		tipMesg
+	} from '@/script/common.js'
 	const props = defineProps({
 		content: Object
+	})
+	// 朋友圈内容
+	const contentDetails = ref(props.content)
+	watch(() => props.content, (value) => {
+		contentDetails.value = value
 	})
 	// 发布时间处理
 	const computedTime = (time: string) => {
@@ -225,7 +240,42 @@
 	}
 	// 提交评论
 	const handlecommitComment = (content: string) => {
-		console.log('提交评论', content)
+		let model = {
+			communityId: commitCommentType.communityId,
+			sendId: store.state.sender.Id,
+			sendName: store.state.sender.Name,
+			receiverId: commitCommentType.receiverId,
+			receiverName: commitCommentType.receiverName,
+			type: commitCommentType.type,
+			avatarUrl: store.state.sender.Avatar,
+			content,
+			communityImg: commitCommentType.communityImg,
+			communityContent: commitCommentType.communityContent
+		}
+		post(`${APIURL}/community/insertCommunityComment`, model).then(res => {
+			if (res?.code === 200) {
+				// 更新最新的评论内容
+				let id = commitCommentType.communityId;
+				getCommentContentById(id)
+			} else {
+				tipMesg(res?.message)
+			}
+		})
+
+	}
+	// 根据朋友圈Id获取最新的评论区内容
+	const getCommentContentById = (id: number) => {
+		let model = {
+			communityId: id
+		}
+		post(`${APIURL}/community/getCommentContentById`, model).then(res => {
+			if (res?.code === 200) {
+				// 更新
+				contentDetails.value!.CommentList = res?.data
+			} else {
+				tipMesg(res?.message)
+			}
+		})
 	}
 	// 点击一条朋友圈
 	const jumpSocialDetail = () => {

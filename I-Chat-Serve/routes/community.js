@@ -1,3 +1,4 @@
+const { response } = require("express");
 var express = require("express");
 const { msg, info, nowTime } = require("../config");
 var router = express.Router();
@@ -170,11 +171,55 @@ router.post("/insertCommunityComment", async (req, res) => {
     model.createDateUtc = nowTime();
     // *** 插入评论
     const result = await insertCommunityComment(model);
-    console.log("----", result);
     if (result.state) {
       res.send(msg.success(null, "评论成功"));
     } else {
       res.send(msg.error("评论失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
+
+//!!! 从数据库根据ID获取最新朋友圈评论Id
+const getCommentContentById = (id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `select * from community_comment where CommunityId = ${id}`,
+        (error, res) => {
+          if (error) {
+            console.log(error);
+            reject(info.error("从数据库根据ID获取最新朋友圈评论Id数据库异常"));
+          } else {
+            resolve(
+              info.success(
+                res,
+                "从数据库根据ID获取最新朋友圈评论Id数据库成功！"
+              )
+            );
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据ID获取最新朋友圈评论Id数据库异常"));
+    }
+  });
+};
+// 根据id获取最新的评论
+router.post("/getCommentContentById", async (req, res) => {
+  try {
+    let model = req.body;
+    if (!(model.communityId > 0)) {
+      res.send(msg.error("朋友圈Id不得为空"));
+      return;
+    }
+    // ***根据Id获取最新的评论内容
+    const result = await getCommentContentById(model.communityId);
+    if (result.state) {
+      res.send(msg.success(result.data, "根据Id获取最新的评论内容成功"));
+    } else {
+      res.send(msg.error("根据Id获取最新的评论内容失败"));
     }
   } catch (error) {
     res.send(msg.error(error.message));

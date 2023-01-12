@@ -3,11 +3,15 @@
 		<!-- 删除 -->
 		<view class="btn btn-remove">删除</view>
 		<!-- 取消 -->
-		<view class="btn btn-cancel">取消</view>
+		<view class="btn btn-cancel" @click="handleCancel">取消</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
+	const emit = defineEmits(['close'])
+	const handleCancel = () => {
+		emit('close')
+	}
 </script>
 
 <style lang="scss" scoped>

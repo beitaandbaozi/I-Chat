@@ -112,7 +112,7 @@
 	</edit-draw>
 	<!-- 删除组件 -->
 	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment />
+		<delete-comment @close="deleteCommentFlag = false"/>
 	</edit-draw>
 </template>
 

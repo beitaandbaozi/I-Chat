@@ -1,5 +1,7 @@
 <template>
 	<view class="delete-comment">
+		<!-- 文字描述 -->
+		<text>是否删除我的评论?</text>
 		<!-- 删除 -->
 		<view class="btn btn-remove" @click="handleDelete">删除</view>
 		<!-- 取消 -->
@@ -27,9 +29,18 @@
 		display: flex;
 		flex-direction: column;
 
+		text {
+			height: 25%;
+			font-size: 25rpx;
+			line-height: 60rpx;
+			color: lightsteelblue;
+			text-align: center;
+			border-bottom: 1px solid #eee;
+		}
+
 		.btn {
 			width: 100%;
-			height: 50%;
+			height: 37.5%;
 			border-bottom: 1px solid #eee;
 			font-size: 30rpx;
 			text-align: center;

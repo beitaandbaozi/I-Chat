@@ -111,8 +111,9 @@
 			@close="commitCommentFlag = false" @handlecommitComment="handlecommitComment" />
 	</edit-draw>
 	<!-- 删除组件 -->
-	<edit-draw v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
-		<delete-comment @close="deleteCommentFlag = false" @handleDeleteComment="handleDeleteComment" />
+	<edit-draw class="delete-box" v-model:drawVisible="deleteCommentFlag" mode="bottom" drawerWidth="100%" drawerHeight="20%">
+		<delete-comment  @close="deleteCommentFlag = false"
+			@handleDeleteComment="handleDeleteComment" />
 	</edit-draw>
 </template>
 
@@ -310,7 +311,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.social-content {
 		margin: 60rpx 40rpx 40rpx 40rpx;
 
@@ -507,6 +508,15 @@
 					}
 				}
 			}
+		}
+
+	}
+
+	// 删除组件
+	.delete-box {
+		:deep(.tui-drawer-container) {
+			border-top-right-radius: 20rpx;
+			border-top-left-radius: 20rpx;
 		}
 	}
 </style>

@@ -333,4 +333,57 @@ router.post("/giveALike", async (req, res) => {
   }
 });
 
+// !!! 根据用户Id和朋友圈Id对朋友圈取消点赞
+const cancelALike = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `delete from community_like_record where UserId = ${model.userId} and CommunityId = ${model.communityId};`,
+        (error, res) => {
+          if (error) {
+            reject(
+              info.error("根据用户Id和朋友圈Id对朋友圈取消点赞数据库异常")
+            );
+          } else {
+            resolve(
+              info.success(
+                null,
+                "根据用户Id和朋友圈Id对朋友圈取消点赞数据库成功！"
+              )
+            );
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据用户Id和朋友圈Id对朋友圈取消点赞异常！"));
+    }
+  });
+};
+// 根据用户id和朋友圈id对某一条朋友圈进行取消点赞操作
+router.post("/cancelALike", async (req, res) => {
+  try {
+    let model = req.body;
+    if (!(model.userId > 0 && model.communityId > 0)) {
+      res.send(msg.error("缺乏必要参数"));
+      return;
+    }
+    // *** 取消点赞
+    let result = await cancelALike(model);
+    // *** 获取对应的点赞用户
+    if (result.state) {
+      let communityLikeCount = await getCommunityLikeCount({
+        communityId: model.communityId,
+      });
+      if (communityLikeCount.state) {
+        res.send(msg.success(communityLikeCount.data, "取消点赞成功"));
+      } else {
+        res.send(msg.error("取消点赞异常"));
+      }
+    } else {
+      res.send(msg.error("取消点赞失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 module.exports = router;

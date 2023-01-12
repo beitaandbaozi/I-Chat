@@ -321,7 +321,14 @@
 			})
 		} else {
 			// 取消点赞
-			console.log('取消点赞')
+			post(`${APIURL}/community/cancelALike`, model).then(res => {
+				if (res?.code === 200) {
+					// icon图标flag
+					contentDetails.value!.IsLike = false
+					// 点赞区补充用户
+					contentDetails.value!.LikeNum = res?.data
+				}
+			})
 		}
 	}
 	// 点击一条朋友圈

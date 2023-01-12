@@ -139,25 +139,23 @@ const insertCommunityComment = (model) => {
   return new Promise((resolve, reject) => {
     try {
       db.query(
-        `insert into community_comment (CommunityId,SendId,Type,SendName,ReceiverId,ReceiverName,AvatarUrl,Content,
-        CreateDateUtc,CommunityImg,CommunityContent) values (${model.communityId},${model.sendId},${model.type},"${model.sendName}",
-        ${model.receiverId},"${model.receiverName}","${model.avatarUrl}","${model.content}","${model.createDateUtc}",
-        "${model.communityImg}","${model.communityContent}")`,
-        (error, res) => {
-          if (error) {
-            res.send(info.error("新增朋友圈评价数据库异常", error));
+        `insert into community_comment (CommunityId,SendId,Type,SendName,ReceiverId,ReceiverName,AvatarUrl,Content,CreateDateUtc,CommunityImg,CommunityContent)
+      values(${model.communityId},${model.sendId},${model.type},"${model.sendName}",${model.receiverId},"${model.receiverName}","${model.avatarUrl}","${model.content}","${model.createDateUtc}","${model.communityImg}","${model.communityContent}");`,
+        (err, result) => {
+          if (err) {
+            reject(info.error("新增社区评论失败"));
           } else {
-            resolve(info.success(null, "新增朋友圈评价数据库成功！"));
+            resolve(info.success(null, "新增社区评论成功"));
           }
         }
       );
-    } catch (error) {
-      reject(info.error("新增朋友圈评论异常！"));
+    } catch {
+      reject(info.error("新增社区评论异常"));
     }
   });
 };
 // 新增评论
-router.post("/insertCommunityComment", (req, res) => {
+router.post("/insertCommunityComment", async (req, res) => {
   try {
     let model = req.body;
     if (!(model.sendId > 0)) {
@@ -171,7 +169,8 @@ router.post("/insertCommunityComment", (req, res) => {
     //!!! 设置时间
     model.createDateUtc = nowTime();
     // *** 插入评论
-    const result = insertCommunityComment(model);
+    const result = await insertCommunityComment(model);
+    console.log("----", result);
     if (result.state) {
       res.send(msg.success(null, "评论成功"));
     } else {

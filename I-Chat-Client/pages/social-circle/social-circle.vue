@@ -1,13 +1,22 @@
 <template>
 	<view class="social-circle">
-		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll">
+		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll" refresher-enabled="true"
+			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
+			@refresherrefresh="onRefresh">
 			<!-- 顶部 -->
 			<HeaderBySocial v-model:navbarFlag="navbarFlag" />
-			<view class="content">
-				<template v-for="(item,index) in communityContentList" :key="index">
-					<ContentBySocial :content="item" />
-				</template>
-			</view>
+			<template v-if="communityContentList.length > 0">
+				<view class="content">
+					<template v-for="(item,index) in communityContentList" :key="index">
+						<ContentBySocial :content="item" />
+					</template>
+				</view>
+			</template>
+			<template v-else>
+				<view class="empty">
+					数据还没加载出来呢
+				</view>
+			</template>
 		</scroll-view>
 	</view>
 </template>
@@ -45,7 +54,11 @@
 	const pageSize = ref < number > (10)
 	// 存储朋友圈数据
 	const communityContentList = ref < any > ([])
-	const getCommunityData = () => {
+	const getCommunityData = (isRefrsh ? : boolean) => {
+		// 表示是下拉刷新更新朋友圈数据
+		if (isRefrsh) {
+			refresherFlag.value = true
+		}
 		let query = {
 			pageIndex: pageIndex.value,
 			pageSize: pageSize.value,
@@ -58,12 +71,30 @@
 			} else {
 				tipMesg(res?.message)
 			}
+		}).finally(() => {
+			// 表示是下拉刷新更新朋友圈数据
+			if (isRefrsh) {
+				refresherFlag.value = false
+			}
 		})
 	}
 	onMounted(() => {
 		getCommunityData()
 	})
-	
+
+	// 下拉刷新
+	const refresherFlag = ref < boolean > (false)
+	const onRefresh = () => {
+		if (refresherFlag.value) return;
+		// 初始化页数、页码等状态
+		pageIndex.value = 1;
+		pageSize.value = 10;
+		refresherFlag.value = false;
+		// 防止添加重复的数据
+		communityContentList.value = [];
+		// 获取数据
+		getCommunityData(true)
+	}
 </script>
 
 <style lang="scss">
@@ -84,6 +115,15 @@
 				// height: 2099rpx;
 				// background: beige;
 			}
+		}
+
+		.empty {
+			margin-top: 150rpx;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			font-size: 30rpx;
+			color: lightblue;
 		}
 	}
 </style>

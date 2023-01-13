@@ -59,7 +59,6 @@
 
 	// 点击导航栏上的按钮
 	const handleClike = (id: number) => {
-		console.log(id)
 		switch (id) {
 			case 0:
 				// 导航栏后退  ----动画出入后续统一处理一下

@@ -2,7 +2,7 @@
 	<view class="social-circle">
 		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll" refresher-enabled="true"
 			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
-			@refresherrefresh="onRefresh" :scroll-top="scrollTop">
+			@refresherrefresh="onRefresh" @scrolltolower="handleLoadMore">
 			<!-- 顶部 -->
 			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" />
 			<template v-if="communityContentList.length > 0">
@@ -16,6 +16,10 @@
 				<view class="empty">
 					数据还没加载出来呢
 				</view>
+			</template>
+			<!-- 滑动到底部加载数据时，数据上限 -->
+			<template v-if="loadMore">
+				<view class="load-more">😆👉世界尽头啦</view>
 			</template>
 		</scroll-view>
 	</view>
@@ -69,7 +73,12 @@
 		post(`${APIURL}/community/getCommunityList`, query).then(res => {
 			if (res?.code === 200) {
 				let item = res?.data || [];
+				console.log('item', item)
 				communityContentList.value.push(...item)
+				if (res?.data.length < pageSize.value) {
+					// 说明加载来的数据不足10条----->说明已经到极限数据了
+					loadMore.value = true
+				}
 			} else {
 				tipMesg(res?.message)
 			}
@@ -118,6 +127,15 @@
 		// 获取数据
 		getCommunityData()
 	}
+	// 滚动到底部，加载数据
+	const loadMore = ref < boolean > (false)
+	const handleLoadMore = () => {
+		// 如果loadMore为true,说明已经没有数据可以加载了
+		if (loadMore.value) return;
+		// 更新页数和页码
+		pageIndex.value = pageIndex.value + 1;
+		getCommunityData()
+	}
 </script>
 
 <style lang="scss">
@@ -147,6 +165,12 @@
 			text-align: center;
 			font-size: 30rpx;
 			color: lightblue;
+		}
+
+		.load-more {
+			text-align: center;
+			color: lightgray;
+			font-size: 25rpx;
 		}
 	}
 </style>

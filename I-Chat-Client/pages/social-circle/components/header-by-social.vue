@@ -4,7 +4,8 @@
 			<!-- 导航 -->
 			<view class="nav" :class="childNavBarFlag ? 'nav-fixed': ''">
 				<template v-for="item in socialCirle" :key="item.id">
-					<view class="nav-bars" v-show="item.id === 0 || item.id === 1  || item.id === 2 ">
+					<view class="nav-bars" v-show="item.id === 0 || item.id === 1  || item.id === 2 "
+						@click="handleClike(item.id)">
 						<svg class="icon img-icon" aria-hidden="true">
 							<use :xlink:href="item.icon"></use>
 						</svg>
@@ -12,7 +13,7 @@
 				</template>
 				<text class="title" v-show="childNavBarFlag">朋友圈</text>
 				<template v-for="item in socialCirle" :key="item.id">
-					<view class="nav-bars" v-show="item.id === 3">
+					<view class="nav-bars" v-show="item.id === 3" @click="handleClike(item.id)">
 						<svg class="icon img-icon" aria-hidden="true">
 							<use :xlink:href="item.icon"></use>
 						</svg>
@@ -55,6 +56,32 @@
 
 	// 个人信息
 	const userInfo = computed(() => store.state.sender)
+
+	// 点击导航栏上的按钮
+	const handleClike = (id: number) => {
+		console.log(id)
+		switch (id) {
+			case 0:
+				// 导航栏后退  ----动画出入后续统一处理一下
+				uni.navigateBack({
+					delta: 1,
+					animationType: 'zoom-in',
+					animationDuration: 200
+				});
+				break;
+			case 1:
+				// 刷新朋友圈
+				break;
+			case 2:
+				// 消息
+				break;
+			case 3:
+				// 发布朋友圈
+				break;
+			default:
+				break;
+		}
+	}
 </script>
 
 <style lang="scss">
@@ -71,7 +98,7 @@
 
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
+				justify-content: space-around;
 
 				width: 100%;
 				height: 70rpx;

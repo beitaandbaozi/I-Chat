@@ -2,9 +2,9 @@
 	<view class="social-circle">
 		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll" refresher-enabled="true"
 			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
-			@refresherrefresh="onRefresh">
+			@refresherrefresh="onRefresh" :scroll-top="scrollTop">
 			<!-- 顶部 -->
-			<HeaderBySocial v-model:navbarFlag="navbarFlag" />
+			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" />
 			<template v-if="communityContentList.length > 0">
 				<view class="content">
 					<template v-for="(item,index) in communityContentList" :key="index">
@@ -25,6 +25,7 @@
 	import HeaderBySocial from './components/header-by-social.vue'
 	import ContentBySocial from './components/content-by-social.vue'
 	import {
+		nextTick,
 		onMounted,
 		ref
 	} from "vue";
@@ -43,6 +44,7 @@
 	const navbarFlag = ref < boolean > (false)
 	// 滚动触发
 	const handleScroll = (e) => {
+		oldScrollTop.value = e.detail.scrollTop
 		if (e.detail.scrollTop >= 345) {
 			navbarFlag.value = true;
 		} else {
@@ -94,6 +96,27 @@
 		communityContentList.value = [];
 		// 获取数据
 		getCommunityData(true)
+	}
+	// 导航中的刷新朋友圈操作
+	const scrollTop = ref < number > (0)
+	const oldScrollTop = ref < number > (0)
+	const handleNavRefresh = () => {
+		// 如果是固定的导航栏刷新时，应该先滚回到顶部，再实现刷新操作
+		if (navbarFlag.value) {
+			// 解决view层不同步的问题
+			scrollTop.value = oldScrollTop.value
+			nextTick(() => {
+				scrollTop.value = 0
+			})
+		}
+		// 初始化页数、页码等状态
+		pageIndex.value = 1;
+		pageSize.value = 10;
+		refresherFlag.value = false;
+		// 防止添加重复的数据
+		communityContentList.value = [];
+		// 获取数据
+		getCommunityData()
 	}
 </script>
 

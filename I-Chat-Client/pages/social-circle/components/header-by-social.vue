@@ -56,7 +56,8 @@
 
 	// 个人信息
 	const userInfo = computed(() => store.state.sender)
-
+	
+	const emit = defineEmits(['handleNavRefresh'])
 	// 点击导航栏上的按钮
 	const handleClike = (id: number) => {
 		switch (id) {
@@ -70,6 +71,7 @@
 				break;
 			case 1:
 				// 刷新朋友圈
+				emit('handleNavRefresh')
 				break;
 			case 2:
 				// 消息

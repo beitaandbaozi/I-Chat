@@ -2,7 +2,7 @@
 	<view class="social-circle">
 		<scroll-view scroll-y class="scroll-container" @scroll="handleScroll" refresher-enabled="true"
 			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
-			@refresherrefresh="onRefresh" @scrolltolower="handleLoadMore">
+			:scroll-top="scrollTop" @refresherrefresh="onRefresh" @scrolltolower="handleLoadMore">
 			<!-- 顶部 -->
 			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" />
 			<template v-if="communityContentList.length > 0">
@@ -73,7 +73,6 @@
 		post(`${APIURL}/community/getCommunityList`, query).then(res => {
 			if (res?.code === 200) {
 				let item = res?.data || [];
-				console.log('item', item)
 				communityContentList.value.push(...item)
 				if (res?.data.length < pageSize.value) {
 					// 说明加载来的数据不足10条----->说明已经到极限数据了

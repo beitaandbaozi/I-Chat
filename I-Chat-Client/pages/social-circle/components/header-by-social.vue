@@ -30,6 +30,10 @@
 			</view>
 		</view>
 	</view>
+	<!-- 发布组件 -->
+	<edit-draw v-model:drawVisible="publishFlag" mode="bottom" drawerWidth="100%" drawerHeight="100%">
+		<commit-social @handleCancel="publishFlag = false"/>
+	</edit-draw>
 </template>
 
 <script lang="ts" setup>
@@ -42,6 +46,10 @@
 		watch
 	} from "vue";
 	import store from '@/store/index.js'
+	// 抽屉组件
+	import EditDraw from '../../../components/community/edit-draw.vue'
+	// 发布组件
+	import CommitSocial from './commit-social.vue'
 
 	// 接收父组件传递过来的props
 	const props = defineProps({
@@ -56,8 +64,13 @@
 
 	// 个人信息
 	const userInfo = computed(() => store.state.sender)
-	
+
 	const emit = defineEmits(['handleNavRefresh'])
+	// 发布朋友圈
+	const publishFlag = ref < boolean > (false)
+	const publishSocial = () => {
+		publishFlag.value = true
+	}
 	// 点击导航栏上的按钮
 	const handleClike = (id: number) => {
 		switch (id) {
@@ -78,6 +91,7 @@
 				break;
 			case 3:
 				// 发布朋友圈
+				publishSocial()
 				break;
 			default:
 				break;

@@ -46,7 +46,6 @@
 	// 关闭遮罩层---双向绑定原理
 	const emit = defineEmits(['update:drawVisible'])
 	const handleCloseMask = () => {
-		editDrawFlag.value = false
 		emit('update:drawVisible', false)
 	}
 </script>

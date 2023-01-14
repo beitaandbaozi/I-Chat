@@ -32,7 +32,7 @@
 	</view>
 	<!-- 发布组件 -->
 	<edit-draw v-model:drawVisible="publishFlag" mode="bottom" drawerWidth="100%" drawerHeight="100%">
-		<commit-social @handleCancel="publishFlag = false"/>
+		<commit-social @handleCancel="publishFlag = false" @refreshCommunity="handleRefreshCommunity" />
 	</edit-draw>
 </template>
 
@@ -65,7 +65,7 @@
 	// 个人信息
 	const userInfo = computed(() => store.state.sender)
 
-	const emit = defineEmits(['handleNavRefresh'])
+	const emit = defineEmits(['handleNavRefresh','handleRefresh'])
 	// 发布朋友圈
 	const publishFlag = ref < boolean > (false)
 	const publishSocial = () => {
@@ -96,6 +96,10 @@
 			default:
 				break;
 		}
+	}
+	// 重新加载朋友圈
+	const handleRefreshCommunity = () => {
+		emit('handleRefresh')
 	}
 </script>
 

@@ -3,7 +3,7 @@
 		<view class="btn-grow">
 			<view class="btn btn-cancle" @click="handleCancel">取消</view>
 			<view class="btn btn-reset" @click="handleReset">重置</view>
-			<view class="btn btn-confirm">发布</view>
+			<view class="btn btn-confirm" @click="handlePublish">发布</view>
 		</view>
 		<textarea maxlength="2000" placeholder="这一刻的想法....🤔😄😡😔🙂" v-model="textAreaContent"></textarea>
 		<!-- 选择图片区域 -->
@@ -37,7 +37,11 @@
 	import {
 		tipMesg
 	} from '@/script/common.js'
-	const emit = defineEmits(['handleCancel'])
+	import store from '@/store/index.js'
+	import {
+		post
+	} from '@/script/request.js'
+	const emit = defineEmits(['handleCancel','refreshCommunity'])
 	// 文本域内容
 	const textAreaContent = ref < string > ('')
 	// 上传的图片列表
@@ -92,7 +96,7 @@
 						fail: (res) => {
 							tipMesg("上传图片异常😭", res)
 						},
-						complete:() => {
+						complete: () => {
 							uni.hideLoading()
 						}
 					})
@@ -103,6 +107,33 @@
 	// 删除上传的图片
 	const handleDeleteImage = (index: number) => {
 		uploadImgList.value.splice(index, 1)
+	}
+	// 发布
+	const handlePublish = () => {
+		// 提交的数据结构
+		let model = {
+			PublishId: store.state.sender.Id,
+			AvatarUrl: store.state.sender.Avatar,
+			PublishName: store.state.sender.Name,
+			Content: textAreaContent.value,
+			ImgList: JSON.stringify(uploadImgList.value)
+		}
+		uni.showLoading({
+			title: '正在发布...🤩'
+		})
+		// 发布接口
+		post(`${APIURL}/community/publishCommunitySocial`, model).then(res => {
+			if (res?.code === 200) {
+				uni.hideLoading()
+				tipMesg(res?.message)
+				// 关闭
+				handleCancel()
+				// 重新加载朋友圈页面
+				emit('refreshCommunity')
+			} else {
+				tipMesg(res?.message)
+			}
+		})
 	}
 </script>
 

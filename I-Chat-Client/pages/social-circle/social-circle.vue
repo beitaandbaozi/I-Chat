@@ -4,7 +4,7 @@
 			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
 			:scroll-top="scrollTop" @refresherrefresh="onRefresh" @scrolltolower="handleLoadMore">
 			<!-- 顶部 -->
-			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" />
+			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" @handleRefresh="onRefresh"/>
 			<template v-if="communityContentList.length > 0">
 				<view class="content">
 					<template v-for="(item,index) in communityContentList" :key="index">

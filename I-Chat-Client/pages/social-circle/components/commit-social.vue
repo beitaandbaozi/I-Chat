@@ -3,7 +3,7 @@
 		<view class="btn-grow">
 			<view class="btn btn-cancle" @click="handleCancel">取消</view>
 			<view class="btn btn-reset" @click="handleReset">重置</view>
-			<view class="btn btn-confirm">确定</view>
+			<view class="btn btn-confirm">发布</view>
 		</view>
 		<textarea maxlength="2000" placeholder="这一刻的想法....🤔😄😡😔🙂" v-model="textAreaContent"></textarea>
 		<!-- 选择图片区域 -->
@@ -17,7 +17,7 @@
 			</template>
 			<template v-for="(item,index) in uploadImgList" :key="index">
 				<view class="img-info">
-					<svg class="icon icon-delete" aria-hidden="true">
+					<svg class="icon icon-delete" aria-hidden="true" @click="handleDeleteImage(index)">
 						<use xlink:href="#icon-cuowu"></use>
 					</svg>
 					<image :src="item"></image>
@@ -94,6 +94,10 @@
 				}
 			},
 		})
+	}
+	// 删除上传的图片
+	const handleDeleteImage = (index: number) => {
+		uploadImgList.value.splice(index, 1)
 	}
 </script>
 

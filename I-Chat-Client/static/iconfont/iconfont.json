@@ -6,6 +6,20 @@
   "description": "聊天应用",
   "glyphs": [
     {
+      "icon_id": "1270",
+      "name": "错误",
+      "font_class": "cuowu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "33784320",
+      "name": "添加景点-copy",
+      "font_class": "upload-image",
+      "unicode": "100d2",
+      "unicode_decimal": 65746
+    },
+    {
       "icon_id": "33692442",
       "name": "爱心-copy",
       "font_class": "aixin-copy",

@@ -11,19 +11,17 @@
 			<!-- 上传icon -->
 			<!-- 图片数量达到9张的时候消失 -->
 			<template v-if="uploadImgList.length < 9">
-				<svg class="icon icon-upload" aria-hidden="true">
+				<svg class="icon icon-upload" aria-hidden="true" @click="handleUploadImage">
 					<use xlink:href="#icon-upload-image"></use>
 				</svg>
 			</template>
-			<template v-else>
-				<template v-for="(item,index) in uploadImgList" :key="index">
-					<view class="img-info">
-						<svg class="icon icon-delete" aria-hidden="true">
-							<use xlink:href="#icon-cuowu"></use>
-						</svg>
-						<image :src="item" mode="widthFix"></image>
-					</view>
-				</template>
+			<template v-for="(item,index) in uploadImgList" :key="index">
+				<view class="img-info">
+					<svg class="icon icon-delete" aria-hidden="true">
+						<use xlink:href="#icon-cuowu"></use>
+					</svg>
+					<image :src="item"></image>
+				</view>
 			</template>
 		</view>
 	</view>
@@ -33,6 +31,12 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		APIURL
+	} from '@/script/config.js'
+	import {
+		tipMesg
+	} from '@/script/common.js'
 	const emit = defineEmits(['handleCancel'])
 	// 文本域内容
 	const textAreaContent = ref < string > ('')
@@ -50,6 +54,46 @@
 		// 文本域内容清空
 		textAreaContent.value = ''
 		// 照片清空
+	}
+	// 上传图片
+	const handleUploadImage = () => {
+		// 限制图片数量 =====> 由uploadImgList的数量来决定
+		let count = 9 - uploadImgList.value.length;
+		// 选择图片
+		uni.chooseImage({
+			count,
+			sizeType: ['original', 'compressed'], //原图和压缩图
+			sourceType: ['album', 'camera'], //从相册选择
+			success: (res) => {
+				uni.showLoading({
+					title: '上传图片中.....🤯😵😬',
+					mask: true
+				})
+				let tempFilePathsList = res.tempFilePaths;
+				for (let i = 0; i < tempFilePathsList.length; i++) {
+					// 上传到服务器
+					uni.uploadFile({
+						url: `${APIURL}/upload/uploadPublishSocialImage`,
+						filePath: tempFilePathsList[i],
+						name: 'file',
+						success: (res) => {
+							if (res?.statusCode === 200) {
+								let data = JSON.parse(res.data)
+								let uploadImage =
+									`http://localhost:9527${APIURL}/upload/getPublishSocialImage?url=${data[0].path}`;
+								uploadImgList.value.push(uploadImage)
+								console.log('----', uploadImgList.value)
+							} else {
+								tipMesg("上传图片失败😭")
+							}
+						},
+						fail: (res) => {
+							tipMesg("上传图片异常😭", res)
+						}
+					})
+				}
+			},
+		})
 	}
 </script>
 
@@ -124,7 +168,6 @@
 				margin: 10rpx 10rpx;
 				width: 30%;
 				height: 200rpx;
-				background-color: lightpink;
 				border-radius: 5%;
 
 				position: relative;

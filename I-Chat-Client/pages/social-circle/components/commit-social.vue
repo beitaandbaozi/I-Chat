@@ -46,6 +46,8 @@
 	const handleCancel = () => {
 		// 文本域内容清空
 		textAreaContent.value = ''
+		// 照片清空
+		uploadImgList.value = []
 		// 关闭
 		emit('handleCancel')
 	}
@@ -54,6 +56,7 @@
 		// 文本域内容清空
 		textAreaContent.value = ''
 		// 照片清空
+		uploadImgList.value = []
 	}
 	// 上传图片
 	const handleUploadImage = () => {
@@ -82,13 +85,15 @@
 								let uploadImage =
 									`http://localhost:9527${APIURL}/upload/getPublishSocialImage?url=${data[0].path}`;
 								uploadImgList.value.push(uploadImage)
-								console.log('----', uploadImgList.value)
 							} else {
 								tipMesg("上传图片失败😭")
 							}
 						},
 						fail: (res) => {
 							tipMesg("上传图片异常😭", res)
+						},
+						complete:() => {
+							uni.hideLoading()
 						}
 					})
 				}

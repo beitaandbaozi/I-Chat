@@ -386,4 +386,38 @@ router.post("/cancelALike", async (req, res) => {
     res.send(msg.error(error.message));
   }
 });
+// !!! 发布朋友圈
+const insertCommunitySocial = (community) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `insert into community (PublishId,AvatarUrl,PublishName,Content,ImgList,CreateDateUtc) values (${community.PublishId},"${community.AvatarUrl}","${community.PublishName}","${community.Content}",'${community.ImgList}',"${community.CreateDateUtc}");`,
+        (error, res) => {
+          if (error) {
+            reject(info.error("发布朋友圈数据库异常"));
+          } else {
+            resolve(info.success(null, "发布朋友圈数据库成功"));
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("发布朋友圈异常"));
+    }
+  });
+};
+// 发布朋友圈
+router.post("/publishCommunitySocial", async (req, res) => {
+  try {
+    let model = req.body;
+    model.CreateDateUtc = nowTime();
+    let result = await insertCommunitySocial(model);
+    if (result.state) {
+      res.send(msg.success(null, "发布成功"));
+    } else {
+      res.send(msg.error("发布失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(err.message));
+  }
+});
 module.exports = router;

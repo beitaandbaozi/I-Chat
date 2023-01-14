@@ -46,7 +46,10 @@ module.exports = {
   nowTime: function () {
     const now = new Date();
     const year = now.getFullYear();
-    const month = now.getMonth();
+    const month =
+      now.getMonth() + 1 >= 10
+        ? now.getMonth() + 1
+        : "0" + (now.getMonth() + 1);
     const date = now.getDate() >= 10 ? now.getDate() : "0" + now.getDate();
     const hour = now.getHours() >= 10 ? now.getHours() : "0" + now.getHours();
     const miu =
@@ -54,17 +57,7 @@ module.exports = {
     const sec =
       now.getSeconds() >= 10 ? now.getSeconds() : "0" + now.getSeconds();
     return (
-      +year +
-      "-" +
-      (month + 1) +
-      "-" +
-      date +
-      "-" +
-      hour +
-      ":" +
-      miu +
-      ":" +
-      sec
+      +year + "-" + month + "-" + date + " " + hour + ":" + miu + ":" + sec
     );
   },
 };

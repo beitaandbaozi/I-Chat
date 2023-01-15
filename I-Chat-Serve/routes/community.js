@@ -488,4 +488,38 @@ router.post("/getUnreadCommunityList", async (req, res) => {
     res.send(msg.error(error.message));
   }
 });
+
+//!!! 从数据库更新朋友圈消息状态
+const updateCommunityContentStateById = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `update community_comment set Status = ${model.status} where ReceiverId = ${model.receiverId}`,
+        (err, result) => {
+          if (err) {
+            reject(info.error("更新用户的消息阅读状态失败"));
+          } else {
+            resolve(info.success(null, "成功"));
+          }
+        }
+      );
+    } catch {
+      reject(info.error("更新用户的消息阅读状态异常"));
+    }
+  });
+};
+// 更新朋友圈消息阅读状态
+router.post("/updateCommunityContentStateById", async (req, res) => {
+  try {
+    let model = req.body;
+    let result = await updateCommunityContentStateById(model);
+    if (result.state) {
+      res.send(msg.success(result.data, "更新成功"));
+    } else {
+      res.send(msg.error("更新失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 module.exports = router;

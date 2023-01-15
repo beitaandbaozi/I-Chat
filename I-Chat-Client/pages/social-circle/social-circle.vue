@@ -9,7 +9,7 @@
 			<!-- 消息提醒 -->
 			<template v-if="unReadCommunityList.length > 0">
 				<view class="unread-message-container">
-					<view class="unread-message">
+					<view class="unread-message" @click="handleGotoMessageDetail">
 						<view class="avatar">
 							<image :src="unReadCommunityList[unReadCommunityList.length - 1].AvatarUrl"></image>
 						</view>
@@ -118,6 +118,8 @@
 		communityContentList.value = [];
 		// 获取数据
 		getCommunityData(true)
+		// 更新未读消息状态
+		getUnreadCommunityList()
 	}
 	// 导航中的刷新朋友圈操作
 	const scrollTop = ref < number > (0)
@@ -139,6 +141,8 @@
 		communityContentList.value = [];
 		// 获取数据
 		getCommunityData()
+		// 更新未读消息状态
+		getUnreadCommunityList()
 	}
 	// 滚动到底部，加载数据
 	const loadMore = ref < boolean > (false)
@@ -148,6 +152,8 @@
 		// 更新页数和页码
 		pageIndex.value = pageIndex.value + 1;
 		getCommunityData()
+		// 更新未读消息状态
+		getUnreadCommunityList()
 	}
 	// 获取未读消息
 	const unReadCommunityList = ref < any[] > ([])
@@ -161,6 +167,17 @@
 			} else {
 				tipMesg(res?.message)
 			}
+		})
+	}
+	// 点击消息跳转到消息详情页
+	const handleGotoMessageDetail = () => {
+		// 标记为已读----->所有的消息都为已读,这里采取传递一个路由参数到详情页面的onLoad处理,这样就不需要重新加载朋友圈页面了
+		let hasRead = unReadCommunityList.value.length > 0 ? 1 : 0
+		// 消息框消失----->直接将数组清空即可
+		unReadCommunityList.value = []
+		// 跳转
+		uni.navigateTo({
+			url: `/pages/social-circle/community-message-details?read=${hasRead}`
 		})
 	}
 </script>

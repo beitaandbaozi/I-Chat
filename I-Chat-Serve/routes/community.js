@@ -453,4 +453,39 @@ router.post("/deleteCommunityById", async (req, res) => {
     res.send(msg.error(error.message));
   }
 });
+//!!! 根据用户id从数据库获取未读的朋友圈信息
+const getUnreadCommunityList = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(
+        `select * from community_comment where ReceiverId = ${model.receiverId} and SendId != ${model.receiverId} and Status = 0`,
+        (error, res) => {
+          if (error) {
+            reject(info.error("根据用户id从数据库获取未读的朋友圈信息失败"));
+          } else {
+            resolve(
+              info.success(res, "根据用户id从数据库获取未读的朋友圈信息成功")
+            );
+          }
+        }
+      );
+    } catch (error) {
+      reject(info.error("根据用户id从数据库获取未读的朋友圈信息异常"));
+    }
+  });
+};
+// 根据用户id获取未读的朋友圈信息
+router.post("/getUnreadCommunityList", async (req, res) => {
+  try {
+    let model = req.body;
+    let userUnreadCommunityMessage = await getUnreadCommunityList(model);
+    if (userUnreadCommunityMessage.state) {
+      res.send(msg.success(userUnreadCommunityMessage.data, "查询成功"));
+    } else {
+      res.send(msg.error("查询失败"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 module.exports = router;

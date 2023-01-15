@@ -4,17 +4,29 @@
 			:refresher-triggered="refresherFlag" :refresher-threshold="50" refresher-background="#000"
 			:scroll-top="scrollTop" @refresherrefresh="onRefresh" @scrolltolower="handleLoadMore">
 			<!-- 顶部 -->
-			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh" @handleRefresh="onRefresh"/>
+			<HeaderBySocial v-model:navbarFlag="navbarFlag" @handleNavRefresh="handleNavRefresh"
+				@handleRefresh="onRefresh" />
+			<!-- 消息提醒 -->
+			<template v-if="unReadCommunityList.length > 0">
+				<view class="unread-message-container">
+					<view class="unread-message">
+						<view class="avatar">
+							<image :src="unReadCommunityList[unReadCommunityList.length - 1].AvatarUrl"></image>
+						</view>
+						<view class="content">{{unReadCommunityList.length}}条新消息</view>
+					</view>
+				</view>
+			</template>
 			<template v-if="communityContentList.length > 0">
 				<view class="content">
 					<template v-for="(item,index) in communityContentList" :key="index">
-						<ContentBySocial :content="item" @handleRefresh="onRefresh"/>
+						<ContentBySocial :content="item" @handleRefresh="onRefresh" />
 					</template>
 				</view>
 			</template>
 			<template v-else>
 				<view class="empty">
-					数据还没加载出来呢
+					数据还没加载出来呢🥺😢😭
 				</view>
 			</template>
 			<!-- 滑动到底部加载数据时，数据上限 -->
@@ -90,6 +102,8 @@
 	}
 	onMounted(() => {
 		getCommunityData()
+		// 获取未读的消息
+		getUnreadCommunityList()
 	})
 
 	// 下拉刷新
@@ -135,6 +149,20 @@
 		pageIndex.value = pageIndex.value + 1;
 		getCommunityData()
 	}
+	// 获取未读消息
+	const unReadCommunityList = ref < any[] > ([])
+	const getUnreadCommunityList = () => {
+		let model = {
+			receiverId: store.state.sender.Id
+		}
+		post(`${APIURL}/community/getUnreadCommunityList`, model).then(res => {
+			if (res?.code === 200) {
+				unReadCommunityList.value = res?.data || []
+			} else {
+				tipMesg(res?.message)
+			}
+		})
+	}
 </script>
 
 <style lang="scss">
@@ -155,21 +183,63 @@
 				// height: 2099rpx;
 				// background: beige;
 			}
+
+			.unread-message-container {
+				width: 100%;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				padding-top: 40rpx;
+
+				.unread-message {
+					width: 300rpx;
+					height: 70rpx;
+					background-color: rgb(97, 97, 97, .7);
+					border-radius: 5%;
+
+					display: flex;
+					justify-content: space-around;
+					align-items: center;
+
+					.avatar {
+						margin-left: 10rpx;
+						width: 55rpx;
+						height: 55rpx;
+
+						image {
+							width: 100%;
+							height: 100%;
+							border-radius: 5%;
+						}
+					}
+
+					.content {
+						flex: 1;
+						font-size: 25rpx;
+						color: #fff;
+						text-align: center;
+					}
+				}
+			}
+
+			.empty {
+				margin-top: 150rpx;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				font-size: 30rpx;
+				color: lightblue;
+			}
+
+			.load-more {
+				text-align: center;
+				color: lightgray;
+				font-size: 25rpx;
+			}
+
 		}
 
-		.empty {
-			margin-top: 150rpx;
-			width: 100%;
-			height: 100%;
-			text-align: center;
-			font-size: 30rpx;
-			color: lightblue;
-		}
-
-		.load-more {
-			text-align: center;
-			color: lightgray;
-			font-size: 25rpx;
-		}
 	}
 </style>

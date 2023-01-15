@@ -65,7 +65,7 @@
 	// 个人信息
 	const userInfo = computed(() => store.state.sender)
 
-	const emit = defineEmits(['handleNavRefresh','handleRefresh'])
+	const emit = defineEmits(['handleNavRefresh', 'handleRefresh'])
 	// 发布朋友圈
 	const publishFlag = ref < boolean > (false)
 	const publishSocial = () => {
@@ -87,7 +87,10 @@
 				emit('handleNavRefresh')
 				break;
 			case 2:
-				// 消息
+				// 跳转到消息详情页面
+				uni.navigateTo({
+					url: `/pages/social-circle/community-message-details`
+				})
 				break;
 			case 3:
 				// 发布朋友圈

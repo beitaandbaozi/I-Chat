@@ -8,7 +8,7 @@
 			<template v-if="communityContentList.length > 0">
 				<view class="content">
 					<template v-for="(item,index) in communityContentList" :key="index">
-						<ContentBySocial :content="item" />
+						<ContentBySocial :content="item" @handleRefresh="onRefresh"/>
 					</template>
 				</view>
 			</template>

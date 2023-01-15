@@ -420,4 +420,37 @@ router.post("/publishCommunitySocial", async (req, res) => {
     res.send(msg.error(err.message));
   }
 });
+
+//!!! 根据Id从数据库删库对应的朋友圈
+const deleteCommunityById = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(`delete from community where Id = ${model.Id}`, (error, res) => {
+        if (error) {
+          reject(info.error("根据Id从数据库删库对应的朋友圈数据库异常！"));
+        } else {
+          resolve(
+            info.success(null, "根据Id从数据库删库对应的朋友圈数据库成功！")
+          );
+        }
+      });
+    } catch (error) {
+      reject(info.error("根据Id从数据库删库对应的朋友圈异常！"));
+    }
+  });
+};
+// 删除朋友圈
+router.post("/deleteCommunityById", async (req, res) => {
+  try {
+    let model = req.body;
+    let result = await deleteCommunityById(model);
+    if (result.state) {
+      res.send(msg.success(null, "删除成功！"));
+    } else {
+      res.send(msg.error("删除失败！"));
+    }
+  } catch (error) {
+    res.send(msg.error(error.message));
+  }
+});
 module.exports = router;

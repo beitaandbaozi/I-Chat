@@ -19,10 +19,17 @@
 					<ImageContent :imageList="contentDetails.ImgList" />
 				</view>
 			</template>
-			<!-- 发布时间、点赞和评论功能 -->
+			<!-- 发布时间、删除、点赞和评论功能 -->
 			<view class="publish-options-flex">
-				<view class="publish-time">
-					{{computedTime(contentDetails.CreateDateUtc)}}
+				<!-- 发布时间、删除按钮 -->
+				<view class="publish-delete-box">
+					<text class="publish-time">
+						{{computedTime(contentDetails.CreateDateUtc)}}
+					</text>
+					<!-- 删除 -->
+					<template v-if="contentDetails.PublishId === store.state.sender.Id">
+						<text class="btn-delete" @click="handleDeleteCommunity(contentDetails.Id)">删除</text>
+					</template>
 				</view>
 				<view class="options-flex">
 					<!-- 区域 -->
@@ -340,6 +347,24 @@
 		}
 		// 跳转到朋友圈详情页面 ----埋坑
 	}
+	// 删除朋友圈
+	const emit = defineEmits(['handleRefresh'])
+	const handleDeleteCommunity = (Id: number) => {
+		let model = {
+			Id
+		}
+		post(`${APIURL}/community/deleteCommunityById`, model).then(res => {
+			if (res?.code === 200) {
+				uni.showLoading({
+					title: '删除成功🥇'
+				})
+				// 重新加载朋友圈
+				emit('handleRefresh')
+			}
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -392,10 +417,18 @@
 				justify-content: space-between;
 				align-items: center;
 
-				// 发布时间
-				.publish-time {
+				.publish-delete-box {
 					font-size: 25rpx;
-					color: rgb(158, 158, 158);
+
+					// 发布时间
+					.publish-time {
+						margin-right: 10rpx;
+						color: rgb(158, 158, 158);
+					}
+
+					.btn-delete {
+						color: rgb(87, 107, 149);
+					}
 				}
 
 				// 点赞和评论功能

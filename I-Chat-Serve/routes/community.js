@@ -522,4 +522,47 @@ router.post("/updateCommunityContentStateById", async (req, res) => {
     res.send(msg.error(error.message));
   }
 });
+
+//!!! 获取朋友圈用户的消息列表
+const getCommunityMessageList = (model) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let sql = "";
+      if (model.pageIndex && model.pageSize) {
+        sql = `select * from community_comment where ReceiverId = ${
+          model.receiverId
+        } and SendId != ${model.receiverId} and Status = ${
+          model.status
+        } order by Id desc limit ${
+          (model.pageIndex - 1) * model.pageSize + model.extra
+        },${model.pageSize}`;
+      } else {
+        sql = `select * from community_comment where ReceiverId = ${model.receiverId} and SendId != ${model.receiverId} and Status = ${model.status} order by Id desc`;
+      }
+      db.query(sql, (err, result) => {
+        if (err) {
+          reject(info.error("查询消息失败"));
+        } else {
+          resolve(info.success(result, "查询用户消息成功"));
+        }
+      });
+    } catch (err) {
+      reject(info.error("查询用户消息异常"));
+    }
+  });
+};
+// 获取朋友圈用户的消息列表
+router.post("/getCommunityMessageList", async (req, res) => {
+  try {
+    let model = req.body;
+    let result = await getCommunityMessageList(model);
+    if (result.state) {
+      res.send(msg.success(result.data, "查询成功"));
+    } else {
+      res.send(msg.error("查询失败"));
+    }
+  } catch (err) {
+    res.send(msg.error(err.message));
+  }
+});
 module.exports = router;

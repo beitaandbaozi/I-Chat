@@ -12,11 +12,11 @@
 
 ##### 登录
 
-![](.\DocumentImage\login.png)
+![](DocumentImage/login.png)
 
 ##### 注册
 
-![](F:\前端知识点补充\基于vue3的uniapp聊天应用\DocumentImage\regist.png)
+![](DocumentImage\regist.png)
 
-![](F:\前端知识点补充\基于vue3的uniapp聊天应用\DocumentImage\regist-by-qq.png)
+![](DocumentImage\regist-by-qq.png)
 

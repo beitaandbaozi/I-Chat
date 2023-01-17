@@ -12,7 +12,7 @@
 
 ##### 登录
 
-![](F:\前端知识点补充\基于vue3的uniapp聊天应用\DocumentImage\login.png)
+![](.\DocumentImage\login.png)
 
 ##### 注册
 

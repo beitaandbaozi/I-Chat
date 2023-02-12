@@ -10,7 +10,8 @@
 						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="widthFix"
+							:data-index="item.Content" @tap="handleImgPreview">
 						</image>
 						<!-- 视频内容 -->
 						<video v-show="item.Type == 2" id="myvideo" class="video-content" :src="item.Content"
@@ -34,7 +35,8 @@
 						<view v-show="item.Type === 0" class="text-content" v-html="item.Content">
 						</view>
 						<!-- 图片内容 -->
-						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="heightFix">
+						<image v-show="item.Type === 1" class="img-content" :src="item.Content" mode="widthFix"
+							:data-index="item.Content" @tap="handleImgPreview">
 						</image>
 						<!-- 视频内容 -->
 						<video v-show="item.Type == 2" id="myvideo" class="video-content" :src="item.Content"
@@ -113,7 +115,8 @@
 		APIURL
 	} from '@/script/config.js'
 	import {
-		tipMesg
+		tipMesg,
+		imgPreview
 	} from '@/script/common.js'
 
 	import WCompress from '@/components/common/w-compress.vue'
@@ -522,6 +525,29 @@
 			direction: 90
 		}); //direction: 90  控制全屏的时候视屏旋转多少度 
 		_this.videoContext.play();
+	}
+	// 点击图片，图片预览
+	const handleImgPreview = (e) => {
+		// 当前图片的索引
+		let currentIndex = 0;
+		let imgList = []
+		// 筛选出当前聊天记录的所有图片
+		const imgConversion = conversitionList.value.filter((item, index) => item.Type === 1)
+		for (let i = 0; i < imgConversion.length; i++) {
+			imgList.push(imgConversion[i].Content)
+		}
+		// 获取当前点击的那张图片的index值
+		for (let i = 0; i < imgList.length; i++) {
+			if (imgList[i] === e.currentTarget.dataset.index) {
+				currentIndex = i;
+				break;
+			}
+		}
+		// 预览操作
+		uni.previewImage({
+			current: currentIndex,
+			urls: imgList
+		})
 	}
 </script>
 

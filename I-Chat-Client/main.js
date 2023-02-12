@@ -1,6 +1,9 @@
 import App from './App'
 import store from './store'
 
+// 引入样式(主题)
+// import './static/theme/variables.less'
+
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false

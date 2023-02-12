@@ -70,6 +70,9 @@
 	},
 	"vueVersion": "3",
 	"h5": {
+		// 主题颜色设置
+		"darkmode" : true,
+		"themeLocation" : "theme.json",
 		"devServer": {
 			"port": 8080,
 			"https": false,

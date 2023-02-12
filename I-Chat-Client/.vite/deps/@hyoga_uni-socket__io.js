@@ -1,46 +1,20 @@
-var __defProp = Object.defineProperty;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
-};
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 
-// <define:process.env.UNI_STAT_TITLE_JSON>
-var init_define_process_env_UNI_STAT_TITLE_JSON = __esm({
-  "<define:process.env.UNI_STAT_TITLE_JSON>"() {
-  }
-});
-
 // F:/前端知识点补充/基于vue3的uniapp聊天应用/I-Chat-Client/node_modules/@hyoga/uni-socket.io/dist/uni-socket.io.js
 var require_uni_socket_io = __commonJS({
   "F:/\u524D\u7AEF\u77E5\u8BC6\u70B9\u8865\u5145/\u57FA\u4E8Evue3\u7684uniapp\u804A\u5929\u5E94\u7528/I-Chat-Client/node_modules/@hyoga/uni-socket.io/dist/uni-socket.io.js"(exports, module) {
-    init_define_process_env_UNI_STAT_TITLE_JSON();
     !function(t, e) {
-      if (typeof exports == "object" && typeof module == "object")
+      if ("object" == typeof exports && "object" == typeof module)
         module.exports = e();
-      else if (typeof define == "function" && define.amd)
+      else if ("function" == typeof define && define.amd)
         define([], e);
       else {
         var n = e();
         for (var r in n)
-          (typeof exports == "object" ? exports : t)[r] = n[r];
+          ("object" == typeof exports ? exports : t)[r] = n[r];
       }
     }(window, function() {
       return function(t) {
@@ -54,14 +28,14 @@ var require_uni_socket_io = __commonJS({
         return n.m = t, n.c = e, n.d = function(t2, e2, r) {
           n.o(t2, e2) || Object.defineProperty(t2, e2, { enumerable: true, get: r });
         }, n.r = function(t2) {
-          typeof Symbol != "undefined" && Symbol.toStringTag && Object.defineProperty(t2, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(t2, "__esModule", { value: true });
+          "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t2, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(t2, "__esModule", { value: true });
         }, n.t = function(t2, e2) {
           if (1 & e2 && (t2 = n(t2)), 8 & e2)
             return t2;
-          if (4 & e2 && typeof t2 == "object" && t2 && t2.__esModule)
+          if (4 & e2 && "object" == typeof t2 && t2 && t2.__esModule)
             return t2;
           var r = /* @__PURE__ */ Object.create(null);
-          if (n.r(r), Object.defineProperty(r, "default", { enumerable: true, value: t2 }), 2 & e2 && typeof t2 != "string")
+          if (n.r(r), Object.defineProperty(r, "default", { enumerable: true, value: t2 }), 2 & e2 && "string" != typeof t2)
             for (var o in t2)
               n.d(r, o, function(e3) {
                 return t2[e3];
@@ -99,19 +73,19 @@ var require_uni_socket_io = __commonJS({
           }
           return n2.fn = e2, this.on(t2, n2), this;
         }, r.prototype.off = r.prototype.removeListener = r.prototype.removeAllListeners = r.prototype.removeEventListener = function(t2, e2) {
-          if (this._callbacks = this._callbacks || {}, arguments.length == 0)
+          if (this._callbacks = this._callbacks || {}, 0 == arguments.length)
             return this._callbacks = {}, this;
           var n2, r2 = this._callbacks["$" + t2];
           if (!r2)
             return this;
-          if (arguments.length == 1)
+          if (1 == arguments.length)
             return delete this._callbacks["$" + t2], this;
           for (var o = 0; o < r2.length; o++)
             if ((n2 = r2[o]) === e2 || n2.fn === e2) {
               r2.splice(o, 1);
               break;
             }
-          return r2.length === 0 && delete this._callbacks["$" + t2], this;
+          return 0 === r2.length && delete this._callbacks["$" + t2], this;
         }, r.prototype.emit = function(t2) {
           this._callbacks = this._callbacks || {};
           for (var e2 = new Array(arguments.length - 1), n2 = this._callbacks["$" + t2], r2 = 1; r2 < arguments.length; r2++)
@@ -141,13 +115,13 @@ var require_uni_socket_io = __commonJS({
           const n2 = t2.split(s), r2 = [];
           for (let t3 = 0; t3 < n2.length; t3++) {
             const s2 = o(n2[t3], e2);
-            if (r2.push(s2), s2.type === "error")
+            if (r2.push(s2), "error" === s2.type)
               break;
           }
           return r2;
         } };
       }, function(t, e) {
-        t.exports = typeof self != "undefined" ? self : typeof window != "undefined" ? window : Function("return this")();
+        t.exports = "undefined" != typeof self ? self : "undefined" != typeof window ? window : Function("return this")();
       }, function(t, e, n) {
         const r = n(2), o = n(1), s = n(0)("engine.io-client:transport");
         t.exports = class extends o {
@@ -159,13 +133,13 @@ var require_uni_socket_io = __commonJS({
             return n2.type = "TransportError", n2.description = e2, this.emit("error", n2), this;
           }
           open() {
-            return this.readyState !== "closed" && this.readyState !== "" || (this.readyState = "opening", this.doOpen()), this;
+            return "closed" !== this.readyState && "" !== this.readyState || (this.readyState = "opening", this.doOpen()), this;
           }
           close() {
-            return this.readyState !== "opening" && this.readyState !== "open" || (this.doClose(), this.onClose()), this;
+            return "opening" !== this.readyState && "open" !== this.readyState || (this.doClose(), this.onClose()), this;
           }
           send(t2) {
-            this.readyState === "open" ? this.write(t2) : s("transport is not open, discarding packets");
+            "open" === this.readyState ? this.write(t2) : s("transport is not open, discarding packets");
           }
           onOpen() {
             this.readyState = "open", this.writable = true, this.emit("open");
@@ -208,7 +182,7 @@ var require_uni_socket_io = __commonJS({
           }
           encodeAsString(t2) {
             let e2 = "" + t2.type;
-            return t2.type !== a.BINARY_EVENT && t2.type !== a.BINARY_ACK || (e2 += t2.attachments + "-"), t2.nsp && t2.nsp !== "/" && (e2 += t2.nsp + ","), t2.id != null && (e2 += t2.id), t2.data != null && (e2 += JSON.stringify(t2.data)), i("encoded %j as %s", t2, e2), e2;
+            return t2.type !== a.BINARY_EVENT && t2.type !== a.BINARY_ACK || (e2 += t2.attachments + "-"), t2.nsp && "/" !== t2.nsp && (e2 += t2.nsp + ","), null != t2.id && (e2 += t2.id), null != t2.data && (e2 += JSON.stringify(t2.data)), i("encoded %j as %s", t2, e2), e2;
           }
           encodeAsBinary(t2) {
             const e2 = o.deconstructPacket(t2), n2 = this.encodeAsString(e2.packet), r2 = e2.buffers;
@@ -221,8 +195,8 @@ var require_uni_socket_io = __commonJS({
           }
           add(t2) {
             let e2;
-            if (typeof t2 == "string")
-              e2 = this.decodeString(t2), e2.type === a.BINARY_EVENT || e2.type === a.BINARY_ACK ? (this.reconstructor = new h(e2), e2.attachments === 0 && super.emit("decoded", e2)) : super.emit("decoded", e2);
+            if ("string" == typeof t2)
+              e2 = this.decodeString(t2), e2.type === a.BINARY_EVENT || e2.type === a.BINARY_ACK ? (this.reconstructor = new h(e2), 0 === e2.attachments && super.emit("decoded", e2)) : super.emit("decoded", e2);
             else {
               if (!s.isBinary(t2) && !t2.base64)
                 throw new Error("Unknown type: " + t2);
@@ -234,21 +208,21 @@ var require_uni_socket_io = __commonJS({
           decodeString(t2) {
             let e2 = 0;
             const n2 = { type: Number(t2.charAt(0)) };
-            if (a[n2.type] === void 0)
+            if (void 0 === a[n2.type])
               throw new Error("unknown packet type " + n2.type);
             if (n2.type === a.BINARY_EVENT || n2.type === a.BINARY_ACK) {
               const r3 = e2 + 1;
-              for (; t2.charAt(++e2) !== "-" && e2 != t2.length; )
+              for (; "-" !== t2.charAt(++e2) && e2 != t2.length; )
                 ;
               const o2 = t2.substring(r3, e2);
-              if (o2 != Number(o2) || t2.charAt(e2) !== "-")
+              if (o2 != Number(o2) || "-" !== t2.charAt(e2))
                 throw new Error("Illegal attachments");
               n2.attachments = Number(o2);
             }
-            if (t2.charAt(e2 + 1) === "/") {
+            if ("/" === t2.charAt(e2 + 1)) {
               const r3 = e2 + 1;
               for (; ++e2; ) {
-                if (t2.charAt(e2) === ",")
+                if ("," === t2.charAt(e2))
                   break;
                 if (e2 === t2.length)
                   break;
@@ -257,11 +231,11 @@ var require_uni_socket_io = __commonJS({
             } else
               n2.nsp = "/";
             const r2 = t2.charAt(e2 + 1);
-            if (r2 !== "" && Number(r2) == r2) {
+            if ("" !== r2 && Number(r2) == r2) {
               const r3 = e2 + 1;
               for (; ++e2; ) {
                 const n3 = t2.charAt(e2);
-                if (n3 == null || Number(n3) != n3) {
+                if (null == n3 || Number(n3) != n3) {
                   --e2;
                   break;
                 }
@@ -287,14 +261,14 @@ var require_uni_socket_io = __commonJS({
           static isPayloadValid(t2, e2) {
             switch (t2) {
               case a.CONNECT:
-                return typeof e2 == "object";
+                return "object" == typeof e2;
               case a.DISCONNECT:
-                return e2 === void 0;
+                return void 0 === e2;
               case a.CONNECT_ERROR:
-                return typeof e2 == "string" || typeof e2 == "object";
+                return "string" == typeof e2 || "object" == typeof e2;
               case a.EVENT:
               case a.BINARY_EVENT:
-                return Array.isArray(e2) && typeof e2[0] == "string";
+                return Array.isArray(e2) && "string" == typeof e2[0];
               case a.ACK:
               case a.BINARY_ACK:
                 return Array.isArray(e2);
@@ -324,13 +298,13 @@ var require_uni_socket_io = __commonJS({
         var n = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/, r = ["source", "protocol", "authority", "userInfo", "user", "password", "host", "port", "relative", "path", "directory", "file", "query", "anchor"];
         t.exports = function(t2) {
           var e2 = t2, o = t2.indexOf("["), s = t2.indexOf("]");
-          o != -1 && s != -1 && (t2 = t2.substring(0, o) + t2.substring(o, s).replace(/:/g, ";") + t2.substring(s, t2.length));
+          -1 != o && -1 != s && (t2 = t2.substring(0, o) + t2.substring(o, s).replace(/:/g, ";") + t2.substring(s, t2.length));
           for (var i, a, c = n.exec(t2 || ""), h = {}, u = 14; u--; )
             h[r[u]] = c[u] || "";
-          return o != -1 && s != -1 && (h.source = e2, h.host = h.host.substring(1, h.host.length - 1).replace(/;/g, ":"), h.authority = h.authority.replace("[", "").replace("]", "").replace(/;/g, ":"), h.ipv6uri = true), h.pathNames = function(t3, e3) {
+          return -1 != o && -1 != s && (h.source = e2, h.host = h.host.substring(1, h.host.length - 1).replace(/;/g, ":"), h.authority = h.authority.replace("[", "").replace("]", "").replace(/;/g, ":"), h.ipv6uri = true), h.pathNames = function(t3, e3) {
             var n2 = e3.replace(/\/{2,9}/g, "/").split("/");
-            e3.substr(0, 1) != "/" && e3.length !== 0 || n2.splice(0, 1);
-            e3.substr(e3.length - 1, 1) == "/" && n2.splice(n2.length - 1, 1);
+            "/" != e3.substr(0, 1) && 0 !== e3.length || n2.splice(0, 1);
+            "/" == e3.substr(e3.length - 1, 1) && n2.splice(n2.length - 1, 1);
             return n2;
           }(0, h.path), h.queryKey = (i = h.query, a = {}, i.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function(t3, e3, n2) {
             e3 && (a[e3] = n2);
@@ -342,33 +316,33 @@ var require_uni_socket_io = __commonJS({
         const r = n(21), o = n(15), s = n(1), i = n(6), a = n(17), c = n(39), h = n(0)("socket.io-client:manager");
         e.Manager = class extends s {
           constructor(t2, e2) {
-            super(), this.nsps = {}, this.subs = [], t2 && typeof t2 == "object" && (e2 = t2, t2 = void 0), (e2 = e2 || {}).path = e2.path || "/socket.io", this.opts = e2, this.reconnection(e2.reconnection !== false), this.reconnectionAttempts(e2.reconnectionAttempts || 1 / 0), this.reconnectionDelay(e2.reconnectionDelay || 1e3), this.reconnectionDelayMax(e2.reconnectionDelayMax || 5e3), this.randomizationFactor(e2.randomizationFactor || 0.5), this.backoff = new c({ min: this.reconnectionDelay(), max: this.reconnectionDelayMax(), jitter: this.randomizationFactor() }), this.timeout(e2.timeout == null ? 2e4 : e2.timeout), this._readyState = "closed", this.uri = t2;
+            super(), this.nsps = {}, this.subs = [], t2 && "object" == typeof t2 && (e2 = t2, t2 = void 0), (e2 = e2 || {}).path = e2.path || "/socket.io", this.opts = e2, this.reconnection(false !== e2.reconnection), this.reconnectionAttempts(e2.reconnectionAttempts || 1 / 0), this.reconnectionDelay(e2.reconnectionDelay || 1e3), this.reconnectionDelayMax(e2.reconnectionDelayMax || 5e3), this.randomizationFactor(e2.randomizationFactor || 0.5), this.backoff = new c({ min: this.reconnectionDelay(), max: this.reconnectionDelayMax(), jitter: this.randomizationFactor() }), this.timeout(null == e2.timeout ? 2e4 : e2.timeout), this._readyState = "closed", this.uri = t2;
             const n2 = e2.parser || i;
-            this.encoder = new n2.Encoder(), this.decoder = new n2.Decoder(), this._autoConnect = e2.autoConnect !== false, this._autoConnect && this.open();
+            this.encoder = new n2.Encoder(), this.decoder = new n2.Decoder(), this._autoConnect = false !== e2.autoConnect, this._autoConnect && this.open();
           }
           reconnection(t2) {
             return arguments.length ? (this._reconnection = !!t2, this) : this._reconnection;
           }
           reconnectionAttempts(t2) {
-            return t2 === void 0 ? this._reconnectionAttempts : (this._reconnectionAttempts = t2, this);
+            return void 0 === t2 ? this._reconnectionAttempts : (this._reconnectionAttempts = t2, this);
           }
           reconnectionDelay(t2) {
             var e2;
-            return t2 === void 0 ? this._reconnectionDelay : (this._reconnectionDelay = t2, (e2 = this.backoff) === null || e2 === void 0 || e2.setMin(t2), this);
+            return void 0 === t2 ? this._reconnectionDelay : (this._reconnectionDelay = t2, null === (e2 = this.backoff) || void 0 === e2 || e2.setMin(t2), this);
           }
           randomizationFactor(t2) {
             var e2;
-            return t2 === void 0 ? this._randomizationFactor : (this._randomizationFactor = t2, (e2 = this.backoff) === null || e2 === void 0 || e2.setJitter(t2), this);
+            return void 0 === t2 ? this._randomizationFactor : (this._randomizationFactor = t2, null === (e2 = this.backoff) || void 0 === e2 || e2.setJitter(t2), this);
           }
           reconnectionDelayMax(t2) {
             var e2;
-            return t2 === void 0 ? this._reconnectionDelayMax : (this._reconnectionDelayMax = t2, (e2 = this.backoff) === null || e2 === void 0 || e2.setMax(t2), this);
+            return void 0 === t2 ? this._reconnectionDelayMax : (this._reconnectionDelayMax = t2, null === (e2 = this.backoff) || void 0 === e2 || e2.setMax(t2), this);
           }
           timeout(t2) {
             return arguments.length ? (this._timeout = t2, this) : this._timeout;
           }
           maybeReconnectOnOpen() {
-            !this._reconnecting && this._reconnection && this.backoff.attempts === 0 && this.reconnect();
+            !this._reconnecting && this._reconnection && 0 === this.backoff.attempts && this.reconnect();
           }
           open(t2) {
             if (h("readyState %s", this._readyState), ~this._readyState.indexOf("open"))
@@ -381,9 +355,9 @@ var require_uni_socket_io = __commonJS({
             }), s2 = a.on(e2, "error", (e3) => {
               h("error"), n2.cleanup(), n2._readyState = "closed", super.emit("error", e3), t2 ? t2(e3) : n2.maybeReconnectOnOpen();
             });
-            if (this._timeout !== false) {
+            if (false !== this._timeout) {
               const t3 = this._timeout;
-              h("connect attempt will timeout after %d", t3), t3 === 0 && o2();
+              h("connect attempt will timeout after %d", t3), 0 === t3 && o2();
               const n3 = setTimeout(() => {
                 h("connect attempt timed out after %d", t3), o2(), e2.close(), e2.emit("error", new Error("timeout"));
               }, t3);
@@ -426,7 +400,7 @@ var require_uni_socket_io = __commonJS({
             this._close();
           }
           _packet(t2) {
-            h("writing packet %j", t2), t2.query && t2.type === 0 && (t2.nsp += "?" + t2.query);
+            h("writing packet %j", t2), t2.query && 0 === t2.type && (t2.nsp += "?" + t2.query);
             const e2 = this.encoder.encode(t2);
             for (let n2 = 0; n2 < e2.length; n2++)
               this.engine.write(e2[n2], t2.options);
@@ -435,7 +409,7 @@ var require_uni_socket_io = __commonJS({
             h("cleanup"), this.subs.forEach((t2) => t2()), this.subs.length = 0, this.decoder.destroy();
           }
           _close() {
-            h("disconnect"), this.skipReconnect = true, this._reconnecting = false, this._readyState === "opening" && this.cleanup(), this.backoff.reset(), this._readyState = "closed", this.engine && this.engine.close();
+            h("disconnect"), this.skipReconnect = true, this._reconnecting = false, "opening" === this._readyState && this.cleanup(), this.backoff.reset(), this._readyState = "closed", this.engine && this.engine.close();
           }
           disconnect() {
             return this._close();
@@ -471,9 +445,9 @@ var require_uni_socket_io = __commonJS({
         const r = n(10), o = n(24), s = n(28), i = n(29);
         e.polling = function(t2) {
           let e2, n2 = false, i2 = false;
-          const a = t2.jsonp !== false;
-          if (typeof location != "undefined") {
-            const e3 = location.protocol === "https:";
+          const a = false !== t2.jsonp;
+          if ("undefined" != typeof location) {
+            const e3 = "https:" === location.protocol;
             let r2 = location.port;
             r2 || (r2 = e3 ? 443 : 80), n2 = t2.hostname !== location.hostname || r2 !== t2.port, i2 = t2.secure !== e3;
           }
@@ -488,12 +462,12 @@ var require_uni_socket_io = __commonJS({
         t.exports = function(t2) {
           const e2 = t2.xdomain, n2 = t2.xscheme, s = t2.enablesXDR;
           try {
-            if (typeof XMLHttpRequest != "undefined" && (!e2 || r))
+            if ("undefined" != typeof XMLHttpRequest && (!e2 || r))
               return new XMLHttpRequest();
           } catch (t3) {
           }
           try {
-            if (typeof XDomainRequest != "undefined" && !n2 && s)
+            if ("undefined" != typeof XDomainRequest && !n2 && s)
               return new XDomainRequest();
           } catch (t3) {
           }
@@ -534,17 +508,17 @@ var require_uni_socket_io = __commonJS({
             const e2 = this;
             a("polling got data %s", t2);
             s.decodePayload(t2, this.socket.binaryType).forEach(function(t3, n2, r2) {
-              if (e2.readyState === "opening" && t3.type === "open" && e2.onOpen(), t3.type === "close")
+              if ("opening" === e2.readyState && "open" === t3.type && e2.onOpen(), "close" === t3.type)
                 return e2.onClose(), false;
               e2.onPacket(t3);
-            }), this.readyState !== "closed" && (this.polling = false, this.emit("pollComplete"), this.readyState === "open" ? this.poll() : a('ignoring poll - transport state "%s"', this.readyState));
+            }), "closed" !== this.readyState && (this.polling = false, this.emit("pollComplete"), "open" === this.readyState ? this.poll() : a('ignoring poll - transport state "%s"', this.readyState));
           }
           doClose() {
             const t2 = this;
             function e2() {
               a("writing close packet"), t2.write([{ type: "close" }]);
             }
-            this.readyState === "open" ? (a("transport open - closing"), e2()) : (a("transport not open - deferring close"), this.once("open", e2));
+            "open" === this.readyState ? (a("transport open - closing"), e2()) : (a("transport not open - deferring close"), this.once("open", e2));
           }
           write(t2) {
             this.writable = false, s.encodePayload(t2, (t3) => {
@@ -557,8 +531,8 @@ var require_uni_socket_io = __commonJS({
             let t2 = this.query || {};
             const e2 = this.opts.secure ? "https" : "http";
             let n2 = "";
-            this.opts.timestampRequests !== false && (t2[this.opts.timestampParam] = i()), this.supportsBinary || t2.sid || (t2.b64 = 1), t2 = o.encode(t2), this.opts.port && (e2 === "https" && Number(this.opts.port) !== 443 || e2 === "http" && Number(this.opts.port) !== 80) && (n2 = ":" + this.opts.port), t2.length && (t2 = "?" + t2);
-            return e2 + "://" + (this.opts.hostname.indexOf(":") !== -1 ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n2 + this.opts.path + t2;
+            false !== this.opts.timestampRequests && (t2[this.opts.timestampParam] = i()), this.supportsBinary || t2.sid || (t2.b64 = 1), t2 = o.encode(t2), this.opts.port && ("https" === e2 && 443 !== Number(this.opts.port) || "http" === e2 && 80 !== Number(this.opts.port)) && (n2 = ":" + this.opts.port), t2.length && (t2 = "?" + t2);
+            return e2 + "://" + (-1 !== this.opts.hostname.indexOf(":") ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n2 + this.opts.path + t2;
           }
         };
       }, function(t, e) {
@@ -611,7 +585,7 @@ var require_uni_socket_io = __commonJS({
             return !!this.subs;
           }
           connect() {
-            return this.connected || (this.subEvents(), this.io._reconnecting || this.io.open(), this.io._readyState === "open" && this.onopen()), this;
+            return this.connected || (this.subEvents(), this.io._reconnecting || this.io.open(), "open" === this.io._readyState && this.onopen()), this;
           }
           open() {
             return this.connect();
@@ -624,7 +598,7 @@ var require_uni_socket_io = __commonJS({
               throw new Error('"' + t2 + '" is a reserved event name');
             e2.unshift(t2);
             const n2 = { type: r.PacketType.EVENT, data: e2, options: {} };
-            n2.options.compress = this.flags.compress !== false, typeof e2[e2.length - 1] == "function" && (i("emitting packet with ack id %d", this.ids), this.acks[this.ids] = e2.pop(), n2.id = this.ids++);
+            n2.options.compress = false !== this.flags.compress, "function" == typeof e2[e2.length - 1] && (i("emitting packet with ack id %d", this.ids), this.acks[this.ids] = e2.pop(), n2.id = this.ids++);
             const o2 = this.io.engine && this.io.engine.transport && this.io.engine.transport.writable;
             return this.flags.volatile && (!o2 || !this.connected) ? i("discard packet as the transport is not currently writable") : this.connected ? this.packet(n2) : this.sendBuffer.push(n2), this.flags = {}, this;
           }
@@ -632,7 +606,7 @@ var require_uni_socket_io = __commonJS({
             t2.nsp = this.nsp, this.io._packet(t2);
           }
           onopen() {
-            i("transport is open - connecting"), typeof this.auth == "function" ? this.auth((t2) => {
+            i("transport is open - connecting"), "function" == typeof this.auth ? this.auth((t2) => {
               this.packet({ type: r.PacketType.CONNECT, data: t2 });
             }) : this.packet({ type: r.PacketType.CONNECT, data: this.auth });
           }
@@ -670,7 +644,7 @@ var require_uni_socket_io = __commonJS({
           }
           onevent(t2) {
             const e2 = t2.data || [];
-            i("emitting event %j", e2), t2.id != null && (i("attaching ack callback to event"), e2.push(this.ack(t2.id))), this.connected ? this.emitEvent(e2) : this.receiveBuffer.push(Object.freeze(e2));
+            i("emitting event %j", e2), null != t2.id && (i("attaching ack callback to event"), e2.push(this.ack(t2.id))), this.connected ? this.emitEvent(e2) : this.receiveBuffer.push(Object.freeze(e2));
           }
           emitEvent(t2) {
             if (this._anyListeners && this._anyListeners.length) {
@@ -689,7 +663,7 @@ var require_uni_socket_io = __commonJS({
           }
           onack(t2) {
             const e2 = this.acks[t2.id];
-            typeof e2 == "function" ? (i("calling ack %s with %j", t2.id, t2.data), e2.apply(this, t2.data), delete this.acks[t2.id]) : i("bad ack %s", t2.id);
+            "function" == typeof e2 ? (i("calling ack %s with %j", t2.id, t2.data), e2.apply(this, t2.data), delete this.acks[t2.id]) : i("bad ack %s", t2.id);
           }
           onconnect(t2) {
             i("socket connected with id %s", t2), this.id = t2, this.connected = true, this.disconnected = false, super.emit("connect"), this.emitBuffered();
@@ -740,12 +714,12 @@ var require_uni_socket_io = __commonJS({
       }, function(t, e, n) {
         "use strict";
         Object.defineProperty(e, "__esModule", { value: true }), e.hasBinary = e.isBinary = void 0;
-        const r = typeof ArrayBuffer == "function", o = Object.prototype.toString, s = typeof Blob == "function" || typeof Blob != "undefined" && o.call(Blob) === "[object BlobConstructor]", i = typeof File == "function" || typeof File != "undefined" && o.call(File) === "[object FileConstructor]";
+        const r = "function" == typeof ArrayBuffer, o = Object.prototype.toString, s = "function" == typeof Blob || "undefined" != typeof Blob && "[object BlobConstructor]" === o.call(Blob), i = "function" == typeof File || "undefined" != typeof File && "[object FileConstructor]" === o.call(File);
         function a(t2) {
-          return r && (t2 instanceof ArrayBuffer || ((t3) => typeof ArrayBuffer.isView == "function" ? ArrayBuffer.isView(t3) : t3.buffer instanceof ArrayBuffer)(t2)) || s && t2 instanceof Blob || i && t2 instanceof File;
+          return r && (t2 instanceof ArrayBuffer || ((t3) => "function" == typeof ArrayBuffer.isView ? ArrayBuffer.isView(t3) : t3.buffer instanceof ArrayBuffer)(t2)) || s && t2 instanceof Blob || i && t2 instanceof File;
         }
         e.isBinary = a, e.hasBinary = function t2(e2, n2) {
-          if (!e2 || typeof e2 != "object")
+          if (!e2 || "object" != typeof e2)
             return false;
           if (Array.isArray(e2)) {
             for (let n3 = 0, r2 = e2.length; n3 < r2; n3++)
@@ -755,7 +729,7 @@ var require_uni_socket_io = __commonJS({
           }
           if (a(e2))
             return true;
-          if (e2.toJSON && typeof e2.toJSON == "function" && arguments.length === 1)
+          if (e2.toJSON && "function" == typeof e2.toJSON && 1 === arguments.length)
             return t2(e2.toJSON(), true);
           for (const n3 in e2)
             if (Object.prototype.hasOwnProperty.call(e2, n3) && t2(e2[n3]))
@@ -782,10 +756,10 @@ var require_uni_socket_io = __commonJS({
         t.exports = e = c;
         const a = e.managers = {};
         function c(t2, e2) {
-          typeof t2 == "object" && (e2 = t2, t2 = void 0), e2 = e2 || {};
+          "object" == typeof t2 && (e2 = t2, t2 = void 0), e2 = e2 || {};
           const n2 = r.url(t2), s2 = n2.source, c2 = n2.id, h2 = n2.path, u2 = a[c2] && h2 in a[c2].nsps;
           let p;
-          return e2.forceNew || e2["force new connection"] || e2.multiplex === false || u2 ? (i("ignoring socket cache for %s", s2), p = new o.Manager(s2, e2)) : (a[c2] || (i("new io instance for %s", s2), a[c2] = new o.Manager(s2, e2)), p = a[c2]), n2.query && !e2.query && (e2.query = n2.query), p.socket(n2.path, e2);
+          return e2.forceNew || e2["force new connection"] || false === e2.multiplex || u2 ? (i("ignoring socket cache for %s", s2), p = new o.Manager(s2, e2)) : (a[c2] || (i("new io instance for %s", s2), a[c2] = new o.Manager(s2, e2)), p = a[c2]), n2.query && !e2.query && (e2.query = n2.query), p.socket(n2.path, e2);
         }
         e.io = c;
         var h = n(6);
@@ -802,8 +776,8 @@ var require_uni_socket_io = __commonJS({
         const r = n(7), o = n(0)("socket.io-client:url");
         e.url = function(t2, e2) {
           let n2 = t2;
-          e2 = e2 || typeof location != "undefined" && location, t2 == null && (t2 = e2.protocol + "//" + e2.host), typeof t2 == "string" && (t2.charAt(0) === "/" && (t2 = t2.charAt(1) === "/" ? e2.protocol + t2 : e2.host + t2), /^(https?|wss?):\/\//.test(t2) || (o("protocol-less url %s", t2), t2 = e2 !== void 0 ? e2.protocol + "//" + t2 : "https://" + t2), o("parse %s", t2), n2 = r(t2)), n2.port || (/^(http|ws)$/.test(n2.protocol) ? n2.port = "80" : /^(http|ws)s$/.test(n2.protocol) && (n2.port = "443")), n2.path = n2.path || "/";
-          const s = n2.host.indexOf(":") !== -1 ? "[" + n2.host + "]" : n2.host;
+          e2 = e2 || "undefined" != typeof location && location, null == t2 && (t2 = e2.protocol + "//" + e2.host), "string" == typeof t2 && ("/" === t2.charAt(0) && (t2 = "/" === t2.charAt(1) ? e2.protocol + t2 : e2.host + t2), /^(https?|wss?):\/\//.test(t2) || (o("protocol-less url %s", t2), t2 = void 0 !== e2 ? e2.protocol + "//" + t2 : "https://" + t2), o("parse %s", t2), n2 = r(t2)), n2.port || (/^(http|ws)$/.test(n2.protocol) ? n2.port = "80" : /^(http|ws)s$/.test(n2.protocol) && (n2.port = "443")), n2.path = n2.path || "/";
+          const s = -1 !== n2.host.indexOf(":") ? "[" + n2.host + "]" : n2.host;
           return n2.id = n2.protocol + "://" + s + ":" + n2.port, n2.href = n2.protocol + "://" + s + (e2 && e2.port === n2.port ? "" : ":" + n2.port), n2;
         };
       }, function(t, e, n) {
@@ -813,9 +787,9 @@ var require_uni_socket_io = __commonJS({
         const r = n(9), o = n(1), s = n(0)("engine.io-client:socket"), i = n(2), a = n(7), c = n(5);
         class h extends o {
           constructor(t2, e2 = {}) {
-            super(), t2 && typeof t2 == "object" && (e2 = t2, t2 = null), t2 ? (t2 = a(t2), e2.hostname = t2.host, e2.secure = t2.protocol === "https" || t2.protocol === "wss", e2.port = t2.port, t2.query && (e2.query = t2.query)) : e2.host && (e2.hostname = a(e2.host).host), this.secure = e2.secure != null ? e2.secure : typeof location != "undefined" && location.protocol === "https:", e2.hostname && !e2.port && (e2.port = this.secure ? "443" : "80"), this.hostname = e2.hostname || (typeof location != "undefined" ? location.hostname : "localhost"), this.port = e2.port || (typeof location != "undefined" && location.port ? location.port : this.secure ? 443 : 80), this.transports = e2.transports || ["polling", "websocket"], this.readyState = "", this.writeBuffer = [], this.prevBufferLen = 0, this.opts = Object.assign({ path: "/engine.io", agent: false, withCredentials: false, upgrade: true, jsonp: true, timestampParam: "t", rememberUpgrade: false, rejectUnauthorized: true, perMessageDeflate: { threshold: 1024 }, transportOptions: {} }, e2), this.opts.path = this.opts.path.replace(/\/$/, "") + "/", typeof this.opts.query == "string" && (this.opts.query = c.decode(this.opts.query)), this.id = null, this.upgrades = null, this.pingInterval = null, this.pingTimeout = null, this.pingTimeoutTimer = null, typeof addEventListener == "function" && (addEventListener("beforeunload", () => {
+            super(), t2 && "object" == typeof t2 && (e2 = t2, t2 = null), t2 ? (t2 = a(t2), e2.hostname = t2.host, e2.secure = "https" === t2.protocol || "wss" === t2.protocol, e2.port = t2.port, t2.query && (e2.query = t2.query)) : e2.host && (e2.hostname = a(e2.host).host), this.secure = null != e2.secure ? e2.secure : "undefined" != typeof location && "https:" === location.protocol, e2.hostname && !e2.port && (e2.port = this.secure ? "443" : "80"), this.hostname = e2.hostname || ("undefined" != typeof location ? location.hostname : "localhost"), this.port = e2.port || ("undefined" != typeof location && location.port ? location.port : this.secure ? 443 : 80), this.transports = e2.transports || ["polling", "websocket"], this.readyState = "", this.writeBuffer = [], this.prevBufferLen = 0, this.opts = Object.assign({ path: "/engine.io", agent: false, withCredentials: false, upgrade: true, jsonp: true, timestampParam: "t", rememberUpgrade: false, rejectUnauthorized: true, perMessageDeflate: { threshold: 1024 }, transportOptions: {} }, e2), this.opts.path = this.opts.path.replace(/\/$/, "") + "/", "string" == typeof this.opts.query && (this.opts.query = c.decode(this.opts.query)), this.id = null, this.upgrades = null, this.pingInterval = null, this.pingTimeout = null, this.pingTimeoutTimer = null, "function" == typeof addEventListener && (addEventListener("beforeunload", () => {
               this.transport && (this.transport.removeAllListeners(), this.transport.close());
-            }, false), this.hostname !== "localhost" && (this.offlineEventListener = () => {
+            }, false), "localhost" !== this.hostname && (this.offlineEventListener = () => {
               this.onClose("transport close");
             }, addEventListener("offline", this.offlineEventListener, false))), this.open();
           }
@@ -833,10 +807,10 @@ var require_uni_socket_io = __commonJS({
           }
           open() {
             let t2;
-            if (this.opts.rememberUpgrade && h.priorWebsocketSuccess && this.transports.indexOf("websocket") !== -1)
+            if (this.opts.rememberUpgrade && h.priorWebsocketSuccess && -1 !== this.transports.indexOf("websocket"))
               t2 = "websocket";
             else {
-              if (this.transports.length === 0) {
+              if (0 === this.transports.length) {
                 const t3 = this;
                 return void setTimeout(function() {
                   t3.emit("error", "No transports available");
@@ -876,11 +850,11 @@ var require_uni_socket_io = __commonJS({
               }
               n2 || (s('probe transport "%s" opened', t2), e2.send([{ type: "ping", data: "probe" }]), e2.once("packet", function(o3) {
                 if (!n2)
-                  if (o3.type === "pong" && o3.data === "probe") {
+                  if ("pong" === o3.type && "probe" === o3.data) {
                     if (s('probe transport "%s" pong', t2), r2.upgrading = true, r2.emit("upgrading", e2), !e2)
                       return;
-                    h.priorWebsocketSuccess = e2.name === "websocket", s('pausing current transport "%s"', r2.transport.name), r2.transport.pause(function() {
-                      n2 || r2.readyState !== "closed" && (s("changing transport and sending upgrade packet"), f(), r2.setTransport(e2), e2.send([{ type: "upgrade" }]), r2.emit("upgrade", e2), e2 = null, r2.upgrading = false, r2.flush());
+                    h.priorWebsocketSuccess = "websocket" === e2.name, s('pausing current transport "%s"', r2.transport.name), r2.transport.pause(function() {
+                      n2 || "closed" !== r2.readyState && (s("changing transport and sending upgrade packet"), f(), r2.setTransport(e2), e2.send([{ type: "upgrade" }]), r2.emit("upgrade", e2), e2 = null, r2.upgrading = false, r2.flush());
                     });
                   } else {
                     s('probe transport "%s" failed', t2);
@@ -911,7 +885,7 @@ var require_uni_socket_io = __commonJS({
             h.priorWebsocketSuccess = false, e2.once("open", o2), e2.once("error", a2), e2.once("close", c2), this.once("close", u), this.once("upgrading", p), e2.open();
           }
           onOpen() {
-            if (s("socket open"), this.readyState = "open", h.priorWebsocketSuccess = this.transport.name === "websocket", this.emit("open"), this.flush(), this.readyState === "open" && this.opts.upgrade && this.transport.pause) {
+            if (s("socket open"), this.readyState = "open", h.priorWebsocketSuccess = "websocket" === this.transport.name, this.emit("open"), this.flush(), "open" === this.readyState && this.opts.upgrade && this.transport.pause) {
               s("starting upgrade probes");
               let t2 = 0;
               const e2 = this.upgrades.length;
@@ -920,7 +894,7 @@ var require_uni_socket_io = __commonJS({
             }
           }
           onPacket(t2) {
-            if (this.readyState === "opening" || this.readyState === "open" || this.readyState === "closing")
+            if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState)
               switch (s('socket receive: type "%s", data "%s"', t2.type, t2.data), this.emit("packet", t2), this.emit("heartbeat"), t2.type) {
                 case "open":
                   this.onHandshake(JSON.parse(t2.data));
@@ -939,7 +913,7 @@ var require_uni_socket_io = __commonJS({
               s('packet received with socket readyState "%s"', this.readyState);
           }
           onHandshake(t2) {
-            this.emit("handshake", t2), this.id = t2.sid, this.transport.query.sid = t2.sid, this.upgrades = this.filterUpgrades(t2.upgrades), this.pingInterval = t2.pingInterval, this.pingTimeout = t2.pingTimeout, this.onOpen(), this.readyState !== "closed" && this.resetPingTimeout();
+            this.emit("handshake", t2), this.id = t2.sid, this.transport.query.sid = t2.sid, this.upgrades = this.filterUpgrades(t2.upgrades), this.pingInterval = t2.pingInterval, this.pingTimeout = t2.pingTimeout, this.onOpen(), "closed" !== this.readyState && this.resetPingTimeout();
           }
           resetPingTimeout() {
             clearTimeout(this.pingTimeoutTimer), this.pingTimeoutTimer = setTimeout(() => {
@@ -947,10 +921,10 @@ var require_uni_socket_io = __commonJS({
             }, this.pingInterval + this.pingTimeout), this.opts.autoUnref && this.pingTimeoutTimer.unref();
           }
           onDrain() {
-            this.writeBuffer.splice(0, this.prevBufferLen), this.prevBufferLen = 0, this.writeBuffer.length === 0 ? this.emit("drain") : this.flush();
+            this.writeBuffer.splice(0, this.prevBufferLen), this.prevBufferLen = 0, 0 === this.writeBuffer.length ? this.emit("drain") : this.flush();
           }
           flush() {
-            this.readyState !== "closed" && this.transport.writable && !this.upgrading && this.writeBuffer.length && (s("flushing %d packets in socket", this.writeBuffer.length), this.transport.send(this.writeBuffer), this.prevBufferLen = this.writeBuffer.length, this.emit("flush"));
+            "closed" !== this.readyState && this.transport.writable && !this.upgrading && this.writeBuffer.length && (s("flushing %d packets in socket", this.writeBuffer.length), this.transport.send(this.writeBuffer), this.prevBufferLen = this.writeBuffer.length, this.emit("flush"));
           }
           write(t2, e2, n2) {
             return this.sendPacket("message", t2, e2, n2), this;
@@ -959,9 +933,9 @@ var require_uni_socket_io = __commonJS({
             return this.sendPacket("message", t2, e2, n2), this;
           }
           sendPacket(t2, e2, n2, r2) {
-            if (typeof e2 == "function" && (r2 = e2, e2 = void 0), typeof n2 == "function" && (r2 = n2, n2 = null), this.readyState === "closing" || this.readyState === "closed")
+            if ("function" == typeof e2 && (r2 = e2, e2 = void 0), "function" == typeof n2 && (r2 = n2, n2 = null), "closing" === this.readyState || "closed" === this.readyState)
               return;
-            (n2 = n2 || {}).compress = n2.compress !== false;
+            (n2 = n2 || {}).compress = false !== n2.compress;
             const o2 = { type: t2, data: e2, options: n2 };
             this.emit("packetCreate", o2), this.writeBuffer.push(o2), r2 && this.once("flush", r2), this.flush();
           }
@@ -976,7 +950,7 @@ var require_uni_socket_io = __commonJS({
             function r2() {
               t2.once("upgrade", n2), t2.once("upgradeError", n2);
             }
-            return this.readyState !== "opening" && this.readyState !== "open" || (this.readyState = "closing", this.writeBuffer.length ? this.once("drain", function() {
+            return "opening" !== this.readyState && "open" !== this.readyState || (this.readyState = "closing", this.writeBuffer.length ? this.once("drain", function() {
               this.upgrading ? r2() : e2();
             }) : this.upgrading ? r2() : e2()), this;
           }
@@ -984,10 +958,10 @@ var require_uni_socket_io = __commonJS({
             s("socket error %j", t2), h.priorWebsocketSuccess = false, this.emit("error", t2), this.onClose("transport error", t2);
           }
           onClose(t2, e2) {
-            if (this.readyState === "opening" || this.readyState === "open" || this.readyState === "closing") {
+            if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState) {
               s('socket close with reason: "%s"', t2);
               const n2 = this;
-              clearTimeout(this.pingIntervalTimer), clearTimeout(this.pingTimeoutTimer), this.transport.removeAllListeners("close"), this.transport.close(), this.transport.removeAllListeners(), typeof removeEventListener == "function" && removeEventListener("offline", this.offlineEventListener, false), this.readyState = "closed", this.id = null, this.emit("close", t2, e2), n2.writeBuffer = [], n2.prevBufferLen = 0;
+              clearTimeout(this.pingIntervalTimer), clearTimeout(this.pingTimeoutTimer), this.transport.removeAllListeners("close"), this.transport.close(), this.transport.removeAllListeners(), "function" == typeof removeEventListener && removeEventListener("offline", this.offlineEventListener, false), this.readyState = "closed", this.id = null, this.emit("close", t2, e2), n2.writeBuffer = [], n2.prevBufferLen = 0;
             }
           }
           filterUpgrades(t2) {
@@ -1002,7 +976,7 @@ var require_uni_socket_io = __commonJS({
         h.priorWebsocketSuccess = false, h.protocol = i.protocol, t.exports = h;
       }, function(t, e) {
         try {
-          t.exports = typeof XMLHttpRequest != "undefined" && "withCredentials" in new XMLHttpRequest();
+          t.exports = "undefined" != typeof XMLHttpRequest && "withCredentials" in new XMLHttpRequest();
         } catch (e2) {
           t.exports = false;
         }
@@ -1010,10 +984,10 @@ var require_uni_socket_io = __commonJS({
         const r = n(10), o = n(11), s = n(1), { pick: i } = n(14), a = n(3), c = n(0)("engine.io-client:polling-xhr");
         function h() {
         }
-        const u = new r({ xdomain: false }).responseType != null;
+        const u = null != new r({ xdomain: false }).responseType;
         class p extends s {
           constructor(t2, e2) {
-            super(), this.opts = e2, this.method = e2.method || "GET", this.uri = t2, this.async = e2.async !== false, this.data = e2.data !== void 0 ? e2.data : null, this.create();
+            super(), this.opts = e2, this.method = e2.method || "GET", this.uri = t2, this.async = false !== e2.async, this.data = void 0 !== e2.data ? e2.data : null, this.create();
           }
           create() {
             const t2 = i(this.opts, "agent", "enablesXDR", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
@@ -1029,7 +1003,7 @@ var require_uni_socket_io = __commonJS({
                 }
               } catch (t3) {
               }
-              if (this.method === "POST")
+              if ("POST" === this.method)
                 try {
                   e2.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
                 } catch (t3) {
@@ -1043,8 +1017,8 @@ var require_uni_socket_io = __commonJS({
               }, e2.onerror = function() {
                 n2.onError(e2.responseText);
               }) : e2.onreadystatechange = function() {
-                e2.readyState === 4 && (e2.status === 200 || e2.status === 1223 ? n2.onLoad() : setTimeout(function() {
-                  n2.onError(typeof e2.status == "number" ? e2.status : 0);
+                4 === e2.readyState && (200 === e2.status || 1223 === e2.status ? n2.onLoad() : setTimeout(function() {
+                  n2.onError("number" == typeof e2.status ? e2.status : 0);
                 }, 0));
               }, c("xhr data %s", this.data), e2.send(this.data);
             } catch (t3) {
@@ -1052,7 +1026,7 @@ var require_uni_socket_io = __commonJS({
                 n2.onError(t3);
               }, 0);
             }
-            typeof document != "undefined" && (this.index = p.requestsCount++, p.requests[this.index] = this);
+            "undefined" != typeof document && (this.index = p.requestsCount++, p.requests[this.index] = this);
           }
           onSuccess() {
             this.emit("success"), this.cleanup();
@@ -1064,30 +1038,30 @@ var require_uni_socket_io = __commonJS({
             this.emit("error", t2), this.cleanup(true);
           }
           cleanup(t2) {
-            if (this.xhr !== void 0 && this.xhr !== null) {
+            if (void 0 !== this.xhr && null !== this.xhr) {
               if (this.hasXDR() ? this.xhr.onload = this.xhr.onerror = h : this.xhr.onreadystatechange = h, t2)
                 try {
                   this.xhr.abort();
                 } catch (t3) {
                 }
-              typeof document != "undefined" && delete p.requests[this.index], this.xhr = null;
+              "undefined" != typeof document && delete p.requests[this.index], this.xhr = null;
             }
           }
           onLoad() {
             const t2 = this.xhr.responseText;
-            t2 !== null && this.onData(t2);
+            null !== t2 && this.onData(t2);
           }
           hasXDR() {
-            return typeof XDomainRequest != "undefined" && !this.xs && this.enablesXDR;
+            return "undefined" != typeof XDomainRequest && !this.xs && this.enablesXDR;
           }
           abort() {
             this.cleanup();
           }
         }
-        if (p.requestsCount = 0, p.requests = {}, typeof document != "undefined") {
-          if (typeof attachEvent == "function")
+        if (p.requestsCount = 0, p.requests = {}, "undefined" != typeof document) {
+          if ("function" == typeof attachEvent)
             attachEvent("onunload", f);
-          else if (typeof addEventListener == "function") {
+          else if ("function" == typeof addEventListener) {
             addEventListener("onpagehide" in a ? "pagehide" : "unload", f, false);
           }
         }
@@ -1097,10 +1071,10 @@ var require_uni_socket_io = __commonJS({
         }
         t.exports = class extends o {
           constructor(t2) {
-            if (super(t2), typeof location != "undefined") {
-              const e3 = location.protocol === "https:";
+            if (super(t2), "undefined" != typeof location) {
+              const e3 = "https:" === location.protocol;
               let n2 = location.port;
-              n2 || (n2 = e3 ? 443 : 80), this.xd = typeof location != "undefined" && t2.hostname !== location.hostname || n2 !== t2.port, this.xs = t2.secure !== e3;
+              n2 || (n2 = e3 ? 443 : 80), this.xd = "undefined" != typeof location && t2.hostname !== location.hostname || n2 !== t2.port, this.xs = t2.secure !== e3;
             }
             const e2 = t2 && t2.forceBase64;
             this.supportsBinary = u && !e2;
@@ -1125,7 +1099,7 @@ var require_uni_socket_io = __commonJS({
           }
         }, t.exports.Request = p;
       }, function(t, e, n) {
-        const { PACKET_TYPES: r } = n(12), o = typeof Blob == "function" || typeof Blob != "undefined" && Object.prototype.toString.call(Blob) === "[object BlobConstructor]", s = typeof ArrayBuffer == "function", i = (t2, e2) => {
+        const { PACKET_TYPES: r } = n(12), o = "function" == typeof Blob || "undefined" != typeof Blob && "[object BlobConstructor]" === Object.prototype.toString.call(Blob), s = "function" == typeof ArrayBuffer, i = (t2, e2) => {
           const n2 = new FileReader();
           return n2.onload = function() {
             const t3 = n2.result.split(",")[1];
@@ -1133,13 +1107,13 @@ var require_uni_socket_io = __commonJS({
           }, n2.readAsDataURL(t2);
         };
         t.exports = ({ type: t2, data: e2 }, n2, a) => {
-          return o && e2 instanceof Blob ? n2 ? a(e2) : i(e2, a) : s && (e2 instanceof ArrayBuffer || (c = e2, typeof ArrayBuffer.isView == "function" ? ArrayBuffer.isView(c) : c && c.buffer instanceof ArrayBuffer)) ? n2 ? a(e2 instanceof ArrayBuffer ? e2 : e2.buffer) : i(new Blob([e2]), a) : a(r[t2] + (e2 || ""));
+          return o && e2 instanceof Blob ? n2 ? a(e2) : i(e2, a) : s && (e2 instanceof ArrayBuffer || (c = e2, "function" == typeof ArrayBuffer.isView ? ArrayBuffer.isView(c) : c && c.buffer instanceof ArrayBuffer)) ? n2 ? a(e2 instanceof ArrayBuffer ? e2 : e2.buffer) : i(new Blob([e2]), a) : a(r[t2] + (e2 || ""));
           var c;
         };
       }, function(t, e, n) {
         const { PACKET_TYPES_REVERSE: r, ERROR_PACKET: o } = n(12);
         let s;
-        typeof ArrayBuffer == "function" && (s = n(27));
+        "function" == typeof ArrayBuffer && (s = n(27));
         const i = (t2, e2) => {
           if (s) {
             const n2 = s.decode(t2);
@@ -1156,10 +1130,10 @@ var require_uni_socket_io = __commonJS({
           }
         };
         t.exports = (t2, e2) => {
-          if (typeof t2 != "string")
+          if ("string" != typeof t2)
             return { type: "message", data: a(t2, e2) };
           const n2 = t2.charAt(0);
-          if (n2 === "b")
+          if ("b" === n2)
             return { type: "message", data: i(t2.substring(1), e2) };
           return r[n2] ? t2.length > 1 ? { type: r[n2], data: t2.substring(1) } : { type: r[n2] } : o;
         };
@@ -1173,7 +1147,7 @@ var require_uni_socket_io = __commonJS({
             return o % 3 == 2 ? s = s.substring(0, s.length - 1) + "=" : o % 3 == 1 && (s = s.substring(0, s.length - 2) + "=="), s;
           }, e.decode = function(e2) {
             var n, r, o, s, i, a = 0.75 * e2.length, c = e2.length, h = 0;
-            e2[e2.length - 1] === "=" && (a--, e2[e2.length - 2] === "=" && a--);
+            "=" === e2[e2.length - 1] && (a--, "=" === e2[e2.length - 2] && a--);
             var u = new ArrayBuffer(a), p = new Uint8Array(u);
             for (n = 0; n < c; n += 4)
               r = t2.indexOf(e2[n]), o = t2.indexOf(e2[n + 1]), s = t2.indexOf(e2[n + 2]), i = t2.indexOf(e2[n + 3]), p[h++] = r << 2 | o >> 4, p[h++] = (15 & o) << 4 | s >> 2, p[h++] = (3 & s) << 6 | 63 & i;
@@ -1205,7 +1179,7 @@ var require_uni_socket_io = __commonJS({
             };
             const n2 = document.getElementsByTagName("script")[0];
             n2 ? n2.parentNode.insertBefore(e2, n2) : (document.head || document.body).appendChild(e2), this.script = e2;
-            typeof navigator != "undefined" && /gecko/i.test(navigator.userAgent) && setTimeout(function() {
+            "undefined" != typeof navigator && /gecko/i.test(navigator.userAgent) && setTimeout(function() {
               const t3 = document.createElement("iframe");
               document.body.appendChild(t3), document.body.removeChild(t3);
             }, 100);
@@ -1241,7 +1215,7 @@ var require_uni_socket_io = __commonJS({
             } catch (t3) {
             }
             this.iframe.attachEvent ? this.iframe.onreadystatechange = function() {
-              n2.iframe.readyState === "complete" && o2();
+              "complete" === n2.iframe.readyState && o2();
             } : this.iframe.onload = o2;
           }
         };
@@ -1249,8 +1223,8 @@ var require_uni_socket_io = __commonJS({
         (function(e2) {
           const r = n(2), o = n(5), s = n(13), i = n(4), { pick: a } = n(14), c = n(3), h = n(0)("engine.io-client:websocket");
           let u = c.WebSocket || c.MozWebSocket, p = true, f = "arraybuffer";
-          typeof window == "undefined" && (u = n(35), p = false, f = "nodebuffer");
-          const l = typeof navigator != "undefined" && typeof navigator.product == "string" && navigator.product.toLowerCase() === "reactnative";
+          "undefined" == typeof window && (u = n(35), p = false, f = "nodebuffer");
+          const l = "undefined" != typeof navigator && "string" == typeof navigator.product && "reactnative" === navigator.product.toLowerCase();
           class d extends i {
             constructor(t2) {
               super(t2), this.supportsBinary = !t2.forceBase64;
@@ -1285,7 +1259,7 @@ var require_uni_socket_io = __commonJS({
                   r.encodePacket(t3, n2.supportsBinary, function(r2) {
                     const s3 = {};
                     if (!p && (t3.options && (s3.compress = t3.options.compress), n2.opts.perMessageDeflate)) {
-                      (typeof r2 == "string" ? e2.byteLength(r2) : r2.length) < n2.opts.perMessageDeflate.threshold && (s3.compress = false);
+                      ("string" == typeof r2 ? e2.byteLength(r2) : r2.length) < n2.opts.perMessageDeflate.threshold && (s3.compress = false);
                     }
                     try {
                       p ? n2.ws.send(r2) : n2.ws.send(r2, s3);
@@ -1305,14 +1279,14 @@ var require_uni_socket_io = __commonJS({
               i.prototype.onClose.call(this);
             }
             doClose() {
-              this.ws !== void 0 && (this.ws.close(), this.ws = null);
+              void 0 !== this.ws && (this.ws.close(), this.ws = null);
             }
             uri() {
               let t2 = this.query || {};
               const e3 = this.opts.secure ? "wss" : "ws";
               let n2 = "";
-              this.opts.port && (e3 === "wss" && Number(this.opts.port) !== 443 || e3 === "ws" && Number(this.opts.port) !== 80) && (n2 = ":" + this.opts.port), this.opts.timestampRequests && (t2[this.opts.timestampParam] = s()), this.supportsBinary || (t2.b64 = 1), t2 = o.encode(t2), t2.length && (t2 = "?" + t2);
-              return e3 + "://" + (this.opts.hostname.indexOf(":") !== -1 ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n2 + this.opts.path + t2;
+              this.opts.port && ("wss" === e3 && 443 !== Number(this.opts.port) || "ws" === e3 && 80 !== Number(this.opts.port)) && (n2 = ":" + this.opts.port), this.opts.timestampRequests && (t2[this.opts.timestampParam] = s()), this.supportsBinary || (t2.b64 = 1), t2 = o.encode(t2), t2.length && (t2 = "?" + t2);
+              return e3 + "://" + (-1 !== this.opts.hostname.indexOf(":") ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n2 + this.opts.path + t2;
             }
             check() {
               return !(!u || "__initialize" in u && this.name === d.prototype.name);
@@ -1330,31 +1304,31 @@ var require_uni_socket_io = __commonJS({
           function a(t3, e2) {
             if (i() < e2)
               throw new RangeError("Invalid typed array length");
-            return c.TYPED_ARRAY_SUPPORT ? (t3 = new Uint8Array(e2)).__proto__ = c.prototype : (t3 === null && (t3 = new c(e2)), t3.length = e2), t3;
+            return c.TYPED_ARRAY_SUPPORT ? (t3 = new Uint8Array(e2)).__proto__ = c.prototype : (null === t3 && (t3 = new c(e2)), t3.length = e2), t3;
           }
           function c(t3, e2, n2) {
             if (!(c.TYPED_ARRAY_SUPPORT || this instanceof c))
               return new c(t3, e2, n2);
-            if (typeof t3 == "number") {
-              if (typeof e2 == "string")
+            if ("number" == typeof t3) {
+              if ("string" == typeof e2)
                 throw new Error("If encoding is specified then the first argument must be a string");
               return p(this, t3);
             }
             return h(this, t3, e2, n2);
           }
           function h(t3, e2, n2, r2) {
-            if (typeof e2 == "number")
+            if ("number" == typeof e2)
               throw new TypeError('"value" argument must not be a number');
-            return typeof ArrayBuffer != "undefined" && e2 instanceof ArrayBuffer ? function(t4, e3, n3, r3) {
+            return "undefined" != typeof ArrayBuffer && e2 instanceof ArrayBuffer ? function(t4, e3, n3, r3) {
               if (e3.byteLength, n3 < 0 || e3.byteLength < n3)
                 throw new RangeError("'offset' is out of bounds");
               if (e3.byteLength < n3 + (r3 || 0))
                 throw new RangeError("'length' is out of bounds");
-              e3 = n3 === void 0 && r3 === void 0 ? new Uint8Array(e3) : r3 === void 0 ? new Uint8Array(e3, n3) : new Uint8Array(e3, n3, r3);
+              e3 = void 0 === n3 && void 0 === r3 ? new Uint8Array(e3) : void 0 === r3 ? new Uint8Array(e3, n3) : new Uint8Array(e3, n3, r3);
               c.TYPED_ARRAY_SUPPORT ? (t4 = e3).__proto__ = c.prototype : t4 = f(t4, e3);
               return t4;
-            }(t3, e2, n2, r2) : typeof e2 == "string" ? function(t4, e3, n3) {
-              typeof n3 == "string" && n3 !== "" || (n3 = "utf8");
+            }(t3, e2, n2, r2) : "string" == typeof e2 ? function(t4, e3, n3) {
+              "string" == typeof n3 && "" !== n3 || (n3 = "utf8");
               if (!c.isEncoding(n3))
                 throw new TypeError('"encoding" must be a valid string encoding');
               var r3 = 0 | d(e3, n3), o2 = (t4 = a(t4, r3)).write(e3, n3);
@@ -1363,12 +1337,12 @@ var require_uni_socket_io = __commonJS({
             }(t3, e2, n2) : function(t4, e3) {
               if (c.isBuffer(e3)) {
                 var n3 = 0 | l(e3.length);
-                return (t4 = a(t4, n3)).length === 0 || e3.copy(t4, 0, 0, n3), t4;
+                return 0 === (t4 = a(t4, n3)).length || e3.copy(t4, 0, 0, n3), t4;
               }
               if (e3) {
-                if (typeof ArrayBuffer != "undefined" && e3.buffer instanceof ArrayBuffer || "length" in e3)
-                  return typeof e3.length != "number" || (r3 = e3.length) != r3 ? a(t4, 0) : f(t4, e3);
-                if (e3.type === "Buffer" && s(e3.data))
+                if ("undefined" != typeof ArrayBuffer && e3.buffer instanceof ArrayBuffer || "length" in e3)
+                  return "number" != typeof e3.length || (r3 = e3.length) != r3 ? a(t4, 0) : f(t4, e3);
+                if ("Buffer" === e3.type && s(e3.data))
                   return f(t4, e3.data);
               }
               var r3;
@@ -1376,7 +1350,7 @@ var require_uni_socket_io = __commonJS({
             }(t3, e2);
           }
           function u(t3) {
-            if (typeof t3 != "number")
+            if ("number" != typeof t3)
               throw new TypeError('"size" argument must be a number');
             if (t3 < 0)
               throw new RangeError('"size" argument must not be negative');
@@ -1402,11 +1376,11 @@ var require_uni_socket_io = __commonJS({
           function d(t3, e2) {
             if (c.isBuffer(t3))
               return t3.length;
-            if (typeof ArrayBuffer != "undefined" && typeof ArrayBuffer.isView == "function" && (ArrayBuffer.isView(t3) || t3 instanceof ArrayBuffer))
+            if ("undefined" != typeof ArrayBuffer && "function" == typeof ArrayBuffer.isView && (ArrayBuffer.isView(t3) || t3 instanceof ArrayBuffer))
               return t3.byteLength;
-            typeof t3 != "string" && (t3 = "" + t3);
+            "string" != typeof t3 && (t3 = "" + t3);
             var n2 = t3.length;
-            if (n2 === 0)
+            if (0 === n2)
               return 0;
             for (var r2 = false; ; )
               switch (e2) {
@@ -1435,9 +1409,9 @@ var require_uni_socket_io = __commonJS({
           }
           function y(t3, e2, n2) {
             var r2 = false;
-            if ((e2 === void 0 || e2 < 0) && (e2 = 0), e2 > this.length)
+            if ((void 0 === e2 || e2 < 0) && (e2 = 0), e2 > this.length)
               return "";
-            if ((n2 === void 0 || n2 > this.length) && (n2 = this.length), n2 <= 0)
+            if ((void 0 === n2 || n2 > this.length) && (n2 = this.length), n2 <= 0)
               return "";
             if ((n2 >>>= 0) <= (e2 >>>= 0))
               return "";
@@ -1471,9 +1445,9 @@ var require_uni_socket_io = __commonJS({
             t3[e2] = t3[n2], t3[n2] = r2;
           }
           function m(t3, e2, n2, r2, o2) {
-            if (t3.length === 0)
+            if (0 === t3.length)
               return -1;
-            if (typeof n2 == "string" ? (r2 = n2, n2 = 0) : n2 > 2147483647 ? n2 = 2147483647 : n2 < -2147483648 && (n2 = -2147483648), n2 = +n2, isNaN(n2) && (n2 = o2 ? 0 : t3.length - 1), n2 < 0 && (n2 = t3.length + n2), n2 >= t3.length) {
+            if ("string" == typeof n2 ? (r2 = n2, n2 = 0) : n2 > 2147483647 ? n2 = 2147483647 : n2 < -2147483648 && (n2 = -2147483648), n2 = +n2, isNaN(n2) && (n2 = o2 ? 0 : t3.length - 1), n2 < 0 && (n2 = t3.length + n2), n2 >= t3.length) {
               if (o2)
                 return -1;
               n2 = t3.length - 1;
@@ -1482,30 +1456,30 @@ var require_uni_socket_io = __commonJS({
                 return -1;
               n2 = 0;
             }
-            if (typeof e2 == "string" && (e2 = c.from(e2, r2)), c.isBuffer(e2))
-              return e2.length === 0 ? -1 : v(t3, e2, n2, r2, o2);
-            if (typeof e2 == "number")
-              return e2 &= 255, c.TYPED_ARRAY_SUPPORT && typeof Uint8Array.prototype.indexOf == "function" ? o2 ? Uint8Array.prototype.indexOf.call(t3, e2, n2) : Uint8Array.prototype.lastIndexOf.call(t3, e2, n2) : v(t3, [e2], n2, r2, o2);
+            if ("string" == typeof e2 && (e2 = c.from(e2, r2)), c.isBuffer(e2))
+              return 0 === e2.length ? -1 : v(t3, e2, n2, r2, o2);
+            if ("number" == typeof e2)
+              return e2 &= 255, c.TYPED_ARRAY_SUPPORT && "function" == typeof Uint8Array.prototype.indexOf ? o2 ? Uint8Array.prototype.indexOf.call(t3, e2, n2) : Uint8Array.prototype.lastIndexOf.call(t3, e2, n2) : v(t3, [e2], n2, r2, o2);
             throw new TypeError("val must be string, number or Buffer");
           }
           function v(t3, e2, n2, r2, o2) {
             var s2, i2 = 1, a2 = t3.length, c2 = e2.length;
-            if (r2 !== void 0 && ((r2 = String(r2).toLowerCase()) === "ucs2" || r2 === "ucs-2" || r2 === "utf16le" || r2 === "utf-16le")) {
+            if (void 0 !== r2 && ("ucs2" === (r2 = String(r2).toLowerCase()) || "ucs-2" === r2 || "utf16le" === r2 || "utf-16le" === r2)) {
               if (t3.length < 2 || e2.length < 2)
                 return -1;
               i2 = 2, a2 /= 2, c2 /= 2, n2 /= 2;
             }
             function h2(t4, e3) {
-              return i2 === 1 ? t4[e3] : t4.readUInt16BE(e3 * i2);
+              return 1 === i2 ? t4[e3] : t4.readUInt16BE(e3 * i2);
             }
             if (o2) {
               var u2 = -1;
               for (s2 = n2; s2 < a2; s2++)
-                if (h2(t3, s2) === h2(e2, u2 === -1 ? 0 : s2 - u2)) {
-                  if (u2 === -1 && (u2 = s2), s2 - u2 + 1 === c2)
+                if (h2(t3, s2) === h2(e2, -1 === u2 ? 0 : s2 - u2)) {
+                  if (-1 === u2 && (u2 = s2), s2 - u2 + 1 === c2)
                     return u2 * i2;
                 } else
-                  u2 !== -1 && (s2 -= s2 - u2), u2 = -1;
+                  -1 !== u2 && (s2 -= s2 - u2), u2 = -1;
             } else
               for (n2 + c2 > a2 && (n2 = a2 - c2), s2 = n2; s2 >= 0; s2--) {
                 for (var p2 = true, f2 = 0; f2 < c2; f2++)
@@ -1558,7 +1532,7 @@ var require_uni_socket_io = __commonJS({
             }(e2, t3.length - n2), t3, n2, r2);
           }
           function T(t3, e2, n2) {
-            return e2 === 0 && n2 === t3.length ? r.fromByteArray(t3) : r.fromByteArray(t3.slice(e2, n2));
+            return 0 === e2 && n2 === t3.length ? r.fromByteArray(t3) : r.fromByteArray(t3.slice(e2, n2));
           }
           function x(t3, e2, n2) {
             n2 = Math.min(t3.length, n2);
@@ -1570,15 +1544,15 @@ var require_uni_socket_io = __commonJS({
                     h2 < 128 && (u2 = h2);
                     break;
                   case 2:
-                    (192 & (s2 = t3[o2 + 1])) == 128 && (c2 = (31 & h2) << 6 | 63 & s2) > 127 && (u2 = c2);
+                    128 == (192 & (s2 = t3[o2 + 1])) && (c2 = (31 & h2) << 6 | 63 & s2) > 127 && (u2 = c2);
                     break;
                   case 3:
-                    s2 = t3[o2 + 1], i2 = t3[o2 + 2], (192 & s2) == 128 && (192 & i2) == 128 && (c2 = (15 & h2) << 12 | (63 & s2) << 6 | 63 & i2) > 2047 && (c2 < 55296 || c2 > 57343) && (u2 = c2);
+                    s2 = t3[o2 + 1], i2 = t3[o2 + 2], 128 == (192 & s2) && 128 == (192 & i2) && (c2 = (15 & h2) << 12 | (63 & s2) << 6 | 63 & i2) > 2047 && (c2 < 55296 || c2 > 57343) && (u2 = c2);
                     break;
                   case 4:
-                    s2 = t3[o2 + 1], i2 = t3[o2 + 2], a2 = t3[o2 + 3], (192 & s2) == 128 && (192 & i2) == 128 && (192 & a2) == 128 && (c2 = (15 & h2) << 18 | (63 & s2) << 12 | (63 & i2) << 6 | 63 & a2) > 65535 && c2 < 1114112 && (u2 = c2);
+                    s2 = t3[o2 + 1], i2 = t3[o2 + 2], a2 = t3[o2 + 3], 128 == (192 & s2) && 128 == (192 & i2) && 128 == (192 & a2) && (c2 = (15 & h2) << 18 | (63 & s2) << 12 | (63 & i2) << 6 | 63 & a2) > 65535 && c2 < 1114112 && (u2 = c2);
                 }
-              u2 === null ? (u2 = 65533, p2 = 1) : u2 > 65535 && (u2 -= 65536, r2.push(u2 >>> 10 & 1023 | 55296), u2 = 56320 | 1023 & u2), r2.push(u2), o2 += p2;
+              null === u2 ? (u2 = 65533, p2 = 1) : u2 > 65535 && (u2 -= 65536, r2.push(u2 >>> 10 & 1023 | 55296), u2 = 56320 | 1023 & u2), r2.push(u2), o2 += p2;
             }
             return function(t4) {
               var e3 = t4.length;
@@ -1593,12 +1567,12 @@ var require_uni_socket_io = __commonJS({
           e.Buffer = c, e.SlowBuffer = function(t3) {
             +t3 != t3 && (t3 = 0);
             return c.alloc(+t3);
-          }, e.INSPECT_MAX_BYTES = 50, c.TYPED_ARRAY_SUPPORT = t2.TYPED_ARRAY_SUPPORT !== void 0 ? t2.TYPED_ARRAY_SUPPORT : function() {
+          }, e.INSPECT_MAX_BYTES = 50, c.TYPED_ARRAY_SUPPORT = void 0 !== t2.TYPED_ARRAY_SUPPORT ? t2.TYPED_ARRAY_SUPPORT : function() {
             try {
               var t3 = new Uint8Array(1);
               return t3.__proto__ = { __proto__: Uint8Array.prototype, foo: function() {
                 return 42;
-              } }, t3.foo() === 42 && typeof t3.subarray == "function" && t3.subarray(1, 1).byteLength === 0;
+              } }, 42 === t3.foo() && "function" == typeof t3.subarray && 0 === t3.subarray(1, 1).byteLength;
             } catch (t4) {
               return false;
             }
@@ -1606,16 +1580,16 @@ var require_uni_socket_io = __commonJS({
             return t3.__proto__ = c.prototype, t3;
           }, c.from = function(t3, e2, n2) {
             return h(null, t3, e2, n2);
-          }, c.TYPED_ARRAY_SUPPORT && (c.prototype.__proto__ = Uint8Array.prototype, c.__proto__ = Uint8Array, typeof Symbol != "undefined" && Symbol.species && c[Symbol.species] === c && Object.defineProperty(c, Symbol.species, { value: null, configurable: true })), c.alloc = function(t3, e2, n2) {
+          }, c.TYPED_ARRAY_SUPPORT && (c.prototype.__proto__ = Uint8Array.prototype, c.__proto__ = Uint8Array, "undefined" != typeof Symbol && Symbol.species && c[Symbol.species] === c && Object.defineProperty(c, Symbol.species, { value: null, configurable: true })), c.alloc = function(t3, e2, n2) {
             return function(t4, e3, n3, r2) {
-              return u(e3), e3 <= 0 ? a(t4, e3) : n3 !== void 0 ? typeof r2 == "string" ? a(t4, e3).fill(n3, r2) : a(t4, e3).fill(n3) : a(t4, e3);
+              return u(e3), e3 <= 0 ? a(t4, e3) : void 0 !== n3 ? "string" == typeof r2 ? a(t4, e3).fill(n3, r2) : a(t4, e3).fill(n3) : a(t4, e3);
             }(null, t3, e2, n2);
           }, c.allocUnsafe = function(t3) {
             return p(null, t3);
           }, c.allocUnsafeSlow = function(t3) {
             return p(null, t3);
           }, c.isBuffer = function(t3) {
-            return !(t3 == null || !t3._isBuffer);
+            return !(null == t3 || !t3._isBuffer);
           }, c.compare = function(t3, e2) {
             if (!c.isBuffer(t3) || !c.isBuffer(e2))
               throw new TypeError("Arguments must be Buffers");
@@ -1647,10 +1621,10 @@ var require_uni_socket_io = __commonJS({
           }, c.concat = function(t3, e2) {
             if (!s(t3))
               throw new TypeError('"list" argument must be an Array of Buffers');
-            if (t3.length === 0)
+            if (0 === t3.length)
               return c.alloc(0);
             var n2;
-            if (e2 === void 0)
+            if (void 0 === e2)
               for (e2 = 0, n2 = 0; n2 < t3.length; ++n2)
                 e2 += t3[n2].length;
             var r2 = c.allocUnsafe(e2), o2 = 0;
@@ -1684,18 +1658,18 @@ var require_uni_socket_io = __commonJS({
             return this;
           }, c.prototype.toString = function() {
             var t3 = 0 | this.length;
-            return t3 === 0 ? "" : arguments.length === 0 ? x(this, 0, t3) : y.apply(this, arguments);
+            return 0 === t3 ? "" : 0 === arguments.length ? x(this, 0, t3) : y.apply(this, arguments);
           }, c.prototype.equals = function(t3) {
             if (!c.isBuffer(t3))
               throw new TypeError("Argument must be a Buffer");
-            return this === t3 || c.compare(this, t3) === 0;
+            return this === t3 || 0 === c.compare(this, t3);
           }, c.prototype.inspect = function() {
             var t3 = "", n2 = e.INSPECT_MAX_BYTES;
             return this.length > 0 && (t3 = this.toString("hex", 0, n2).match(/.{2}/g).join(" "), this.length > n2 && (t3 += " ... ")), "<Buffer " + t3 + ">";
           }, c.prototype.compare = function(t3, e2, n2, r2, o2) {
             if (!c.isBuffer(t3))
               throw new TypeError("Argument must be a Buffer");
-            if (e2 === void 0 && (e2 = 0), n2 === void 0 && (n2 = t3 ? t3.length : 0), r2 === void 0 && (r2 = 0), o2 === void 0 && (o2 = this.length), e2 < 0 || n2 > t3.length || r2 < 0 || o2 > this.length)
+            if (void 0 === e2 && (e2 = 0), void 0 === n2 && (n2 = t3 ? t3.length : 0), void 0 === r2 && (r2 = 0), void 0 === o2 && (o2 = this.length), e2 < 0 || n2 > t3.length || r2 < 0 || o2 > this.length)
               throw new RangeError("out of range index");
             if (r2 >= o2 && e2 >= n2)
               return 0;
@@ -1712,23 +1686,23 @@ var require_uni_socket_io = __commonJS({
               }
             return s2 < i2 ? -1 : i2 < s2 ? 1 : 0;
           }, c.prototype.includes = function(t3, e2, n2) {
-            return this.indexOf(t3, e2, n2) !== -1;
+            return -1 !== this.indexOf(t3, e2, n2);
           }, c.prototype.indexOf = function(t3, e2, n2) {
             return m(this, t3, e2, n2, true);
           }, c.prototype.lastIndexOf = function(t3, e2, n2) {
             return m(this, t3, e2, n2, false);
           }, c.prototype.write = function(t3, e2, n2, r2) {
-            if (e2 === void 0)
+            if (void 0 === e2)
               r2 = "utf8", n2 = this.length, e2 = 0;
-            else if (n2 === void 0 && typeof e2 == "string")
+            else if (void 0 === n2 && "string" == typeof e2)
               r2 = e2, n2 = this.length, e2 = 0;
             else {
               if (!isFinite(e2))
                 throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");
-              e2 |= 0, isFinite(n2) ? (n2 |= 0, r2 === void 0 && (r2 = "utf8")) : (r2 = n2, n2 = void 0);
+              e2 |= 0, isFinite(n2) ? (n2 |= 0, void 0 === r2 && (r2 = "utf8")) : (r2 = n2, n2 = void 0);
             }
             var o2 = this.length - e2;
-            if ((n2 === void 0 || n2 > o2) && (n2 = o2), t3.length > 0 && (n2 < 0 || e2 < 0) || e2 > this.length)
+            if ((void 0 === n2 || n2 > o2) && (n2 = o2), t3.length > 0 && (n2 < 0 || e2 < 0) || e2 > this.length)
               throw new RangeError("Attempt to write outside buffer bounds");
             r2 || (r2 = "utf8");
             for (var s2 = false; ; )
@@ -1822,7 +1796,7 @@ var require_uni_socket_io = __commonJS({
           }
           c.prototype.slice = function(t3, e2) {
             var n2, r2 = this.length;
-            if ((t3 = ~~t3) < 0 ? (t3 += r2) < 0 && (t3 = 0) : t3 > r2 && (t3 = r2), (e2 = e2 === void 0 ? r2 : ~~e2) < 0 ? (e2 += r2) < 0 && (e2 = 0) : e2 > r2 && (e2 = r2), e2 < t3 && (e2 = t3), c.TYPED_ARRAY_SUPPORT)
+            if ((t3 = ~~t3) < 0 ? (t3 += r2) < 0 && (t3 = 0) : t3 > r2 && (t3 = r2), (e2 = void 0 === e2 ? r2 : ~~e2) < 0 ? (e2 += r2) < 0 && (e2 = 0) : e2 > r2 && (e2 = r2), e2 < t3 && (e2 = t3), c.TYPED_ARRAY_SUPPORT)
               (n2 = this.subarray(t3, e2)).__proto__ = c.prototype;
             else {
               var o2 = e2 - t3;
@@ -1912,7 +1886,7 @@ var require_uni_socket_io = __commonJS({
             }
             var s2 = 0, i2 = 1, a2 = 0;
             for (this[e2] = 255 & t3; ++s2 < n2 && (i2 *= 256); )
-              t3 < 0 && a2 === 0 && this[e2 + s2 - 1] !== 0 && (a2 = 1), this[e2 + s2] = (t3 / i2 >> 0) - a2 & 255;
+              t3 < 0 && 0 === a2 && 0 !== this[e2 + s2 - 1] && (a2 = 1), this[e2 + s2] = (t3 / i2 >> 0) - a2 & 255;
             return e2 + n2;
           }, c.prototype.writeIntBE = function(t3, e2, n2, r2) {
             if (t3 = +t3, e2 |= 0, !r2) {
@@ -1921,7 +1895,7 @@ var require_uni_socket_io = __commonJS({
             }
             var s2 = n2 - 1, i2 = 1, a2 = 0;
             for (this[e2 + s2] = 255 & t3; --s2 >= 0 && (i2 *= 256); )
-              t3 < 0 && a2 === 0 && this[e2 + s2 + 1] !== 0 && (a2 = 1), this[e2 + s2] = (t3 / i2 >> 0) - a2 & 255;
+              t3 < 0 && 0 === a2 && 0 !== this[e2 + s2 + 1] && (a2 = 1), this[e2 + s2] = (t3 / i2 >> 0) - a2 & 255;
             return e2 + n2;
           }, c.prototype.writeInt8 = function(t3, e2, n2) {
             return t3 = +t3, e2 |= 0, n2 || B(this, t3, e2, 1, 127, -128), c.TYPED_ARRAY_SUPPORT || (t3 = Math.floor(t3)), t3 < 0 && (t3 = 255 + t3 + 1), this[e2] = 255 & t3, e2 + 1;
@@ -1942,9 +1916,9 @@ var require_uni_socket_io = __commonJS({
           }, c.prototype.writeDoubleBE = function(t3, e2, n2) {
             return M(this, t3, e2, false, n2);
           }, c.prototype.copy = function(t3, e2, n2, r2) {
-            if (n2 || (n2 = 0), r2 || r2 === 0 || (r2 = this.length), e2 >= t3.length && (e2 = t3.length), e2 || (e2 = 0), r2 > 0 && r2 < n2 && (r2 = n2), r2 === n2)
+            if (n2 || (n2 = 0), r2 || 0 === r2 || (r2 = this.length), e2 >= t3.length && (e2 = t3.length), e2 || (e2 = 0), r2 > 0 && r2 < n2 && (r2 = n2), r2 === n2)
               return 0;
-            if (t3.length === 0 || this.length === 0)
+            if (0 === t3.length || 0 === this.length)
               return 0;
             if (e2 < 0)
               throw new RangeError("targetStart out of bounds");
@@ -1964,23 +1938,23 @@ var require_uni_socket_io = __commonJS({
               Uint8Array.prototype.set.call(t3, this.subarray(n2, n2 + s2), e2);
             return s2;
           }, c.prototype.fill = function(t3, e2, n2, r2) {
-            if (typeof t3 == "string") {
-              if (typeof e2 == "string" ? (r2 = e2, e2 = 0, n2 = this.length) : typeof n2 == "string" && (r2 = n2, n2 = this.length), t3.length === 1) {
+            if ("string" == typeof t3) {
+              if ("string" == typeof e2 ? (r2 = e2, e2 = 0, n2 = this.length) : "string" == typeof n2 && (r2 = n2, n2 = this.length), 1 === t3.length) {
                 var o2 = t3.charCodeAt(0);
                 o2 < 256 && (t3 = o2);
               }
-              if (r2 !== void 0 && typeof r2 != "string")
+              if (void 0 !== r2 && "string" != typeof r2)
                 throw new TypeError("encoding must be a string");
-              if (typeof r2 == "string" && !c.isEncoding(r2))
+              if ("string" == typeof r2 && !c.isEncoding(r2))
                 throw new TypeError("Unknown encoding: " + r2);
             } else
-              typeof t3 == "number" && (t3 &= 255);
+              "number" == typeof t3 && (t3 &= 255);
             if (e2 < 0 || this.length < e2 || this.length < n2)
               throw new RangeError("Out of range index");
             if (n2 <= e2)
               return this;
             var s2;
-            if (e2 >>>= 0, n2 = n2 === void 0 ? this.length : n2 >>> 0, t3 || (t3 = 0), typeof t3 == "number")
+            if (e2 >>>= 0, n2 = void 0 === n2 ? this.length : n2 >>> 0, t3 || (t3 = 0), "number" == typeof t3)
               for (s2 = e2; s2 < n2; ++s2)
                 this[s2] = t3;
             else {
@@ -2065,7 +2039,7 @@ var require_uni_socket_io = __commonJS({
         try {
           n = n || new Function("return this")();
         } catch (t2) {
-          typeof window == "object" && (n = window);
+          "object" == typeof window && (n = window);
         }
         t.exports = n;
       }, function(t, e, n) {
@@ -2079,23 +2053,23 @@ var require_uni_socket_io = __commonJS({
           }(0, i2, a2)), u2 = 0, p = a2 > 0 ? i2 - 4 : i2;
           for (n2 = 0; n2 < p; n2 += 4)
             e2 = o[t2.charCodeAt(n2)] << 18 | o[t2.charCodeAt(n2 + 1)] << 12 | o[t2.charCodeAt(n2 + 2)] << 6 | o[t2.charCodeAt(n2 + 3)], c2[u2++] = e2 >> 16 & 255, c2[u2++] = e2 >> 8 & 255, c2[u2++] = 255 & e2;
-          a2 === 2 && (e2 = o[t2.charCodeAt(n2)] << 2 | o[t2.charCodeAt(n2 + 1)] >> 4, c2[u2++] = 255 & e2);
-          a2 === 1 && (e2 = o[t2.charCodeAt(n2)] << 10 | o[t2.charCodeAt(n2 + 1)] << 4 | o[t2.charCodeAt(n2 + 2)] >> 2, c2[u2++] = e2 >> 8 & 255, c2[u2++] = 255 & e2);
+          2 === a2 && (e2 = o[t2.charCodeAt(n2)] << 2 | o[t2.charCodeAt(n2 + 1)] >> 4, c2[u2++] = 255 & e2);
+          1 === a2 && (e2 = o[t2.charCodeAt(n2)] << 10 | o[t2.charCodeAt(n2 + 1)] << 4 | o[t2.charCodeAt(n2 + 2)] >> 2, c2[u2++] = e2 >> 8 & 255, c2[u2++] = 255 & e2);
           return c2;
         }, e.fromByteArray = function(t2) {
           for (var e2, n2 = t2.length, o2 = n2 % 3, s2 = [], i2 = 0, a2 = n2 - o2; i2 < a2; i2 += 16383)
             s2.push(u(t2, i2, i2 + 16383 > a2 ? a2 : i2 + 16383));
-          o2 === 1 ? (e2 = t2[n2 - 1], s2.push(r[e2 >> 2] + r[e2 << 4 & 63] + "==")) : o2 === 2 && (e2 = (t2[n2 - 2] << 8) + t2[n2 - 1], s2.push(r[e2 >> 10] + r[e2 >> 4 & 63] + r[e2 << 2 & 63] + "="));
+          1 === o2 ? (e2 = t2[n2 - 1], s2.push(r[e2 >> 2] + r[e2 << 4 & 63] + "==")) : 2 === o2 && (e2 = (t2[n2 - 2] << 8) + t2[n2 - 1], s2.push(r[e2 >> 10] + r[e2 >> 4 & 63] + r[e2 << 2 & 63] + "="));
           return s2.join("");
         };
-        for (var r = [], o = [], s = typeof Uint8Array != "undefined" ? Uint8Array : Array, i = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", a = 0, c = i.length; a < c; ++a)
+        for (var r = [], o = [], s = "undefined" != typeof Uint8Array ? Uint8Array : Array, i = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", a = 0, c = i.length; a < c; ++a)
           r[a] = i[a], o[i.charCodeAt(a)] = a;
         function h(t2) {
           var e2 = t2.length;
           if (e2 % 4 > 0)
             throw new Error("Invalid string. Length must be a multiple of 4");
           var n2 = t2.indexOf("=");
-          return n2 === -1 && (n2 = e2), [n2, n2 === e2 ? 0 : 4 - n2 % 4];
+          return -1 === n2 && (n2 = e2), [n2, n2 === e2 ? 0 : 4 - n2 % 4];
         }
         function u(t2, e2, n2) {
           for (var o2, s2, i2 = [], a2 = e2; a2 < n2; a2 += 3)
@@ -2110,7 +2084,7 @@ var require_uni_socket_io = __commonJS({
             ;
           for (i = s & (1 << -u) - 1, s >>= -u, u += r; u > 0; i = 256 * i + t2[e2 + p], p += f, u -= 8)
             ;
-          if (s === 0)
+          if (0 === s)
             s = 1 - h;
           else {
             if (s === c)
@@ -2119,7 +2093,7 @@ var require_uni_socket_io = __commonJS({
           }
           return (l ? -1 : 1) * i * Math.pow(2, s - r);
         }, e.write = function(t2, e2, n, r, o, s) {
-          var i, a, c, h = 8 * s - o - 1, u = (1 << h) - 1, p = u >> 1, f = o === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, l = r ? 0 : s - 1, d = r ? 1 : -1, y = e2 < 0 || e2 === 0 && 1 / e2 < 0 ? 1 : 0;
+          var i, a, c, h = 8 * s - o - 1, u = (1 << h) - 1, p = u >> 1, f = 23 === o ? Math.pow(2, -24) - Math.pow(2, -77) : 0, l = r ? 0 : s - 1, d = r ? 1 : -1, y = e2 < 0 || 0 === e2 && 1 / e2 < 0 ? 1 : 0;
           for (e2 = Math.abs(e2), isNaN(e2) || e2 === 1 / 0 ? (a = isNaN(e2) ? 1 : 0, i = u) : (i = Math.floor(Math.log(e2) / Math.LN2), e2 * (c = Math.pow(2, -i)) < 1 && (i--, c *= 2), (e2 += i + p >= 1 ? f / c : f * Math.pow(2, 1 - p)) * c >= 2 && (i++, c /= 2), i + p >= u ? (a = 0, i = u) : i + p >= 1 ? (a = (e2 * c - 1) * Math.pow(2, o), i += p) : (a = e2 * Math.pow(2, p - 1) * Math.pow(2, o), i = 0)); o >= 8; t2[n + l] = 255 & a, l += d, a /= 256, o -= 8)
             ;
           for (i = i << o | a, h += o; h > 0; t2[n + l] = 255 & i, l += d, i /= 256, h -= 8)
@@ -2129,20 +2103,20 @@ var require_uni_socket_io = __commonJS({
       }, function(t, e) {
         var n = {}.toString;
         t.exports = Array.isArray || function(t2) {
-          return n.call(t2) == "[object Array]";
+          return "[object Array]" == n.call(t2);
         };
       }, function(t, e, n) {
         const r = n(36), o = n(37), s = n(0)("@hyoga/uni-socket"), i = uni || wx;
         class a extends r {
           constructor(t2, e2, n2) {
-            super(), this._readyState = a.CONNECTING, this._socket = null, t2 !== null && (Array.isArray(e2) ? e2 = e2.join(", ") : typeof e2 == "object" && e2 !== null && (n2 = e2, e2 = void 0), this.initAsClient(t2, e2, n2));
+            super(), this._readyState = a.CONNECTING, this._socket = null, null !== t2 && (Array.isArray(e2) ? e2 = e2.join(", ") : "object" == typeof e2 && null !== e2 && (n2 = e2, e2 = void 0), this.initAsClient(t2, e2, n2));
           }
           initAsClient(t2, e2, n2) {
             Object.assign(n2, { url: t2, header: { "content-type": "application/json" }, protocols: e2, timeout: 25e3 }), this._socket = this.createConnection(n2), this.addSocketEventListeners();
           }
           createConnection(t2) {
-            return i.connectSocket(__spreadValues({ complete: () => {
-            } }, t2));
+            return i.connectSocket({ complete: () => {
+            }, ...t2 });
           }
           addSocketEventListeners() {
             this._socket.onOpen(() => {
@@ -2158,7 +2132,7 @@ var require_uni_socket_io = __commonJS({
           send(t2) {
             if (s("send data: ", t2, this._readyState), this._readyState === a.CONNECTING)
               throw new Error("WebSocket is not open: readyState 0 (CONNECTING)");
-            typeof t2 == "number" && (t2 = t2.toString()), this._readyState === a.OPEN && this._socket.send({ data: t2 });
+            "number" == typeof t2 && (t2 = t2.toString()), this._readyState === a.OPEN && this._socket.send({ data: t2 });
           }
           close(t2, e2) {
             s("close socket: ", t2, e2), this._readyState = a.CLOSING, this._socket.close({ code: t2, reason: e2 });
@@ -2182,10 +2156,10 @@ var require_uni_socket_io = __commonJS({
         }), a.prototype.addEventListener = o.addEventListener, a.prototype.removeEventListener = o.removeEventListener, t.exports = a;
       }, function(t, e, n) {
         "use strict";
-        var r, o = typeof Reflect == "object" ? Reflect : null, s = o && typeof o.apply == "function" ? o.apply : function(t2, e2, n2) {
+        var r, o = "object" == typeof Reflect ? Reflect : null, s = o && "function" == typeof o.apply ? o.apply : function(t2, e2, n2) {
           return Function.prototype.apply.call(t2, e2, n2);
         };
-        r = o && typeof o.ownKeys == "function" ? o.ownKeys : Object.getOwnPropertySymbols ? function(t2) {
+        r = o && "function" == typeof o.ownKeys ? o.ownKeys : Object.getOwnPropertySymbols ? function(t2) {
           return Object.getOwnPropertyNames(t2).concat(Object.getOwnPropertySymbols(t2));
         } : function(t2) {
           return Object.getOwnPropertyNames(t2);
@@ -2199,27 +2173,27 @@ var require_uni_socket_io = __commonJS({
         t.exports = a, t.exports.once = function(t2, e2) {
           return new Promise(function(n2, r2) {
             function o2() {
-              s2 !== void 0 && t2.removeListener("error", s2), n2([].slice.call(arguments));
+              void 0 !== s2 && t2.removeListener("error", s2), n2([].slice.call(arguments));
             }
             var s2;
-            e2 !== "error" && (s2 = function(n3) {
+            "error" !== e2 && (s2 = function(n3) {
               t2.removeListener(e2, o2), r2(n3);
             }, t2.once("error", s2)), t2.once(e2, o2);
           });
         }, a.EventEmitter = a, a.prototype._events = void 0, a.prototype._eventsCount = 0, a.prototype._maxListeners = void 0;
         var c = 10;
         function h(t2) {
-          if (typeof t2 != "function")
+          if ("function" != typeof t2)
             throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof t2);
         }
         function u(t2) {
-          return t2._maxListeners === void 0 ? a.defaultMaxListeners : t2._maxListeners;
+          return void 0 === t2._maxListeners ? a.defaultMaxListeners : t2._maxListeners;
         }
         function p(t2, e2, n2, r2) {
           var o2, s2, i2, a2;
-          if (h(n2), (s2 = t2._events) === void 0 ? (s2 = t2._events = /* @__PURE__ */ Object.create(null), t2._eventsCount = 0) : (s2.newListener !== void 0 && (t2.emit("newListener", e2, n2.listener ? n2.listener : n2), s2 = t2._events), i2 = s2[e2]), i2 === void 0)
+          if (h(n2), void 0 === (s2 = t2._events) ? (s2 = t2._events = /* @__PURE__ */ Object.create(null), t2._eventsCount = 0) : (void 0 !== s2.newListener && (t2.emit("newListener", e2, n2.listener ? n2.listener : n2), s2 = t2._events), i2 = s2[e2]), void 0 === i2)
             i2 = s2[e2] = n2, ++t2._eventsCount;
-          else if (typeof i2 == "function" ? i2 = s2[e2] = r2 ? [n2, i2] : [i2, n2] : r2 ? i2.unshift(n2) : i2.push(n2), (o2 = u(t2)) > 0 && i2.length > o2 && !i2.warned) {
+          else if ("function" == typeof i2 ? i2 = s2[e2] = r2 ? [n2, i2] : [i2, n2] : r2 ? i2.unshift(n2) : i2.push(n2), (o2 = u(t2)) > 0 && i2.length > o2 && !i2.warned) {
             i2.warned = true;
             var c2 = new Error("Possible EventEmitter memory leak detected. " + i2.length + " " + String(e2) + " listeners added. Use emitter.setMaxListeners() to increase limit");
             c2.name = "MaxListenersExceededWarning", c2.emitter = t2, c2.type = e2, c2.count = i2.length, a2 = c2, console && console.warn && console.warn(a2);
@@ -2228,7 +2202,7 @@ var require_uni_socket_io = __commonJS({
         }
         function f() {
           if (!this.fired)
-            return this.target.removeListener(this.type, this.wrapFn), this.fired = true, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
+            return this.target.removeListener(this.type, this.wrapFn), this.fired = true, 0 === arguments.length ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
         }
         function l(t2, e2, n2) {
           var r2 = { fired: false, wrapFn: void 0, target: t2, type: e2, listener: n2 }, o2 = f.bind(r2);
@@ -2236,10 +2210,10 @@ var require_uni_socket_io = __commonJS({
         }
         function d(t2, e2, n2) {
           var r2 = t2._events;
-          if (r2 === void 0)
+          if (void 0 === r2)
             return [];
           var o2 = r2[e2];
-          return o2 === void 0 ? [] : typeof o2 == "function" ? n2 ? [o2.listener || o2] : [o2] : n2 ? function(t3) {
+          return void 0 === o2 ? [] : "function" == typeof o2 ? n2 ? [o2.listener || o2] : [o2] : n2 ? function(t3) {
             for (var e3 = new Array(t3.length), n3 = 0; n3 < e3.length; ++n3)
               e3[n3] = t3[n3].listener || t3[n3];
             return e3;
@@ -2247,11 +2221,11 @@ var require_uni_socket_io = __commonJS({
         }
         function y(t2) {
           var e2 = this._events;
-          if (e2 !== void 0) {
+          if (void 0 !== e2) {
             var n2 = e2[t2];
-            if (typeof n2 == "function")
+            if ("function" == typeof n2)
               return 1;
-            if (n2 !== void 0)
+            if (void 0 !== n2)
               return n2.length;
           }
           return 0;
@@ -2264,13 +2238,13 @@ var require_uni_socket_io = __commonJS({
         Object.defineProperty(a, "defaultMaxListeners", { enumerable: true, get: function() {
           return c;
         }, set: function(t2) {
-          if (typeof t2 != "number" || t2 < 0 || i(t2))
+          if ("number" != typeof t2 || t2 < 0 || i(t2))
             throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + t2 + ".");
           c = t2;
         } }), a.init = function() {
-          this._events !== void 0 && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
+          void 0 !== this._events && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
         }, a.prototype.setMaxListeners = function(t2) {
-          if (typeof t2 != "number" || t2 < 0 || i(t2))
+          if ("number" != typeof t2 || t2 < 0 || i(t2))
             throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + t2 + ".");
           return this._maxListeners = t2, this;
         }, a.prototype.getMaxListeners = function() {
@@ -2278,9 +2252,9 @@ var require_uni_socket_io = __commonJS({
         }, a.prototype.emit = function(t2) {
           for (var e2 = [], n2 = 1; n2 < arguments.length; n2++)
             e2.push(arguments[n2]);
-          var r2 = t2 === "error", o2 = this._events;
-          if (o2 !== void 0)
-            r2 = r2 && o2.error === void 0;
+          var r2 = "error" === t2, o2 = this._events;
+          if (void 0 !== o2)
+            r2 = r2 && void 0 === o2.error;
           else if (!r2)
             return false;
           if (r2) {
@@ -2291,9 +2265,9 @@ var require_uni_socket_io = __commonJS({
             throw a2.context = i2, a2;
           }
           var c2 = o2[t2];
-          if (c2 === void 0)
+          if (void 0 === c2)
             return false;
-          if (typeof c2 == "function")
+          if ("function" == typeof c2)
             s(c2, this, e2);
           else {
             var h2 = c2.length, u2 = g(c2, h2);
@@ -2311,13 +2285,13 @@ var require_uni_socket_io = __commonJS({
           return h(e2), this.prependListener(t2, l(this, t2, e2)), this;
         }, a.prototype.removeListener = function(t2, e2) {
           var n2, r2, o2, s2, i2;
-          if (h(e2), (r2 = this._events) === void 0)
+          if (h(e2), void 0 === (r2 = this._events))
             return this;
-          if ((n2 = r2[t2]) === void 0)
+          if (void 0 === (n2 = r2[t2]))
             return this;
           if (n2 === e2 || n2.listener === e2)
-            --this._eventsCount == 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete r2[t2], r2.removeListener && this.emit("removeListener", t2, n2.listener || e2));
-          else if (typeof n2 != "function") {
+            0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : (delete r2[t2], r2.removeListener && this.emit("removeListener", t2, n2.listener || e2));
+          else if ("function" != typeof n2) {
             for (o2 = -1, s2 = n2.length - 1; s2 >= 0; s2--)
               if (n2[s2] === e2 || n2[s2].listener === e2) {
                 i2 = n2[s2].listener, o2 = s2;
@@ -2325,28 +2299,28 @@ var require_uni_socket_io = __commonJS({
               }
             if (o2 < 0)
               return this;
-            o2 === 0 ? n2.shift() : function(t3, e3) {
+            0 === o2 ? n2.shift() : function(t3, e3) {
               for (; e3 + 1 < t3.length; e3++)
                 t3[e3] = t3[e3 + 1];
               t3.pop();
-            }(n2, o2), n2.length === 1 && (r2[t2] = n2[0]), r2.removeListener !== void 0 && this.emit("removeListener", t2, i2 || e2);
+            }(n2, o2), 1 === n2.length && (r2[t2] = n2[0]), void 0 !== r2.removeListener && this.emit("removeListener", t2, i2 || e2);
           }
           return this;
         }, a.prototype.off = a.prototype.removeListener, a.prototype.removeAllListeners = function(t2) {
           var e2, n2, r2;
-          if ((n2 = this._events) === void 0)
+          if (void 0 === (n2 = this._events))
             return this;
-          if (n2.removeListener === void 0)
-            return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : n2[t2] !== void 0 && (--this._eventsCount == 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete n2[t2]), this;
-          if (arguments.length === 0) {
+          if (void 0 === n2.removeListener)
+            return 0 === arguments.length ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : void 0 !== n2[t2] && (0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : delete n2[t2]), this;
+          if (0 === arguments.length) {
             var o2, s2 = Object.keys(n2);
             for (r2 = 0; r2 < s2.length; ++r2)
-              (o2 = s2[r2]) !== "removeListener" && this.removeAllListeners(o2);
+              "removeListener" !== (o2 = s2[r2]) && this.removeAllListeners(o2);
             return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
           }
-          if (typeof (e2 = n2[t2]) == "function")
+          if ("function" == typeof (e2 = n2[t2]))
             this.removeListener(t2, e2);
-          else if (e2 !== void 0)
+          else if (void 0 !== e2)
             for (r2 = e2.length - 1; r2 >= 0; r2--)
               this.removeListener(t2, e2[r2]);
           return this;
@@ -2355,7 +2329,7 @@ var require_uni_socket_io = __commonJS({
         }, a.prototype.rawListeners = function(t2) {
           return d(this, t2, false);
         }, a.listenerCount = function(t2, e2) {
-          return typeof t2.listenerCount == "function" ? t2.listenerCount(e2) : y.call(t2, e2);
+          return "function" == typeof t2.listenerCount ? t2.listenerCount(e2) : y.call(t2, e2);
         }, a.prototype.listenerCount = y, a.prototype.eventNames = function() {
           return this._eventsCount > 0 ? r(this._events) : [];
         };
@@ -2399,7 +2373,7 @@ var require_uni_socket_io = __commonJS({
           function h() {
             e2.call(this, new i(this));
           }
-          typeof e2 == "function" && (t2 === "message" ? (n2._listener = e2, this.on(t2, n2)) : t2 === "close" ? (r2._listener = e2, this.on(t2, r2)) : t2 === "error" ? (c2._listener = e2, this.on(t2, c2)) : t2 === "open" ? (h._listener = e2, this.on(t2, h)) : this.on(t2, e2));
+          "function" == typeof e2 && ("message" === t2 ? (n2._listener = e2, this.on(t2, n2)) : "close" === t2 ? (r2._listener = e2, this.on(t2, r2)) : "error" === t2 ? (c2._listener = e2, this.on(t2, c2)) : "open" === t2 ? (h._listener = e2, this.on(t2, h)) : this.on(t2, e2));
         }, removeEventListener(t2, e2) {
           const n2 = this.listeners(t2);
           for (var r2 = 0; r2 < n2.length; r2++)
@@ -2425,7 +2399,7 @@ var require_uni_socket_io = __commonJS({
                 r2[o2] = t3(e3[o2], n3);
               return r2;
             }
-            if (typeof e3 == "object" && !(e3 instanceof Date)) {
+            if ("object" == typeof e3 && !(e3 instanceof Date)) {
               const r2 = {};
               for (const o2 in e3)
                 e3.hasOwnProperty(o2) && (r2[o2] = t3(e3[o2], n3));
@@ -2442,7 +2416,7 @@ var require_uni_socket_io = __commonJS({
             if (Array.isArray(e3))
               for (let r2 = 0; r2 < e3.length; r2++)
                 e3[r2] = t3(e3[r2], n2);
-            else if (typeof e3 == "object")
+            else if ("object" == typeof e3)
               for (const r2 in e3)
                 e3.hasOwnProperty(r2) && (e3[r2] = t3(e3[r2], n2));
             return e3;
@@ -2456,7 +2430,7 @@ var require_uni_socket_io = __commonJS({
           var t2 = this.ms * Math.pow(this.factor, this.attempts++);
           if (this.jitter) {
             var e2 = Math.random(), n2 = Math.floor(e2 * this.jitter * t2);
-            t2 = (1 & Math.floor(10 * e2)) == 0 ? t2 - n2 : t2 + n2;
+            t2 = 0 == (1 & Math.floor(10 * e2)) ? t2 - n2 : t2 + n2;
           }
           return 0 | Math.min(t2, this.max);
         }, n.prototype.reset = function() {
@@ -2472,13 +2446,7 @@ var require_uni_socket_io = __commonJS({
     });
   }
 });
-
-// dep:@hyoga_uni-socket_io
-init_define_process_env_UNI_STAT_TITLE_JSON();
-var hyoga_uni_socket_io_default = require_uni_socket_io();
-export {
-  hyoga_uni_socket_io_default as default
-};
+export default require_uni_socket_io();
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -2486,4 +2454,4 @@ export {
  * @license  MIT
  */
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-//# sourceMappingURL=@hyoga_uni-socket_io.js.map
+//# sourceMappingURL=@hyoga_uni-socket__io.js.map

@@ -96,10 +96,10 @@
 		}
 	],
 	"tabBar": {
-		"borderStyle": "black",
-		"backgroundColor": "#fff",
-		"color": "#cdcdcd",
-		"selectedColor": "#718b5c",
+		"borderStyle": "@tabBorderStyle",
+		"backgroundColor": "@tabBgColor",
+		"color": "@tabFontColor",
+		"selectedColor": "@tabSelectedColor",
 		"iconWidth": "24px",
 		"list": [{
 				"pagePath": "pages/chat-session/chat-session",

@@ -1,0 +1,14 @@
+{
+	"light": {
+		"tabFontColor": "#000000",
+		"tabSelectedColor": "#eaa3c4",
+		"tabBgColor": "#ffffff",
+		"tabBorderStyle": "black"
+	},
+	"dark": {
+		"tabFontColor": "#ffffff",
+		"tabSelectedColor": "#eaa3c4",
+		"tabBgColor": "#292929",
+		"tabBorderStyle": "white"
+	}
+}

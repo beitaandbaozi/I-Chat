@@ -23,12 +23,22 @@
 			} else {
 				reLaunch('/index/index')
 			}
+			
 		},
 		onShow: function() {
 			console.log('App Show')
+			uni.getSystemInfo({
+				success: function (res) {
+					console.log("目前主题",res.theme)
+				}
+			});
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		// 主题切换
+		onThemeChange: function(res) {
+			console.log('主题切换', res)
 		}
 	}
 </script>

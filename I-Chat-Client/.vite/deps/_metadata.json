@@ -1,11 +1,11 @@
 {
-  "hash": "1530e992",
-  "browserHash": "ce3eafff",
+  "hash": "86659041",
+  "browserHash": "174ad0eb",
   "optimized": {
     "@hyoga/uni-socket.io": {
       "src": "../../node_modules/@hyoga/uni-socket.io/dist/uni-socket.io.js",
-      "file": "@hyoga_uni-socket_io.js",
-      "fileHash": "6aa5a545",
+      "file": "@hyoga_uni-socket__io.js",
+      "fileHash": "41c9828f",
       "needsInterop": true
     }
   },

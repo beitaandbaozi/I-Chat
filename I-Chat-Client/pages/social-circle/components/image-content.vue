@@ -10,7 +10,8 @@
 			]">
 			<template v-for="(item,index) in imageList" :key="index">
 				<template v-if="!defaultImageFlag">
-					<image :src="item" class="img-info" @error="handleImageError"></image>
+					<image :src="item" class="img-info" :data-index="index" @error="handleImageError"
+						@tap="handleImgsPreView"></image>
 				</template>
 				<template v-else>
 					<view class="img-info">
@@ -24,12 +25,11 @@
 
 <script lang="ts" setup>
 	import {
-		ref
+		ref,
 	} from 'vue'
 	const props = defineProps({
 		imageList: {
 			type: Array,
-			default: []
 		}
 	})
 	// 图片加载出错时，添加默认图片
@@ -38,6 +38,23 @@
 	const handleImageError = (e) => {
 		console.log('image发生error事件，携带值为' + e.detail.errMsg)
 		defaultImageFlag.value = true
+	}
+	// 点击图片预览
+	const handleImgsPreView = (e) => {
+		// 获取当前的点击的图片索引值
+		let currentIndex = 0;
+		if (props.imageList) {
+			for (let i = 0; i < props.imageList.length; i++) {
+				if (i === e.currentTarget.dataset.index) {
+					currentIndex = i
+					break
+				}
+			}
+		}
+		uni.previewImage({
+			current: currentIndex,
+			urls: props.imageList as string[]
+		})
 	}
 </script>
 
